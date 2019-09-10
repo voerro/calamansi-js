@@ -5,7 +5,26 @@ class Calamansi
         this.id = this.generateUniqueId();
         this.skinPath = el.attributes.skin ? el.attributes.skin.value : 'default';
 
+        this.eventListeners = {
+            initialized: [],
+        };
+
         this.init();
+    }
+
+    /**
+     * Automatically initialize all the player instances
+     */
+    static autoload() {
+        const calamansis = [];
+        const elements = document.querySelectorAll('v-calamansi');
+
+        // Initialize all the player instances
+        elements.forEach(item => {
+            calamansis.push(new Calamansi(item));
+        });
+
+        return calamansis;
     }
 
     async init() {
@@ -20,9 +39,7 @@ class Calamansi
         this.el.parentNode.replaceChild(wrapper, this.el);
         this.el = wrapper;
 
-        console.log(`Calamansi initialized!`);
-
-        // TODO: Fire an event/callback
+        this.emit('initialized', this);
     }
     
     async fetchSkin(path) {
@@ -58,6 +75,38 @@ class Calamansi
         return document.querySelectorAll(`calamansi-${id}`).length > 0
             ? this.generateUniqueId()
             : `calamansi-${id}`;
+    }
+
+    /**
+     * Register an event listener
+     * 
+     * @param {*} event 
+     * @param {*} callback 
+     */
+    on(event, callback) {
+        // Ignore inexisting event types
+        if (!this.eventListeners[event]) {
+            return;
+        }
+
+        this.eventListeners[event].push(callback);
+    }
+
+    /**
+     * Emit an event. Call all the event listeners' callbacks.
+     * 
+     * @param {*} event 
+     * @param {*} data 
+     */
+    emit(event, data) {
+        // Ignore inexisting event types
+        if (!this.eventListeners[event]) {
+            return;
+        }
+
+        for (let callback of this.eventListeners[event]) {
+            callback(data);
+        }
     }
 }
 

@@ -12,5 +12,15 @@
     <v-calamansi skin="../dist/skins/inline"></v-calamansi>
     
     <script src="../dist/calamansi.js"></script>
+
+    <script>
+        var calamansis = Calamansi.autoload();
+
+        calamansis.forEach(function (instance) {
+            instance.on('initialized', (calamansi) => {
+                console.log(`Calamansi initialized: ${calamansi.id}`);
+            });
+        });
+    </script>
 </body>
 </html>
