@@ -1,71 +1,107 @@
 class Calamansi
 {
-    constructor(el) {
-        this.initialized = false;
+    constructor(el, options = {}) {
+        /* DATA */
+        this.options = Object.assign(options, {
+            // Default options...
+            multitrack: false,
+        });
 
-        this.el = el;
-        this.id = this.generateUniqueId();
-        this.skinPath = el.attributes.skin ? el.attributes.skin.value : 'default';
-
+        // Make sure we have all the required options provided and the values
+        // are all correct
         try {
-            this.options = el.attributes.options
-                ? this.parseOptions(el.attributes.options.value)
-                : null;
+            this.validateOptions();
         } catch (error) {
-            console.error('Could not initialize a Calamansi instance');
+            console.error(`Calamansi intialization error: ${error}`);
 
             return;
         }
+
+        /* STATE */
+        this.initialized = false;
+
+        this.el = el;
+        this.id = el.id ? el.id : this.generateUniqueId();
 
         this.eventListeners = {
             initialized: [],
         };
 
+        /* INITIALIZE PLAYER INSTANCE */
         this.init();
     }
 
     /**
      * Automatically initialize all the player instances
      */
-    static autoload() {
+    static autoload(className = 'calamansi') {
         const calamansis = [];
-        const elements = document.querySelectorAll('v-calamansi');
+        const elements = document.querySelectorAll(`.${className}`);
 
         // Initialize all the player instances
         elements.forEach(el => {
-            calamansis.push(new Calamansi(el));
+            calamansis.push(new Calamansi(el, this.readOptionsFromElement(el)));
         });
 
         return calamansis;
     }
 
-    parseOptions(string) {
-        try {
-            string = string.replace(/'/g, '"');
+    /**
+     * Read options from a DOM element for autoloaded instances
+     * 
+     * @param {*} el 
+     */
+    static readOptionsFromElement(el) {
+        const options = {};
 
-            return JSON.parse(string);
-        } catch (error) {
-            throw error;
+        options.skin = el.dataset.skin ? el.dataset.skin : null;
+        options.source = el.dataset.source ? el.dataset.source : null;
+
+        return options;
+    }
+
+    validateOptions() {
+        if (!this.options.skin) {
+            throw 'No skin provided.';
+        }
+
+        if (!this.options.multitrack && !this.options.source) {
+            throw 'No audio source provided.';
         }
     }
 
     async init() {
-        this.loadSkinCss(this.skinPath);
-        const skin = await this.fetchSkin(this.skinPath);
+        this.loadSkinCss(this.options.skin);
+        const skin = await this.fetchSkin(this.options.skin);
+        const content = this.el.innerHTML;
 
+        console.log(skin);
+
+        // Prepare the DOM for the player instance using the skin's HTML
         let wrapper = document.createElement('div');
-        wrapper.innerHTML = skin;
+        wrapper.innerHTML = skin.trim();
         
         if (wrapper.firstChild.dataset.noWrapper) {
             wrapper = wrapper.firstChild;
+
+            delete wrapper.dataset.noWrapper;
         }
 
         wrapper.classList.add('calamansi');
         wrapper.id = this.id;
 
+        // Replace the provided element with the compiled HTML
         this.el.parentNode.replaceChild(wrapper, this.el);
         this.el = wrapper;
 
+        // Insert the element's content inside the skin's content slot
+        const contentSlot = document.querySelector(`#${this.el.id} .slot--content`);
+
+        if (contentSlot) {
+            contentSlot.innerHTML = content;
+        }
+
+        // Initialization done!
         this.initialized = true;
 
         this.emit('initialized', this);
@@ -80,9 +116,29 @@ class Calamansi
 
                 return data.text();
             })
-            .then(html => html);
+            .then(html => {
+                html = html.trim();
+
+                // Remove all the new lines
+                while (html.search("\n") >= 0) {
+                    html = html.replace(/\n/, '');
+                }
+
+                // Remove all the double spaces
+                while (html.search('  ') >= 0) {
+                    html = html.replace(/  /, '');
+                }
+
+                return html;
+            });
     }
 
+    /**
+     * Append a <link> with the skin's CSS to the page if this skin's CSS has
+     * not been appended yet
+     * 
+     * @param {*} path 
+     */
     loadSkinCss(path) {
         const cssPath = `${path}/skin.css`;
 

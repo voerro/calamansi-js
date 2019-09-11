@@ -7,13 +7,32 @@
     <title>Calamansi Audio Player by Voerro</title>
 </head>
 <body>
-    <v-calamansi skin="../dist/skins/inline"
-        options="{ 'source': '../dist/sounds/kiitos.mp3' }"></v-calamansi>
-    
-    <v-calamansi skin="../dist/skins/inline"
-        source="../dist/sounds/danke.mp3"></v-calamansi>
+    <!-- Simple in-text players to be initialized automatically -->
+    <p>
+        How do you say "thank you" in different languages? In Finnish it is
 
-    <v-calamansi skin="../dist/skins/inline"></v-calamansi>
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="../dist/sounds/kiitos.mp3">kiitos</span>, and in German - 
+
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="../dist/sounds/danke.mp3">danke</span>.
+    </p>
+
+    <p>
+        Testing invalid players:
+
+        <ul>
+            <li class="calamansi">[no skin]</li>
+
+            <li class="calamansi"
+                data-skin="../dist/skins/in-text">[no audio source]</li>
+        </ul>
+    </p>
+    
+    <!-- A player to be initialized manually -->
+    <div id="player1">Loading player...</div>
     
     <script src="../dist/calamansi.js"></script>
 
@@ -25,6 +44,8 @@
                 console.log(`Calamansi initialized: ${calamansi.id}`);
             });
         });
+
+        var player1 = new Calamansi(document.getElementById('player1'));
     </script>
 </body>
 </html>
