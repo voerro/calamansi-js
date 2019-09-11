@@ -27,6 +27,8 @@ class Calamansi
             initialized: [],
         };
 
+        this.audio = null;
+
         /* INITIALIZE PLAYER INSTANCE */
         this.init();
     }
@@ -75,8 +77,6 @@ class Calamansi
         const skin = await this.fetchSkin(this.options.skin);
         const content = this.el.innerHTML;
 
-        console.log(skin);
-
         // Prepare the DOM for the player instance using the skin's HTML
         let wrapper = document.createElement('div');
         wrapper.innerHTML = skin.trim();
@@ -100,6 +100,12 @@ class Calamansi
         if (contentSlot) {
             contentSlot.innerHTML = content;
         }
+
+        // Load the audio
+        this.loadAudio(this.options.source);
+
+        // Activate the player's controls
+        this.activateControls();
 
         // Initialization done!
         this.initialized = true;
@@ -160,6 +166,22 @@ class Calamansi
         return document.querySelectorAll(`calamansi-${id}`).length > 0
             ? this.generateUniqueId()
             : `calamansi-${id}`;
+    }
+
+    loadAudio(source) {
+        this.audio = new Audio(source);
+    }
+
+    activateControls() {
+        this.el.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            if (event.target.classList.contains('control-play')) {
+                // "Play" button
+                this.audio.load();
+                this.audio.play();
+            }
+        });
     }
 
     /**
