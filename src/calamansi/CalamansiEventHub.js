@@ -1,0 +1,45 @@
+class CalamansiEventHub
+{
+    constructor() {
+        this.eventListeners = {
+            initialized: [],
+            play: [],
+            pause: [],
+            ended: [],
+        };
+    }
+
+    /**
+     * Emit an event. Call all the event listeners' callbacks.
+     * 
+     * @param {*} event 
+     * @param {*} data 
+     */
+    emit(event, data) {
+        // Ignore inexisting event types
+        if (!this.eventListeners[event]) {
+            return;
+        }
+
+        for (let callback of this.eventListeners[event]) {
+            callback(data);
+        }
+    }
+
+    /**
+     * Register an event listener
+     * 
+     * @param {*} event 
+     * @param {*} callback 
+     */
+    on(event, callback) {
+        // Ignore inexisting event types
+        if (!this.eventListeners[event]) {
+            return;
+        }
+
+        this.eventListeners[event].push(callback);
+    }
+}
+
+export default CalamansiEventHub;
