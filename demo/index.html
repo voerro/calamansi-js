@@ -20,6 +20,20 @@
             data-source="../dist/sounds/danke.mp3">danke</span>.
     </p>
 
+    <p>
+        These in-text players are a bit more advances. You can play and pause full songs like
+        
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="../dist/sounds/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3"
+        >Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span> or 
+
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="../dist/sounds/Dominia - Harvester.mp3"
+        >Dominia - Harvester</span>
+    </p>
+
     <div>
         Testing invalid players:
 
@@ -39,11 +53,11 @@
     <script>
         var calamansis = Calamansi.autoload();
 
-        calamansis.forEach(function (instance) {
-            instance.on('initialized', (calamansi) => {
-                console.log(`Calamansi initialized: ${calamansi.id}`);
-            });
-        });
+        // calamansis.forEach(function (instance) {
+        //     instance.on('initialized', (calamansi) => {
+        //         console.log(`Calamansi initialized: ${calamansi.id}`);
+        //     });
+        // });
 
         var player1 = new Calamansi(document.getElementById('player1'));
     </script>
