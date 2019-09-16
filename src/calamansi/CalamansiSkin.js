@@ -131,6 +131,10 @@ class CalamansiSkin
             this.updatePlaybackTimeLeft(
                 this.calamansi.audio.currentTime, this.calamansi.audio.duration
             );
+
+            this.updateProgressBar(
+                this.calamansi.audio.currentTime, this.calamansi.audio.duration
+            );
         });
     }
 
@@ -159,10 +163,21 @@ class CalamansiSkin
 
     updatePlaybackTimeLeft(time, duration) {
         const el = this.getEl('.playback-time-left');
-        const timeLeft = duration - Math.floor(time);
 
         if (el) {
+            const timeLeft = duration - Math.floor(time);
+
             el.innerText = '-' + this.formatTime(timeLeft);
+        }
+    }
+
+    updateProgressBar(time, duration) {
+        const el = this.getEl('.playback-progress');
+
+        if (el) {
+            const progress = (time / duration) * 100;
+
+            el.style.width = progress + '%';
         }
     }
 

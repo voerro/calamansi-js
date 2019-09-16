@@ -1,3 +1,22 @@
 .calamansi-skin--dummy {
     border: 5px solid black;
 }
+
+.calamansi-skin--dummy .playback-bar {
+    position: relative;
+    height: 10px;
+    background-color: #eee;
+}
+.calamansi-skin--dummy .playback-load {
+    height: 100%;
+    width: 0%;
+    background-color: #ddd;
+}
+.calamansi-skin--dummy .playback-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background-color: #13abea;
+}
