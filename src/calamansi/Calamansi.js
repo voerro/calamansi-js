@@ -33,6 +33,10 @@ class Calamansi
         };
 
         this.audio = null;
+        
+        this.playlists = [];
+        this._currentPlaylist = null;
+        this._currentTrack = null;
 
         /* INITIALIZE PLAYER INSTANCE */
         this.init();
@@ -62,7 +66,13 @@ class Calamansi
         const options = {};
 
         options.skin = el.dataset.skin ? el.dataset.skin : null;
-        options.source = el.dataset.source ? el.dataset.source : null;
+
+        if (el.dataset.source) {
+            options.playlists = {
+                'default': [{ source: el.dataset.source }]
+            };
+            // options.source = el.dataset.source ? el.dataset.source : null;
+        }
 
         return options;
     }
@@ -72,9 +82,9 @@ class Calamansi
             throw 'No skin provided.';
         }
 
-        if (!this.options.multitrack && !this.options.source) {
-            throw 'No audio source provided.';
-        }
+        // if (!this.options.multitrack && !this.options.source) {
+        //     throw 'No audio source provided.';
+        // }
     }
 
     async init() {
@@ -108,8 +118,11 @@ class Calamansi
             });
         }
 
-        // Load the audio
-        this.loadAudio(this.options.source);
+        // Prepare playlists/audio source, load the first track to play
+        this.preparePlaylists();
+
+        // Load the first playlist with at least 1 track
+        this.loadPlaylist(this.currentPlaylist());
 
         // Activate the player's controls
         this.activateControls();
@@ -178,25 +191,91 @@ class Calamansi
             : `calamansi-${id}`;
     }
 
-    loadAudio(source) {
-        this.audio = new CalamansiAudio(this, source);
+    /**
+     * Read playlist information from the provided options, select the first
+     * playlist and track to be played
+     */
+    preparePlaylists() {
+        if (this.options.playlists && Object.keys(this.options.playlists).length > 0) {
+            let playlistIndex = 0;
+
+            for (let name in this.options.playlists) {
+                let playlist = {
+                    name: name,
+                    list: []
+                };
+                
+                if (!Array.isArray(this.options.playlists[name])) {
+                    continue;
+                }
+
+                for (let track of this.options.playlists[name]) {
+                    if (!track.source) {
+                        continue;
+                    }
+
+                    playlist.list.push(track);
+
+                    // Set the first playlist with at least 1 track as the
+                    // current playlist
+                    if (!this._currentPlaylist) {
+                        this._currentPlaylist = playlistIndex;
+                    }
+                }
+                
+                this.playlists.push(playlist);
+
+                playlistIndex++;
+            }
+
+            // If no tracks were found - set the first playlist as the current
+            if (this._currentPlaylist === null) {
+                this._currentPlaylist = 0;
+            }
+        }
+    }
+
+    loadPlaylist(playlist) {
+        if (!playlist) {
+            return;
+        }
+
+        this._currentTrack = 0;
+
+        // Load the first track to play
+        this.loadTrack(this.currentTrack());
+    }
+
+    loadTrack(track) {
+        this.audio = new CalamansiAudio(this, track.source);
     }
 
     activateControls() {
         this.el.addEventListener('click', (event) => {
             event.preventDefault();
 
-            if (event.target.classList.contains('control-play')) {
-                // "Play" button - start playback from 00:00
-                this.audio.playFromStart();
-            } else if (event.target.classList.contains('control-resume')) {
-                // "Play" button - start or resume playback
-                this.audio.play();
-            } else if (event.target.classList.contains('control-pause')) {
-                // "Pause" button
-                this.audio.pause();
+            // Audio (playback) controls
+            if (this.audio) {
+                if (event.target.classList.contains('control-play')) {
+                    // "Play" button - start playback from 00:00
+                    this.audio.playFromStart();
+                } else if (event.target.classList.contains('control-resume')) {
+                    // "Play" button - start or resume playback
+                    this.audio.play();
+                } else if (event.target.classList.contains('control-pause')) {
+                    // "Pause" button
+                    this.audio.pause();
+                }
             }
         });
+    }
+
+    currentPlaylist() {
+        return this.playlists[this._currentPlaylist];
+    }
+
+    currentTrack() {
+        return this.currentPlaylist().list[this._currentTrack];
     }
 
     /**

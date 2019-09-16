@@ -13,11 +13,11 @@
 
         <span class="calamansi"
             data-skin="../dist/skins/pronunciation"
-            data-source="../dist/sounds/kiitos.mp3">kiitos</span>, and in German it is 
+            data-source="../dist/files/kiitos.mp3">kiitos</span>, and in German it is 
 
         <span class="calamansi"
             data-skin="../dist/skins/pronunciation"
-            data-source="../dist/sounds/danke.mp3">danke</span>.
+            data-source="../dist/files/danke.mp3">danke</span>.
     </p>
 
     <p>
@@ -25,12 +25,12 @@
         
         <span class="calamansi"
             data-skin="../dist/skins/in-text"
-            data-source="../dist/sounds/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3"
+            data-source="../dist/files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3"
         >Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span> or 
 
         <span class="calamansi"
             data-skin="../dist/skins/in-text"
-            data-source="../dist/sounds/Dominia - Harvester.mp3"
+            data-source="../dist/files/Dominia - Harvester.mp3"
         >Dominia - Harvester</span>
     </p>
 
@@ -59,7 +59,22 @@
         //     });
         // });
 
-        var player1 = new Calamansi(document.getElementById('player1'));
+        var dummyPlayer = new Calamansi(document.getElementById('player1'), {
+            skin: '../dist/skins/dummy',
+            playlists: {
+                'Metal With Violins': [
+                    {
+                        source: '../dist/files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: '../dist/files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: '../dist/files/Dominia - Harvester.mp3',
+                    },
+                ],
+            },
+        });
     </script>
 </body>
 </html>
