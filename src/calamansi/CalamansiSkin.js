@@ -13,6 +13,9 @@ class CalamansiSkin
 
         // Activate the player's controls
         this.activateControls();
+
+        // Register event listeners
+        this.addEventListeners();
     }
 
     async load() {
@@ -115,6 +118,80 @@ class CalamansiSkin
                 }
             }
         });
+    }
+
+    addEventListeners() {
+        this.calamansi.on('loadedmetadata', (instance) => {
+            this.updatePlaybackDuration(this.calamansi.audio.duration);
+        });
+
+        this.calamansi.on('timeupdate', (instance) => {
+            this.updatePlaybackTime(this.calamansi.audio.currentTime);
+
+            this.updatePlaybackTimeLeft(
+                this.calamansi.audio.currentTime, this.calamansi.audio.duration
+            );
+        });
+    }
+
+    /**
+     * Updating the UI
+     */
+    getEl(selector) {
+        return document.querySelector(`#${this.el.id} ${selector}`);
+    }
+
+    updatePlaybackDuration(duration) {
+        const el = this.getEl('.playback-duration');
+
+        if (el) {
+            el.innerText = this.formatTime(duration);
+        }
+    }
+
+    updatePlaybackTime(currentTime) {
+        const el = this.getEl('.playback-time');
+
+        if (el) {
+            el.innerText = this.formatTime(currentTime);
+        }
+    }
+
+    updatePlaybackTimeLeft(time, duration) {
+        const el = this.getEl('.playback-time-left');
+        const timeLeft = duration - Math.floor(time);
+
+        if (el) {
+            el.innerText = '-' + this.formatTime(timeLeft);
+        }
+    }
+
+    formatTime(seconds) {
+        let minutes = seconds > 60
+            ? Math.floor(seconds / 60)
+            : '00';
+
+        let hours = minutes > 60
+            ? Math.floor(minutes / 60)
+            : '00';
+
+        seconds = Math.floor(seconds);
+
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
+        }
+
+        if (minutes !== '00' && minutes < 10) {
+            minutes = `0${minutes}`;
+        }
+
+        if (hours !== '00' && hours < 10) {
+            hours = `0${hours}`;
+        }
+
+        return hours !== '00'
+            ? `${hours}:${minutes}:${seconds}`
+            : `${minutes}:${seconds}`;
     }
 }
 

@@ -5,7 +5,11 @@ class CalamansiEventHub
             initialized: [],
             play: [],
             pause: [],
+            stop: [],
             ended: [],
+            loadeddata: [],
+            loadedmetadata: [],
+            timeupdate: [],
         };
     }
 

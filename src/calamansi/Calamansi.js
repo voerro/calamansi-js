@@ -32,8 +32,12 @@ class Calamansi
             pause: [],
             stop: [],
             ended: [],
+            loadeddata: [],
+            loadedmetadata: [],
+            timeupdate: [],
         };
 
+        this.skin = null;
         this.audio = null;
         
         this.playlists = [];
