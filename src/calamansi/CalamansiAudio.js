@@ -35,6 +35,14 @@ class CalamansiAudio
         this.calamansi.emit('pause', this.calamansi);
         CalamansiEvents.emit('pause', this.calamansi);
     }
+
+    stop() {
+        this.audio.pause();
+        this.audio.load();
+
+        this.calamansi.emit('stop', this.calamansi);
+        CalamansiEvents.emit('stop', this.calamansi);
+    }
 }
 
 export default CalamansiAudio;

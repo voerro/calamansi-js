@@ -29,6 +29,7 @@ class Calamansi
             initialized: [],
             play: [],
             pause: [],
+            stop: [],
             ended: [],
         };
 
@@ -265,6 +266,9 @@ class Calamansi
                 } else if (event.target.classList.contains('control-pause')) {
                     // "Pause" button
                     this.audio.pause();
+                } else if (event.target.classList.contains('control-stop')) {
+                    // "Stop" button
+                    this.audio.stop();
                 }
             }
         });
@@ -334,7 +338,9 @@ class Calamansi
             // Pause all players when one of the players on the page has started
             // playing
             if (instance.id != this.id) {
-                this.audio.pause();
+                if (this.audio) {
+                    this.audio.pause();
+                }
             }
         });
     }
