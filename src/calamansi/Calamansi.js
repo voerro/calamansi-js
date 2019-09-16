@@ -34,6 +34,8 @@ class Calamansi
             ended: [],
             loadeddata: [],
             loadedmetadata: [],
+            canplaythrough: [],
+            loadingProgress: [],
             timeupdate: [],
         };
 

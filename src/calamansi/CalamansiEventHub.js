@@ -9,6 +9,8 @@ class CalamansiEventHub
             ended: [],
             loadeddata: [],
             loadedmetadata: [],
+            canplaythrough: [],
+            loadingProgress: [],
             timeupdate: [],
         };
     }

@@ -7,6 +7,7 @@ class CalamansiAudio
         // Metadata
         this.duration = 0;
         this.currentTime = 0;
+        this.loadedPercent = 0.0;
         
         this.addEventListeners();
     }
@@ -19,6 +20,7 @@ class CalamansiAudio
             CalamansiEvents.emit('loadedmetadata', this.calamansi);
         });
 
+        // Fired when the first frame of the media has finished loading.
         this.audio.addEventListener('loadeddata', (event) => {
             this.setCurrentTime(this.audio.currentTime);
 
@@ -26,11 +28,19 @@ class CalamansiAudio
             CalamansiEvents.emit('loadeddata', this.calamansi);
         });
 
-        this.audio.addEventListener('timeupdate', (event) => {
-            this.currentTime = this.audio.currentTime;
+        // Data has been fully loaded till the end
+        this.audio.addEventListener('canplaythrough', (event) => {
+            this.loadedPercent = 100;
 
-            this.calamansi.emit('timeupdate', this.calamansi);
-            CalamansiEvents.emit('timeupdate', this.calamansi);
+            this.calamansi.emit('canplaythrough', this.calamansi);
+            CalamansiEvents.emit('canplaythrough', this.calamansi);
+
+            this.calamansi.emit('loadingProgress', this.calamansi);
+            CalamansiEvents.emit('loadingProgress', this.calamansi);
+        });
+
+        this.audio.addEventListener('timeupdate', (event) => {
+            this.setCurrentTime(this.audio.currentTime);
         });
 
         this.audio.addEventListener('ended', (event) => {
@@ -76,6 +86,12 @@ class CalamansiAudio
 
         this.calamansi.emit('timeupdate', this.calamansi);
         CalamansiEvents.emit('timeupdate', this.calamansi);
+    }
+
+    seekTo(time) {
+        this.audio.currentTime = time;
+        
+        this.setCurrentTime(time);
     }
 }
 

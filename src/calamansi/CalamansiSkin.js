@@ -115,6 +115,10 @@ class CalamansiSkin
                 } else if (event.target.classList.contains('control-stop')) {
                     // "Stop" button
                     this.calamansi.audio.stop();
+                } else if (event.target.classList.contains('playback-load') || event.target.classList.contains('playback-progress')) {
+                    const position = event.layerX / event.target.parentNode.offsetWidth;
+
+                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
                 }
             }
         });
@@ -122,20 +126,24 @@ class CalamansiSkin
 
     addEventListeners() {
         this.calamansi.on('loadedmetadata', (instance) => {
-            this.updatePlaybackDuration(this.calamansi.audio.duration);
+            this.updatePlaybackDuration(instance.audio.duration);
         });
 
         this.calamansi.on('timeupdate', (instance) => {
-            this.updatePlaybackTime(this.calamansi.audio.currentTime);
+            this.updatePlaybackTime(instance.audio.currentTime);
 
             this.updatePlaybackTimeLeft(
-                this.calamansi.audio.currentTime, this.calamansi.audio.duration
+                instance.audio.currentTime, instance.audio.duration
             );
 
-            this.updateProgressBar(
-                this.calamansi.audio.currentTime, this.calamansi.audio.duration
+            this.updatePlaybackProgress(
+                instance.audio.currentTime, instance.audio.duration
             );
         });
+
+        this.calamansi.on('loadingProgress', (instance) => {
+            this.updateLoadingProgress(instance.audio.loadedPercent);
+        })
     }
 
     /**
@@ -171,12 +179,20 @@ class CalamansiSkin
         }
     }
 
-    updateProgressBar(time, duration) {
+    updatePlaybackProgress(time, duration) {
         const el = this.getEl('.playback-progress');
 
         if (el) {
             const progress = (time / duration) * 100;
 
+            el.style.width = progress + '%';
+        }
+    }
+
+    updateLoadingProgress(progress) {
+        const el = this.getEl('.playback-load');
+
+        if (el) {
             el.style.width = progress + '%';
         }
     }
