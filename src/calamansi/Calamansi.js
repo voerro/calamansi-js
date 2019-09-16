@@ -1,4 +1,5 @@
 import CalamansiAudio from './CalamansiAudio';
+import CalamansiSkin from './CalamansiSkin';
 
 class Calamansi
 {
@@ -89,44 +90,14 @@ class Calamansi
     }
 
     async init() {
-        this.loadSkinCss(this.options.skin);
-        const skin = await this.fetchSkin(this.options.skin);
-        const content = this.el.innerHTML;
-
-        // Prepare the DOM for the player instance using the skin's HTML
-        let wrapper = document.createElement('div');
-        wrapper.innerHTML = skin.trim();
-        
-        if (wrapper.firstChild.dataset.noWrapper) {
-            wrapper = wrapper.firstChild;
-
-            delete wrapper.dataset.noWrapper;
-        }
-
-        wrapper.classList.add('calamansi');
-        wrapper.id = this.id;
-
-        // Replace the provided element with the compiled HTML
-        this.el.parentNode.replaceChild(wrapper, this.el);
-        this.el = wrapper;
-
-        // Insert the element's content inside the skin's content slot
-        const contentSlots = document.querySelectorAll(`#${this.el.id} .slot--content`);
-
-        if (contentSlots && contentSlots.length > 0) {
-            contentSlots.forEach(slot => {
-                slot.innerHTML = content;
-            });
-        }
+        this.skin = new CalamansiSkin(this, this.options.skin);
+        await this.skin.init();
 
         // Prepare playlists/audio source, load the first track to play
         this.preparePlaylists();
 
         // Load the first playlist with at least 1 track
         this.loadPlaylist(this.currentPlaylist());
-
-        // Activate the player's controls
-        this.activateControls();
 
         // Register internal event listeners
         this.registerEventListeners();
@@ -135,53 +106,6 @@ class Calamansi
         this.initialized = true;
 
         this.emit('initialized', this);
-    }
-    
-    async fetchSkin(path) {
-        return fetch(`${path}/skin.html`)
-            .then(data => {
-                if (data.status != 200) {
-                    throw `Skin at path "${path}" not found!`;
-                }
-
-                return data.text();
-            })
-            .then(html => {
-                html = html.trim();
-
-                // Remove all the new lines
-                while (html.search("\n") >= 0) {
-                    html = html.replace(/\n/, '');
-                }
-
-                // Remove all the double spaces
-                while (html.search('  ') >= 0) {
-                    html = html.replace(/  /, '');
-                }
-
-                return html;
-            });
-    }
-
-    /**
-     * Append a <link> with the skin's CSS to the page if this skin's CSS has
-     * not been appended yet
-     * 
-     * @param {*} path 
-     */
-    loadSkinCss(path) {
-        const cssPath = `${path}/skin.css`;
-
-        // If the skin's CSS has already been loaded
-        if (document.querySelectorAll(`link[href="${cssPath}"]`).length > 0) {
-            return;
-        }
-
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = cssPath;
-
-        document.querySelector('head').appendChild(link);
     }
 
     generateUniqueId() {
@@ -251,29 +175,6 @@ class Calamansi
         this.audio = new CalamansiAudio(this, track.source);
     }
 
-    activateControls() {
-        this.el.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            // Audio (playback) controls
-            if (this.audio) {
-                if (event.target.classList.contains('control-play')) {
-                    // "Play" button - start playback from 00:00
-                    this.audio.playFromStart();
-                } else if (event.target.classList.contains('control-resume')) {
-                    // "Play" button - start or resume playback
-                    this.audio.play();
-                } else if (event.target.classList.contains('control-pause')) {
-                    // "Pause" button
-                    this.audio.pause();
-                } else if (event.target.classList.contains('control-stop')) {
-                    // "Stop" button
-                    this.audio.stop();
-                }
-            }
-        });
-    }
-
     currentPlaylist() {
         return this.playlists[this._currentPlaylist];
     }
@@ -302,8 +203,9 @@ class Calamansi
      * 
      * @param {*} event 
      * @param {*} data 
+     * @param {*} data 
      */
-    emit(event, data) {
+    emit(event, instance, data = {}) {
         // Sometimes the player initialization might fail
         if (!this.initialized) {
             return;
@@ -315,11 +217,11 @@ class Calamansi
         }
 
         for (let callback of this.eventListeners[event]) {
-            callback(data);
+            callback(instance, data);
         }
 
         // DOM elements visibility can be dependent on events
-        document.querySelectorAll(`#${this.el.id} .hide-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this.skin.el.id} .hide-on-${event}`).forEach(el => {
             if (el.style.display == 'none') {
                 return;
             }
@@ -328,7 +230,7 @@ class Calamansi
             el.style.display = 'none';
         });
 
-        document.querySelectorAll(`#${this.el.id} .show-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this.skin.el.id} .show-on-${event}`).forEach(el => {
             el.style.display = el.dataset.display;
         });
     }

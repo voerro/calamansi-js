@@ -13,16 +13,17 @@ class CalamansiEventHub
      * Emit an event. Call all the event listeners' callbacks.
      * 
      * @param {*} event 
+     * @param {*} instance
      * @param {*} data 
      */
-    emit(event, data) {
+    emit(event, instance, data = {}) {
         // Ignore inexisting event types
         if (!this.eventListeners[event]) {
             return;
         }
 
         for (let callback of this.eventListeners[event]) {
-            callback(data);
+            callback(instance, data);
         }
     }
 
