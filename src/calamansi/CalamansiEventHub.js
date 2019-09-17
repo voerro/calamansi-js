@@ -12,6 +12,7 @@ class CalamansiEventHub
             canplaythrough: [],
             loadingProgress: [],
             timeupdate: [],
+            volumechange: [],
         };
     }
 

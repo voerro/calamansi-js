@@ -37,6 +37,7 @@ class Calamansi
             canplaythrough: [],
             loadingProgress: [],
             timeupdate: [],
+            volumechange: [],
         };
 
         this.skin = null;

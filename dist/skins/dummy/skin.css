@@ -20,3 +20,16 @@
     width: 0%;
     background-color: #13abea;
 }
+
+.calamansi-skin--dummy .volume-bar {
+    display: inline-block;
+    position: relative;
+    width: 10%;
+    height: 10px;
+    background-color: #eee;
+}
+.calamansi-skin--dummy .volume-value {
+    height: 100%;
+    width: 100%;
+    background-color: #13abea;
+}

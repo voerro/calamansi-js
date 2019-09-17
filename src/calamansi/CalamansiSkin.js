@@ -5,6 +5,9 @@ class CalamansiSkin
         this.path = path;
 
         this.el = calamansi.el;
+
+        // State
+        this.mouseDownTarget = null;
     }
 
     async init() {
@@ -98,6 +101,14 @@ class CalamansiSkin
     }
 
     activateControls() {
+        this.el.addEventListener('mousedown', (event) => {
+            this.mouseDownTarget = event.target;
+        });
+
+        document.addEventListener('mouseup', (event) => {
+            this.mouseDownTarget = null;
+        });
+
         this.el.addEventListener('click', (event) => {
             event.preventDefault();
 
@@ -119,6 +130,38 @@ class CalamansiSkin
                     const position = event.layerX / event.target.parentNode.offsetWidth;
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+                } else if (event.target.classList.contains('volume-bar') || event.target.classList.contains('volume-value')) {
+                    const parent = event.target.classList.contains('volume-bar')
+                        ? event.target
+                        : event.target.parentNode;
+
+                    const position = event.layerX / parent.offsetWidth;
+
+                    this.calamansi.audio.changeVolume(position);
+                }
+            }
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            // Audio (playback) controls
+            if (this.calamansi.audio && this.mouseDownTarget) {
+                if (this.mouseDownTarget.classList.contains('playback-load') || this.mouseDownTarget.classList.contains('playback-progress')) {
+                    // Smooth seeking
+                    const parent = this.mouseDownTarget.parentNode;
+                    
+                    const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+                } else if (this.mouseDownTarget.classList.contains('volume-bar') || this.mouseDownTarget.classList.contains('volume-value')) {
+                    // Smooth change of the volume
+                    const parent = this.mouseDownTarget.classList.contains('volume-bar')
+                        ? this.mouseDownTarget
+                        : this.mouseDownTarget.parentNode;
+
+                    // const position = event.layerX / parent.offsetWidth;
+                    const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    this.calamansi.audio.changeVolume(position);
                 }
             }
         });
@@ -143,6 +186,10 @@ class CalamansiSkin
 
         this.calamansi.on('loadingProgress', (instance) => {
             this.updateLoadingProgress(instance.audio.loadedPercent);
+        })
+
+        this.calamansi.on('volumechange', (instance) => {
+            this.updateVolume(instance.audio.volume);
         })
     }
 
@@ -194,6 +241,14 @@ class CalamansiSkin
 
         if (el) {
             el.style.width = progress + '%';
+        }
+    }
+
+    updateVolume(volume) {
+        const el = this.getEl('.volume-value');
+
+        if (el) {
+            el.style.width = (volume * 100) + '%';
         }
     }
 
