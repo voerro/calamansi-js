@@ -12,7 +12,10 @@ class CalamansiSkin
 
     async init() {
         // Load and apply the skin
-        await this.load();
+        const content = await this.load();
+
+        // Set UI elements
+        this.setUiElements(content);
 
         // Activate the player's controls
         this.activateControls();
@@ -43,14 +46,7 @@ class CalamansiSkin
         this.el.parentNode.replaceChild(wrapper, this.el);
         this.el = wrapper;
 
-        // Insert the element's content inside the skin's content slot
-        const contentSlots = document.querySelectorAll(`#${this.el.id} .slot--content`);
-
-        if (contentSlots && contentSlots.length > 0) {
-            contentSlots.forEach(slot => {
-                slot.innerHTML = content;
-            });
-        }
+        return content;
     }
 
     /**
@@ -98,6 +94,23 @@ class CalamansiSkin
 
                 return html;
             });
+    }
+
+    setUiElements(content) {
+        // Insert the element's content inside the skin's content slot
+        const contentSlots = document.querySelectorAll(`#${this.el.id} .slot--content`);
+
+        if (contentSlots && contentSlots.length > 0) {
+            contentSlots.forEach(slot => {
+                slot.innerHTML = content;
+            });
+        }
+
+        // Set the filename
+        const filenameEl = this.getEl('.track-info--filename');
+        if (filenameEl) {
+            filenameEl.innerText = this.calamansi.currentTrack().filename;
+        }
     }
 
     activateControls() {
@@ -148,7 +161,7 @@ class CalamansiSkin
                 if (this.mouseDownTarget.classList.contains('playback-load') || this.mouseDownTarget.classList.contains('playback-progress')) {
                     // Smooth seeking
                     const parent = this.mouseDownTarget.parentNode;
-                    
+
                     const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);

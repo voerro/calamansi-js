@@ -97,9 +97,6 @@ class Calamansi
     }
 
     async init() {
-        this.skin = new CalamansiSkin(this, this.options.skin);
-        await this.skin.init();
-
         // Prepare playlists/audio source, load the first track to play
         this.preparePlaylists();
 
@@ -108,6 +105,10 @@ class Calamansi
 
         // Register internal event listeners
         this.registerEventListeners();
+
+        // Initialize the skin
+        this.skin = new CalamansiSkin(this, this.options.skin);
+        await this.skin.init();
 
         // Initialization done!
         this.initialized = true;
@@ -145,6 +146,9 @@ class Calamansi
                     if (!track.source) {
                         continue;
                     }
+
+                    const sourceParts = track.source.split('/');
+                    track.filename = sourceParts[sourceParts.length - 1];
 
                     playlist.list.push(track);
 
