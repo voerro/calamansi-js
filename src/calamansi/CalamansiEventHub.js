@@ -13,6 +13,8 @@ class CalamansiEventHub
             loadingProgress: [],
             timeupdate: [],
             volumechange: [],
+            trackInfoReady: [],
+            trackSwitched: [],
         };
     }
 

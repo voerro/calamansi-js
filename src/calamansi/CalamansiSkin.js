@@ -111,6 +111,9 @@ class CalamansiSkin
         if (filenameEl) {
             filenameEl.innerText = this.calamansi.currentTrack().filename;
         }
+
+        // Set the track info fields
+        this.updateTrackInfo();
     }
 
     activateControls() {
@@ -184,6 +187,10 @@ class CalamansiSkin
         this.calamansi.on('loadedmetadata', (instance) => {
             this.updatePlaybackDuration(instance.audio.duration);
         });
+        
+        this.calamansi.on('trackSwitched', (instance) => {
+            this.updateTrackInfo();
+        });
 
         this.calamansi.on('timeupdate', (instance) => {
             this.updatePlaybackTime(instance.audio.currentTime);
@@ -199,11 +206,17 @@ class CalamansiSkin
 
         this.calamansi.on('loadingProgress', (instance) => {
             this.updateLoadingProgress(instance.audio.loadedPercent);
-        })
+        });
 
         this.calamansi.on('volumechange', (instance) => {
             this.updateVolume(instance.audio.volume);
-        })
+        });
+
+        this.calamansi.on('trackInfoReady', (instance, track) => {
+            if (instance.currentTrack().source === track.source) {
+                this.updateTrackInfo();
+            }
+        });
     }
 
     /**
@@ -291,6 +304,22 @@ class CalamansiSkin
         return hours !== '00'
             ? `${hours}:${minutes}:${seconds}`
             : `${minutes}:${seconds}`;
+    }
+
+    updateTrackInfo() {
+        if (!this.calamansi.currentTrack() || !this.calamansi.currentTrack().info) {
+            return;
+        }
+
+        const info = this.calamansi.currentTrack().info;
+
+        for (let key in info) {
+            let el = this.getEl(`.track-info--${key}`);
+            
+            if (el) {
+                el.innerText = info[key];
+            }
+        }
     }
 }
 

@@ -1,13 +1,14 @@
 import CalamansiAudio from './CalamansiAudio';
 import CalamansiSkin from './CalamansiSkin';
 
+import Id3Reader from './services/Id3Reader';
+
 class Calamansi
 {
     constructor(el, options = {}) {
         /* DATA */
         this.options = Object.assign(options, {
             // Default options...
-            multitrack: false,
         });
 
         // Make sure we have all the required options provided and the values
@@ -38,6 +39,8 @@ class Calamansi
             loadingProgress: [],
             timeupdate: [],
             volumechange: [],
+            trackInfoReady: [],
+            trackSwitched: [],
         };
 
         this.skin = null;
@@ -80,7 +83,6 @@ class Calamansi
             options.playlists = {
                 'default': [{ source: el.dataset.source }]
             };
-            // options.source = el.dataset.source ? el.dataset.source : null;
         }
 
         return options;
@@ -90,10 +92,6 @@ class Calamansi
         if (!this.options.skin) {
             throw 'No skin provided.';
         }
-
-        // if (!this.options.multitrack && !this.options.source) {
-        //     throw 'No audio source provided.';
-        // }
     }
 
     async init() {
@@ -147,10 +145,17 @@ class Calamansi
                         continue;
                     }
 
-                    const sourceParts = track.source.split('/');
-                    track.filename = sourceParts[sourceParts.length - 1];
+                    track.filename = track.source.split('/').pop();
+                    track.sourceType = track.filename.split('.').pop();
+                    track.info = {};
 
                     playlist.list.push(track);
+
+                    // Load track info
+                    // TODO: Loading track info should be optional. In-text
+                    // player probably won't need that, so let's save our
+                    // browser from making unnecessary requests
+                    this.loadTrackInfo(track);
 
                     // Set the first playlist with at least 1 track as the
                     // current playlist
@@ -175,15 +180,31 @@ class Calamansi
         if (!playlist) {
             return;
         }
-
-        this._currentTrack = 0;
-
-        // Load the first track to play
-        this.loadTrack(this.currentTrack());
+        
+        this.switchTrack(0);
     }
 
     loadTrack(track) {
         this.audio = new CalamansiAudio(this, track.source);
+    }
+
+    switchTrack(index) {
+        this._currentTrack = index;
+
+        // Load the first track to play
+        this.loadTrack(this.currentTrack());
+
+        this.emit('trackSwitched', this);
+    }
+
+    loadTrackInfo(track) {
+        if (track.sourceType === 'mp3') {
+            (new Id3Reader(track.source)).getAllTags().then(tags => {
+                track.info = tags;
+
+                this.emit('trackInfoReady', this, track);
+            });
+        }
     }
 
     currentPlaylist() {
@@ -191,7 +212,9 @@ class Calamansi
     }
 
     currentTrack() {
-        return this.currentPlaylist().list[this._currentTrack];
+        return this.currentPlaylist()
+            ? this.currentPlaylist().list[this._currentTrack]
+            : null;
     }
 
     /**
