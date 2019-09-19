@@ -5,6 +5,7 @@ class Id3Reader
 
         this.buffer = null;
         this.byteArray = [];
+        this.id3Size = 0;
         this.tags = {};
 
         this.frames = {
@@ -22,21 +23,65 @@ class Id3Reader
         };
     }
     
-    getAllTags() {
+    async getAllTags() {
+        try {
+            await this.loadMetaData();
+        } catch (error) {
+            // Do nothing
+            return;
+        }
+
+        // Is there an ID3 tags block at all?
+        if (!this._hasId3Tags()) {
+            return;
+        }
+
+        // ID3 major version. We're support only v4 for now.
+        if (this._getId3MajorVersion() !== 4) {
+            return;
+        }
+
+        this.id3Size = new DataView(this.buffer.slice(6, 10)).getInt32();
+
+        // Determine where the actual tags start from
+        const id3Start = this._headerIsExtended()
+            ? 10 + new DataView(this.buffer.slice(10, 14)).getInt32()
+            : 10;
+
         return new Promise((resolve, reject) => {
-            // TODO: Don't fetch the whole files, fetch only the id3 part in the
-            // beginning. Make 2 requests, the first one needs to fetch first 10
-            // bytes to get the id3 block size, the next should fetch the block.
-            fetch(this.url)
-                .then(response => response.arrayBuffer())
-                .then(data => {
-                    this.buffer = data;
-                    this.byteArray = new Uint8Array(data);
+            fetch(this.url, {
+                method: 'GET',
+                headers: {
+                    Range: `bytes=${id3Start}-${this.id3Size}`
+                }
+            })
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                this.buffer = data;
+                this.byteArray = new Uint8Array(data);
 
-                    this._readTags();
+                this._readTags();
 
-                    resolve(this.tags);
-                });
+                resolve(this.tags);
+            });
+        });
+    }
+
+    /**
+     * Load first 10 bytes of the file to determine whether it has id3 tags and
+     * if it does - what is the id3 block size
+     */
+    async loadMetaData() {
+        await fetch(this.url, {
+            method: 'GET',
+            headers: {
+                Range: 'bytes=0-13'
+            }
+        })
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            this.buffer = data;
+            this.byteArray = new Uint8Array(data);
         });
     }
 
@@ -49,37 +94,16 @@ class Id3Reader
     }
 
     _readTags() {
-        if (!this._hasId3Tags()) {
-            return null;
-        }
-
-        // Next 2 bytes have the ID2 version
-        // ID3 major version. We're support only v4 for now.
-        if (this._getId3MajorVersion() !== 4) {
-            return;
-        }
-
-        const id3Size = new DataView(this.buffer.slice(6, 10)).getInt32();
-
-        // Determine where the actual tags start from
-        const extendedHeaderSize = this._headerIsExtended()
-            ? new DataView(this.buffer.slice(10, 14)).getInt32()
-            : 0;
-
-        let offset = 10 + extendedHeaderSize;
-
-        this.buffer = this.buffer.slice(offset, offset + id3Size);
-        this.byteArray = new Uint8Array(this.buffer);
-        offset = 0;
+        let offset = 0;
 
         // Read all the tags one by one, extract the ones we need
-        while (offset < id3Size) {
+        while (offset < this.id3Size) {
             try {
                 // this._readTags();
                 offset = this._readTag(offset);
             } catch (error) {
                 // Do nothing
-                offset += id3Size;
+                offset += this.id3Size;
             }
         }
     }
