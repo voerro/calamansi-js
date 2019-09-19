@@ -3,6 +3,7 @@ class CalamansiAudio
     constructor(calamansi, source) {
         this.calamansi = calamansi;
         this.audio = new Audio(source);
+        this.audio.load();
 
         // Metadata
         this.duration = 0;
@@ -31,6 +32,12 @@ class CalamansiAudio
             CalamansiEvents.emit('loadeddata', this.calamansi);
         });
 
+        // Data loading progress
+        this.audio.addEventListener('progress', (event, progress) => {
+            // TODO: There seems to be no way to actually determine how much has
+            // been loaded
+        });
+
         // Data has been fully loaded till the end
         this.audio.addEventListener('canplaythrough', (event) => {
             this.loadedPercent = 100;
@@ -55,7 +62,9 @@ class CalamansiAudio
     }
 
     playFromStart() {
-        this.audio.load();
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        this.currentTime = 0;
         this.audio.play();
 
         this.calamansi.emit('play', this.calamansi);
@@ -78,7 +87,8 @@ class CalamansiAudio
 
     stop() {
         this.audio.pause();
-        this.audio.load();
+        this.audio.currentTime = 0;
+        this.currentTime = 0;
 
         this.calamansi.emit('stop', this.calamansi);
         CalamansiEvents.emit('stop', this.calamansi);

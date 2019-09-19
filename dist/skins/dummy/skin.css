@@ -9,7 +9,7 @@
 }
 .calamansi-skin--dummy .playback-load {
     height: 100%;
-    width: 0%;
+    width: 100%;
     background-color: #ddd;
 }
 .calamansi-skin--dummy .playback-progress {
