@@ -279,29 +279,33 @@ class CalamansiSkin
     }
 
     formatTime(seconds) {
-        let minutes = seconds > 60
-            ? Math.floor(seconds / 60)
-            : '00';
+        let hours = seconds > 1 ? Math.floor(seconds / 60 / 60) : 0;
+        let minutes = seconds > 1 ? Math.floor(seconds / 60) : 0;
 
-        let hours = minutes > 60
-            ? Math.floor(minutes / 60)
-            : '00';
+        if (minutes >= 60) {
+            minutes -= hours * 60;
+        }
 
         seconds = Math.floor(seconds);
 
+        if (seconds >= 60) {
+            seconds -= minutes * 60;
+        }
+
+        // Add trailing zeros if required
         if (seconds < 10) {
             seconds = `0${seconds}`;
         }
 
-        if (minutes !== '00' && minutes < 10) {
+        if (minutes < 10) {
             minutes = `0${minutes}`;
         }
 
-        if (hours !== '00' && hours < 10) {
+        if (hours < 10) {
             hours = `0${hours}`;
         }
 
-        return hours !== '00'
+        return hours != 0
             ? `${hours}:${minutes}:${seconds}`
             : `${minutes}:${seconds}`;
     }

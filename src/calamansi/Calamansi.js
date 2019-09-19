@@ -98,15 +98,15 @@ class Calamansi
         // Prepare playlists/audio source, load the first track to play
         this.preparePlaylists();
 
-        // Load the first playlist with at least 1 track
-        this.loadPlaylist(this.currentPlaylist());
-
         // Register internal event listeners
         this.registerEventListeners();
 
         // Initialize the skin
         this.skin = new CalamansiSkin(this, this.options.skin);
         await this.skin.init();
+
+        // Load the first playlist with at least 1 track
+        this.loadPlaylist(this.currentPlaylist());
 
         // Initialization done!
         this.initialized = true;
