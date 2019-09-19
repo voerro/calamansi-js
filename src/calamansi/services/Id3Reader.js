@@ -30,14 +30,16 @@ class Id3Reader
             // Do nothing
             return;
         }
-
+        
         // Is there an ID3 tags block at all?
         if (!this._hasId3Tags()) {
             return;
         }
-
-        // ID3 major version. We're support only v4 for now.
-        if (this._getId3MajorVersion() !== 4) {
+        
+        // ID3 major version. We're support only v2.3 up for now.
+        // NOTE: There are slight differences between  v2.3 & v2.4 which we
+        // don't consider for now as well
+        if (this._getId3MajorVersion() < 3) {
             return;
         }
 
@@ -62,6 +64,7 @@ class Id3Reader
 
                 this._readTags();
 
+                console.log(this.tags);
                 resolve(this.tags);
             });
         });
@@ -90,7 +93,7 @@ class Id3Reader
     }
 
     _sliceToString(from, length) {
-        return String.fromCharCode.apply(String, this._slice(from, length));
+        return (new TextDecoder()).decode(this._slice(from, length));
     }
 
     _readTags() {
