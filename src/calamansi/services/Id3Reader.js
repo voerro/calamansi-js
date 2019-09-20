@@ -64,7 +64,6 @@ class Id3Reader
 
                 this._readTags();
 
-                console.log(this.tags);
                 resolve(this.tags);
             });
         });
@@ -90,6 +89,10 @@ class Id3Reader
 
     _slice(from, length) {
         return this.byteArray.slice(from, from + length);
+    }
+
+    _bytesToString(bytes) {
+        return (new TextDecoder()).decode(bytes);
     }
 
     _sliceToString(from, length) {
@@ -149,18 +152,59 @@ class Id3Reader
         const flags = this._slice(offset, 2);
         offset += 2;
 
-        // Each value starts with a weird character. From StackOverflow: "The
-        // character at the beginning may be U+FEFF Byte Order Mark, which is
-        // used to distinguish between UTF-16LE and UTF-16BE". So, we're gonna
-        // ignore it.
-        const value = this._sliceToString(offset + 1, frameSize - 1);
-        offset += frameSize;
-
-        if (this.frames[type]) {
-            this.tags[this.frames[type]] = value;
+        // NOTE: Textual frames are marked with an encoding byte, which takes
+        // values $00-$03. It denotes the encoding used for the following text:
+        // ISO-8859-1, UCS-2, UTF-16BE, UTF-8. We're going to ignore this value
+        // for the time being. https://en.wikipedia.org/wiki/ID3#ID3v2
+        let value;
+        if (this._slice(offset, 1) <= 3) {
+            value = this._sliceToString(offset + 1, frameSize - 1);
+        } else {
+            value = this._sliceToString(offset, frameSize);
         }
 
+        if (this.frames[type]) {
+            if (type === 'APIC') {
+                // TODO: Each mp3 file can have multiple APICs of different type: icon, front cover, back cover, etc... Handle multiple pictures
+                // this.tags[this.frames[type]] = this._readApic(this._sliceToString(offset, frameSize));
+                // this.tags[this.frames[type]] = this._readApic(new DataView(this.buffer.slice(offset, offset + frameSize)));
+                this.tags[this.frames[type]] = this._readApic(this._slice(offset, frameSize));
+
+                // console.log(new DataView(this.buffer.slice(offset, offset + 1)).getInt16());
+                // console.log(this._sliceToString(offset, frameSize));
+
+                // console.log(this.tags[this.frames[type]]);
+            } else {
+                this.tags[this.frames[type]] = value;
+            }
+        }
+
+        offset += frameSize;
+
         return offset;
+    }
+
+    _readApic(data) {
+        const res = {};
+
+        let offset = 0;
+        let textEncoding = this._bytesToString(data.slice(offset, 1));
+        offset++;
+
+        let valueStart = offset;
+        let valueEnd = valueStart + 1;
+        
+        while (true) {
+            // console.log(data.slice(valueStart, valueEnd));
+
+            break;
+        }
+
+        // console.log(data.getUint8(0) === 0x00);
+
+        res.data = data;
+
+        return res;
     }
 }
 

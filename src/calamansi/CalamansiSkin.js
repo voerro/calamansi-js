@@ -319,8 +319,22 @@ class CalamansiSkin
 
         for (let key in info) {
             let el = this.getEl(`.track-info--${key}`);
-            
+
             if (el) {
+                if (key === 'albumCover') {
+                    // TODO: Display album cover
+                    let base64 = info[key].data;
+
+                    base64 = 'data:image/png;charset=utf-8;base64,'
+                        + btoa(unescape(encodeURIComponent(base64)));
+
+                    console.log(base64);
+
+                    el.src = base64;
+
+                    continue;
+                }
+
                 el.innerText = info[key];
             }
         }
