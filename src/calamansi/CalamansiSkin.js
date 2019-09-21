@@ -362,12 +362,16 @@ class CalamansiSkin
 
                     if (el) {
 
-                        if (key === 'albumCover') {
-                            // TODO: Display album cover
-                            continue;
+                        switch (key) {
+                            case 'albumCover':
+                                // TODO: Display album cover
+                                break
+                            case 'duration':
+                                el.innerText = this.formatTime(track.info[key]);
+                                break;
+                            default:
+                                el.innerText = track.info[key];
                         }
-
-                        el.innerText = track.info[key];
                     }
                 }
 

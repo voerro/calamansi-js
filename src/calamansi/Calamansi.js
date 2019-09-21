@@ -201,17 +201,27 @@ class Calamansi
     }
 
     loadTrackInfo(track) {
-        if (track.sourceType === 'mp3') {
-            (new Id3Reader(track.source)).getAllTags().then(tags => {
-                track.info = Object.assign(track.info, tags);
+        // Read duration of each track asynchronously
+        let audio = new Audio(track.source);
 
-                if (track.info.artist && track.info.title) {
-                    track.info.name = `${track.info.artist} - ${track.info.title}`;
-                }
+        audio.addEventListener('loadedmetadata', (event) => {
+            track.info.duration = audio.duration;
 
+            // Read ID3 tags for MP3
+            if (track.sourceType === 'mp3') {
+                (new Id3Reader(track.source)).getAllTags().then(tags => {
+                    track.info = Object.assign(track.info, tags);
+
+                    if (track.info.artist && track.info.title) {
+                        track.info.name = `${track.info.artist} - ${track.info.title}`;
+                    }
+
+                    this.emit('trackInfoReady', this, track);
+                });
+            } else {
                 this.emit('trackInfoReady', this, track);
-            });
-        }
+            }
+        });
     }
 
     currentPlaylist() {
