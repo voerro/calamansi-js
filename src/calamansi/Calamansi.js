@@ -145,9 +145,10 @@ class Calamansi
                         continue;
                     }
 
-                    track.filename = track.source.split('/').pop();
-                    track.sourceType = track.filename.split('.').pop();
                     track.info = {};
+                    track.info.filename = track.source.split('/').pop();
+                    track.info.name = track.info.filename;
+                    track.sourceType = track.info.filename.split('.').pop();
 
                     playlist.list.push(track);
 
@@ -182,6 +183,8 @@ class Calamansi
         }
         
         this.switchTrack(0);
+
+        this.emit('playlistLoaded', this);
     }
 
     loadTrack(track) {
@@ -200,7 +203,11 @@ class Calamansi
     loadTrackInfo(track) {
         if (track.sourceType === 'mp3') {
             (new Id3Reader(track.source)).getAllTags().then(tags => {
-                track.info = tags;
+                track.info = Object.assign(track.info, tags);
+
+                if (track.info.artist && track.info.title) {
+                    track.info.name = `${track.info.artist} - ${track.info.title}`;
+                }
 
                 this.emit('trackInfoReady', this, track);
             });

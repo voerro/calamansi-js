@@ -106,11 +106,8 @@ class CalamansiSkin
             });
         }
 
-        // Set the filename
-        const filenameEl = this.getEl('.track-info--filename');
-        if (filenameEl) {
-            filenameEl.innerText = this.calamansi.currentTrack().filename;
-        }
+        // Set up the playlist
+        this.updatePlaylist();
 
         // Set the track info fields
         this.updateTrackInfo();
@@ -187,10 +184,6 @@ class CalamansiSkin
         this.calamansi.on('loadedmetadata', (instance) => {
             this.updatePlaybackDuration(instance.audio.duration);
         });
-        
-        this.calamansi.on('trackSwitched', (instance) => {
-            this.updateTrackInfo();
-        });
 
         this.calamansi.on('timeupdate', (instance) => {
             this.updatePlaybackTime(instance.audio.currentTime);
@@ -216,6 +209,16 @@ class CalamansiSkin
             if (instance.currentTrack().source === track.source) {
                 this.updateTrackInfo();
             }
+
+            this.updatePlaylist();
+        });
+
+        this.calamansi.on('playlistLoaded', (instance) => {
+            this.updatePlaylist();
+        });
+
+        this.calamansi.on('trackSwitched', (instance) => {
+            this.updateTrackInfo();
         });
     }
 
@@ -224,6 +227,10 @@ class CalamansiSkin
      */
     getEl(selector) {
         return document.querySelector(`#${this.el.id} ${selector}`);
+    }
+
+    findEl(item, selector) {
+        return item.querySelector(selector);
     }
 
     updatePlaybackDuration(duration) {
@@ -310,6 +317,75 @@ class CalamansiSkin
             : `${minutes}:${seconds}`;
     }
 
+    updatePlaylist() {
+        if (!this.calamansi.currentPlaylist()) {
+            return;
+        }
+        
+        const el = this.getEl('.playlist');
+
+        if (!el) {
+            return;
+        }
+
+        if (el.nodeName.toLowerCase() === 'table') {
+            // TODO: Method to be implemented
+            this.updatePlaylistTable(el);
+        } else {
+            this.updatePlaylistUl(el);
+        }
+    }
+
+    updatePlaylistUl(container) {
+        // Remove the current list
+        if (container.querySelector('ul')) {
+            container.removeChild(container.querySelector('ul'))
+        }
+
+        const ul = document.createElement('ul');
+
+        let template = this.getEl('.playlist-item.template');
+        
+        if (template) {
+            template = template.cloneNode(true);
+            template.classList.remove('template');
+        }
+
+        for (let track of this.calamansi.currentPlaylist().list) {
+            let li = document.createElement('li');
+
+            if (template) {
+                const item = template.cloneNode(true);
+
+                for (let key in track.info) {
+                    let el = this.findEl(item, `.playlist-item--${key}`);
+
+                    if (el) {
+
+                        if (key === 'albumCover') {
+                            // TODO: Display album cover
+                            continue;
+                        }
+
+                        el.innerText = track.info[key];
+                    }
+                }
+
+                if (track === this.calamansi.currentTrack()) {
+                    item.classList.add('active');
+                }
+                
+                li.appendChild(item);
+            } else {
+                li.innerText = track.info.name;
+            }
+
+            ul.appendChild(li);
+        }
+
+        container.appendChild(ul);
+    }
+
     updateTrackInfo() {
         if (!this.calamansi.currentTrack() || !this.calamansi.currentTrack().info) {
             return;
@@ -328,7 +404,7 @@ class CalamansiSkin
                     base64 = 'data:image/png;charset=utf-8;base64,'
                         + btoa(unescape(encodeURIComponent(base64)));
 
-                    console.log(base64);
+                    // console.log(base64);
 
                     el.src = base64;
 

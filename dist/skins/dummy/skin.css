@@ -33,3 +33,25 @@
     width: 100%;
     background-color: #13abea;
 }
+
+/* Playlist */
+.calamansi-skin--dummy .playlist-item.template {
+    display: none;
+}
+
+.calamansi-skin--dummy .playlist-item {
+    display: flex;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.calamansi-skin--dummy .playlist-item.active {
+    background-color: #eee;
+}
+
+.calamansi-skin--dummy .playlist-item--name {
+    flex: 1;
+}
