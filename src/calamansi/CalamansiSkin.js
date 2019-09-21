@@ -139,6 +139,12 @@ class CalamansiSkin
                 } else if (event.target.classList.contains('control-stop')) {
                     // "Stop" button
                     this.calamansi.audio.stop();
+                } else if (event.target.classList.contains('control-next-track')) {
+                    // "Next Track" button
+                    this.calamansi.nextTrack();
+                } else if (event.target.classList.contains('control-prev-track')) {
+                    // "Previoud Track" button
+                    this.calamansi.prevTrack();
                 } else if (event.target.classList.contains('playback-load') || event.target.classList.contains('playback-progress')) {
                     const position = event.layerX / event.target.parentNode.offsetWidth;
 
@@ -219,6 +225,8 @@ class CalamansiSkin
 
         this.calamansi.on('trackSwitched', (instance) => {
             this.updateTrackInfo();
+
+            this.updatePlaylistActiveTrack();
         });
     }
 
@@ -227,6 +235,10 @@ class CalamansiSkin
      */
     getEl(selector) {
         return document.querySelector(`#${this.el.id} ${selector}`);
+    }
+
+    getEls(selector) {
+        return document.querySelectorAll(`#${this.el.id} ${selector}`);
     }
 
     findEl(item, selector) {
@@ -388,6 +400,20 @@ class CalamansiSkin
         }
 
         container.appendChild(ul);
+    }
+
+    updatePlaylistActiveTrack() {
+        let active = this.getEl('.playlist-item.active');
+
+        if (active) {
+            active.classList.remove('active');
+
+            let newActive = this.getEls('.playlist-item:not(.template)')[this.calamansi._currentTrack];
+
+            if (newActive) {
+                newActive.classList.add('active');
+            }
+        }
     }
 
     updateTrackInfo() {

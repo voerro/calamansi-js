@@ -39,6 +39,7 @@ class Calamansi
             loadingProgress: [],
             timeupdate: [],
             volumechange: [],
+            playlistLoaded: [],
             trackInfoReady: [],
             trackSwitched: [],
         };
@@ -105,13 +106,13 @@ class Calamansi
         this.skin = new CalamansiSkin(this, this.options.skin);
         await this.skin.init();
 
-        // Load the first playlist with at least 1 track
-        this.loadPlaylist(this.currentPlaylist());
-
         // Initialization done!
         this.initialized = true;
 
         this.emit('initialized', this);
+
+        // Load the first playlist with at least 1 track
+        this.loadPlaylist(this.currentPlaylist());
     }
 
     generateUniqueId() {
@@ -188,6 +189,10 @@ class Calamansi
     }
 
     loadTrack(track) {
+        if (this.audio) {
+            this.audio.stop();
+        }
+
         this.audio = new CalamansiAudio(this, track.source);
     }
 
@@ -232,6 +237,26 @@ class Calamansi
         return this.currentPlaylist()
             ? this.currentPlaylist().list[this._currentTrack]
             : null;
+    }
+
+    nextTrack() {
+        this.switchTrack(
+            this._currentTrack + 1 < this.currentPlaylist().list.length
+                ? this._currentTrack + 1
+                : 0
+        );
+
+        this.audio.play();
+    }
+
+    prevTrack() {
+        this.switchTrack(
+            this._currentTrack - 1 >= 0
+                ? this._currentTrack - 1
+                : this.currentPlaylist().list.length - 1
+        );
+
+        this.audio.play();
     }
 
     /**
