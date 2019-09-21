@@ -164,18 +164,23 @@ class Id3Reader
         }
 
         if (this.frames[type]) {
-            if (type === 'APIC') {
-                // TODO: Each mp3 file can have multiple APICs of different type: icon, front cover, back cover, etc... Handle multiple pictures
-                // this.tags[this.frames[type]] = this._readApic(this._sliceToString(offset, frameSize));
-                // this.tags[this.frames[type]] = this._readApic(new DataView(this.buffer.slice(offset, offset + frameSize)));
-                this.tags[this.frames[type]] = this._readApic(this._slice(offset, frameSize));
+            switch (type) {
+                case 'APIC':
+                    // TODO: Each mp3 file can have multiple APICs of different type: icon, front cover, back cover, etc... Handle multiple pictures
+                    // this.tags[this.frames[type]] = this._readApic(this._sliceToString(offset, frameSize));
+                    // this.tags[this.frames[type]] = this._readApic(new DataView(this.buffer.slice(offset, offset + frameSize)));
+                    this.tags[this.frames[type]] = this._readApic(this._slice(offset, frameSize));
 
-                // console.log(new DataView(this.buffer.slice(offset, offset + 1)).getInt16());
-                // console.log(this._sliceToString(offset, frameSize));
+                    // console.log(new DataView(this.buffer.slice(offset, offset + 1)).getInt16());
+                    // console.log(this._sliceToString(offset, frameSize));
 
-                // console.log(this.tags[this.frames[type]]);
-            } else {
-                this.tags[this.frames[type]] = value;
+                    // console.log(this.tags[this.frames[type]]);
+                    break;
+                case 'TRCK':
+                    this.tags[this.frames[type]] = parseInt(value.split('/')[0]);
+                    break;
+                default:
+                    this.tags[this.frames[type]] = value;
             }
         }
 
