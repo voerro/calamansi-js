@@ -108,6 +108,9 @@ class CalamansiSkin
 
         this.updateCheckboxes();
 
+        // Update the list of playlist
+        this.updatePlaylistList();
+
         // Set up the playlist
         this.updatePlaylist();
 
@@ -375,6 +378,32 @@ class CalamansiSkin
         if (el) {
             el.checked = this.calamansi.options.shuffle;
         }
+    }
+    
+    updatePlaylistList() {
+        const el = this.getEl('.playlists');
+
+        if (!el) {
+            return;
+        }
+
+        for (let child of el.children) {
+            el.removeChild(child);
+        }
+
+        for (let index in this.calamansi.playlists) {
+            const playlist = this.calamansi.playlists[index];
+
+            const option = document.createElement('option');
+            option.value = index;
+            option.innerText = playlist.name;
+
+            el.appendChild(option);
+        }
+
+        el.addEventListener('change', (event) => {
+            this.calamansi.switchPlaylist(el.value);
+        });
     }
 
     updatePlaylist() {

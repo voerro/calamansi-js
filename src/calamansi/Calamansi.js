@@ -43,6 +43,7 @@ class Calamansi
             volumechange: [],
             playlistLoaded: [],
             playlistReordered: [],
+            playlistSwitched: [],
             trackInfoReady: [],
             trackSwitched: [],
         };
@@ -165,7 +166,7 @@ class Calamansi
 
                     // Set the first playlist with at least 1 track as the
                     // current playlist
-                    if (!this._currentPlaylist) {
+                    if (this._currentPlaylist === null) {
                         this._currentPlaylist = playlistIndex;
                     }
                 }
@@ -202,7 +203,7 @@ class Calamansi
         this._currentPlaylist = index;
 
         // Load the first track to play
-        this.loadTrack(this.currentPlaylist());
+        this.loadPlaylist(this.currentPlaylist());
 
         this.emit('playlistSwitched', this);
     }
