@@ -32,7 +32,7 @@ class Calamansi
             play: [],
             pause: [],
             stop: [],
-            ended: [],
+            trackEnded: [],
             loadeddata: [],
             loadedmetadata: [],
             canplaythrough: [],
@@ -325,6 +325,10 @@ class Calamansi
                 }
             }
         });
+
+        this.on('trackEnded', (instance) => {
+            this.nextTrack();
+        })
     }
 }
 

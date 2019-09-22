@@ -6,7 +6,7 @@ class CalamansiEventHub
             play: [],
             pause: [],
             stop: [],
-            ended: [],
+            trackEnded: [],
             loadeddata: [],
             loadedmetadata: [],
             canplaythrough: [],

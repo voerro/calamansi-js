@@ -56,8 +56,8 @@ class CalamansiAudio
         this.audio.addEventListener('ended', (event) => {
             this._setCurrentTime(0);
 
-            this.calamansi.emit('ended', this.calamansi);
-            CalamansiEvents.emit('ended', this.calamansi);
+            this.calamansi.emit('trackEnded', this.calamansi);
+            CalamansiEvents.emit('trackEnded', this.calamansi);
         });
     }
 
