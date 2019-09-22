@@ -1,7 +1,8 @@
 import CalamansiAudio from './CalamansiAudio';
 import CalamansiSkin from './CalamansiSkin';
 
-import Id3Reader from './services/Id3Reader';
+// import Id3Reader from './services/Id3Reader';
+let jsmediatags = require('../vendor/jsmediatags.min.js');
 
 class Calamansi
 {
@@ -13,6 +14,7 @@ class Calamansi
             shuffle: false,
             volume: 100,
             loadTrackInfo: false,
+            defaultAlbumCover: '',
         }, options);
 
         // Make sure we have all the required options provided and the values
@@ -244,15 +246,43 @@ class Calamansi
 
             // Read ID3 tags for MP3
             if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
-                (new Id3Reader(track.source)).getAllTags().then(tags => {
-                    track.info = Object.assign(track.info, tags);
+                jsmediatags.read(window.location.href + track.source, {
+                    onSuccess: (tags) => {
+                        track.info = Object.assign(track.info, tags.tags);
 
-                    if (track.info.artist && track.info.title) {
-                        track.info.name = `${track.info.artist} - ${track.info.title}`;
+                        // console.log(tags.tags);
+
+                        if (track.info.artist && track.info.title) {
+                            track.info.name = `${track.info.artist} - ${track.info.title}`;
+                        }
+
+                        if (track.info.track) {
+                            track.info.trackNumber = parseInt(track.info.track.split('/')[0]);
+                        }
+
+                        if (track.info.picture) {
+                            let base64 = btoa(String.fromCharCode.apply(null, track.info.picture.data));
+
+                            track.info.picture = Object.assign(track.info.picture, {
+                                base64: 'data:' + track.info.picture.format + ';base64,' + base64
+                            });
+
+                            track.info.albumCover = track.info.picture;
+                        }
+
+                        this.emit('trackInfoReady', this, track);
                     }
-
-                    this.emit('trackInfoReady', this, track);
                 });
+                
+                // .then(tags => {
+                //     track.info = Object.assign(track.info, tags);
+
+                //     if (track.info.artist && track.info.title) {
+                //         track.info.name = `${track.info.artist} - ${track.info.title}`;
+                //     }
+
+                //     this.emit('trackInfoReady', this, track);
+                // });
             } else {
                 this.emit('trackInfoReady', this, track);
             }

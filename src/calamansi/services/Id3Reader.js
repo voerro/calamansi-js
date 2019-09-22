@@ -105,7 +105,6 @@ class Id3Reader
         // Read all the tags one by one, extract the ones we need
         while (offset < this.id3Size) {
             try {
-                // this._readTags();
                 offset = this._readTag(offset);
             } catch (error) {
                 // Do nothing
@@ -146,7 +145,7 @@ class Id3Reader
 
         const frameSize = new DataView(this.buffer.slice(offset, offset + 4)).getInt32();
         offset += 4;
-        
+
         // TODO: See the "4.1.   Frame header flags" section at
         // http://id3.org/id3v2.4.0-structure on how to handle the frame flags
         const flags = this._slice(offset, 2);

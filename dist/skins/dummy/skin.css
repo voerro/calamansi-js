@@ -34,6 +34,11 @@
     background-color: #13abea;
 }
 
+/* Track info */
+.calamansi-skin--dummy .track-info--albumCover {
+    width: 150px;
+}
+
 /* Playlists */
 .calamansi-skin--dummy .playlists {
     width: 100%;

@@ -609,20 +609,19 @@ class CalamansiSkin
 
             if (el) {
                 if (key === 'albumCover') {
-                    // TODO: Display album cover
-                    let base64 = info[key].data;
-
-                    base64 = 'data:image/png;charset=utf-8;base64,'
-                        + btoa(unescape(encodeURIComponent(base64)));
-
-                    // console.log(base64);
-
-                    el.src = base64;
+                    el.src = info[key].base64;
 
                     continue;
                 }
 
                 el.innerText = info[key];
+            }
+
+            // Remove albumCover src if there's a DOM element and no data
+            const albumCover = this.getEl(`.track-info--albumCover`);
+
+            if (albumCover && !info[albumCover]) {
+                albumCover.src = this.calamansi.options.defaultAlbumCover;
             }
         }
     }
