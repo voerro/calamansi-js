@@ -245,6 +245,10 @@ class CalamansiSkin
         return item.querySelector(selector);
     }
 
+    findEls(item, selector) {
+        return item.querySelectorAll(selector);
+    }
+
     findElParent(item, className) {
         if (item.classList.contains(className)) {
             return item;
@@ -424,6 +428,60 @@ class CalamansiSkin
         }
 
         container.appendChild(ul);
+    }
+
+    updatePlaylistTable(table) {        
+        while (this.findEl(table, 'tbody')) {
+            table.removeChild(this.findEl(table, 'tbody'));
+        }
+
+        const tbody = document.createElement('tbody');
+
+        let index = 0;
+        for (let track of this.calamansi.currentPlaylist().list) {
+            const tr = document.createElement('tr');
+            tr.classList.add('playlist-item');
+
+            for (let th of this.findEls(table, 'th')) {
+                const td = document.createElement('td');
+                const key = th.classList[0];
+
+                td.classList.add(`playlist-item--${key}`);
+
+                if (track.info[key]) {
+                    switch (key) {
+                        case 'albumCover':
+                            // TODO: Display album cover
+                            break
+                        case 'duration':
+                            td.innerText = this.formatTime(track.info[key]);
+                            break;
+                        default:
+                            td.innerText = track.info[key];
+                    }
+                }
+
+                if (track === this.calamansi.currentTrack()) {
+                    tr.classList.add('active');
+                }
+
+                tr.dataset.index = index;
+
+                tr.addEventListener('dblclick', (event) => {
+                    const el = this.findElParent(event.target, 'playlist-item');
+
+                    this.calamansi.switchTrack(parseInt(el.dataset.index), true);
+                });
+
+                tr.appendChild(td);
+            }
+
+            tbody.appendChild(tr);
+
+            index++;
+        }
+
+        table.appendChild(tbody);
     }
 
     updatePlaylistActiveTrack() {
