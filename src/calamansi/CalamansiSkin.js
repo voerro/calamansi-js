@@ -245,6 +245,18 @@ class CalamansiSkin
         return item.querySelector(selector);
     }
 
+    findElParent(item, className) {
+        if (item.classList.contains(className)) {
+            return item;
+        }
+
+        if (!item.parentNode) {
+            return null;
+        }
+
+        return this.findElParent(item.parentNode, className);
+    }
+
     updatePlaybackDuration(duration) {
         const el = this.getEl('.playback-duration');
 
@@ -363,6 +375,7 @@ class CalamansiSkin
             template.classList.remove('template');
         }
 
+        let index = 0;
         for (let track of this.calamansi.currentPlaylist().list) {
             let li = document.createElement('li');
 
@@ -396,7 +409,18 @@ class CalamansiSkin
                 li.innerText = track.info.name;
             }
 
+            li.classList.add('playlist-item-li');
+            li.dataset.index = index;
+
+            li.addEventListener('dblclick', (event) => {
+                const el = this.findElParent(event.target, 'playlist-item-li');
+
+                this.calamansi.switchTrack(parseInt(el.dataset.index), true);
+            });
+
             ul.appendChild(li);
+
+            index++;
         }
 
         container.appendChild(ul);

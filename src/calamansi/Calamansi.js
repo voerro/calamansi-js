@@ -189,20 +189,26 @@ class Calamansi
     }
 
     loadTrack(track) {
-        if (this.audio) {
-            this.audio.stop();
+        if (!this.audio) {
+            this.audio = new CalamansiAudio(this, track.source);
+
+            return;
         }
 
-        this.audio = new CalamansiAudio(this, track.source);
+        this.audio.load(track.source);
     }
 
-    switchTrack(index) {
+    switchTrack(index, startPlaying = false) {
         this._currentTrack = index;
 
         // Load the first track to play
         this.loadTrack(this.currentTrack());
 
         this.emit('trackSwitched', this);
+
+        if (startPlaying) {
+            this.audio.play();
+        }
     }
 
     loadTrackInfo(track) {
@@ -243,20 +249,18 @@ class Calamansi
         this.switchTrack(
             this._currentTrack + 1 < this.currentPlaylist().list.length
                 ? this._currentTrack + 1
-                : 0
+                : 0,
+            true
         );
-
-        this.audio.play();
     }
 
     prevTrack() {
         this.switchTrack(
             this._currentTrack - 1 >= 0
                 ? this._currentTrack - 1
-                : this.currentPlaylist().list.length - 1
+                : this.currentPlaylist().list.length - 1,
+            true
         );
-
-        this.audio.play();
     }
 
     /**

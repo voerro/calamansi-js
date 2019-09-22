@@ -61,6 +61,13 @@ class CalamansiAudio
         });
     }
 
+    load(source) {
+        this.stop();
+
+        this.audio.src = source;
+        this.audio.load();
+    }
+
     playFromStart() {
         this.audio.pause();
         this.audio.currentTime = 0;
