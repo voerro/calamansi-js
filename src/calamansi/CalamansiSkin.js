@@ -229,6 +229,16 @@ class CalamansiSkin
                 }
             }
         });
+
+        const playbackRateSelect = this.getEl('.playback-rate');
+
+        if (playbackRateSelect) {
+            playbackRateSelect.addEventListener('change', (event) => {
+                if (this.calamansi.audio) {
+                    this.calamansi.audio.changePlaybackRate(parseFloat(playbackRateSelect.value));
+                }
+            })
+        }
     }
 
     addEventListeners() {

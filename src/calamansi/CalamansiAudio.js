@@ -114,17 +114,20 @@ class CalamansiAudio
         this._setCurrentTime(time);
     }
 
-    _setVolume(volume) {
+    changeVolume(volume) {
+        this.audio.volume = volume;
         this.volume = volume;
 
         this.calamansi.emit('volumechange', this.calamansi);
         CalamansiEvents.emit('volumechange', this.calamansi);
     }
 
-    changeVolume(volume) {
-        this.audio.volume = volume;
+    changePlaybackRate(rate) {
+        this.playbackRate = rate;
+        this.audio.playbackRate = rate;
 
-        this._setVolume(volume);
+        this.calamansi.emit('ratechange', this.calamansi);
+        CalamansiEvents.emit('ratechange', this.calamansi);
     }
 }
 

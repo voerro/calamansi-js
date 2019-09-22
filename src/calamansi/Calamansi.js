@@ -43,6 +43,7 @@ class Calamansi
             loadingProgress: [],
             timeupdate: [],
             volumechange: [],
+            ratechange: [],
             playlistLoaded: [],
             playlistReordered: [],
             playlistSwitched: [],

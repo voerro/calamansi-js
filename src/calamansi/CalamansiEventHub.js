@@ -13,6 +13,7 @@ class CalamansiEventHub
             loadingProgress: [],
             timeupdate: [],
             volumechange: [],
+            ratechange: [],
             playlistLoaded: [],
             playlistReordered: [],
             trackInfoReady: [],
