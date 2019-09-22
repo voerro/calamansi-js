@@ -106,6 +106,8 @@ class CalamansiSkin
             });
         }
 
+        this.updateCheckboxes();
+
         // Set up the playlist
         this.updatePlaylist();
 
@@ -123,7 +125,9 @@ class CalamansiSkin
         });
 
         this.el.addEventListener('click', (event) => {
-            event.preventDefault();
+            if (event.target.type !== 'checkbox') {
+                event.preventDefault();
+            }
 
             // Audio (playback) controls
             if (this.calamansi.audio) {
@@ -145,6 +149,9 @@ class CalamansiSkin
                 } else if (event.target.classList.contains('control-prev-track')) {
                     // "Previoud Track" button
                     this.calamansi.prevTrack();
+                } else if (event.target.classList.contains('control-toggle-repeat')) {
+                    // "Repeat" button (checkbox)
+                    this.calamansi.toggleRepeat();
                 } else if (event.target.classList.contains('playback-load') || event.target.classList.contains('playback-progress')) {
                     const position = event.layerX / event.target.parentNode.offsetWidth;
 
@@ -343,6 +350,15 @@ class CalamansiSkin
         return hours != 0
             ? `${hours}:${minutes}:${seconds}`
             : `${minutes}:${seconds}`;
+    }
+
+    updateCheckboxes() {
+        // "Repeat"
+        let el = this.getEl('.control-toggle-repeat');
+
+        if (el) {
+            el.checked = this.calamansi.options.repeat;
+        }
     }
 
     updatePlaylist() {

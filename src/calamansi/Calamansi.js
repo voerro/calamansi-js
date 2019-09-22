@@ -7,9 +7,10 @@ class Calamansi
 {
     constructor(el, options = {}) {
         /* DATA */
-        this.options = Object.assign(options, {
+        this.options = Object.assign({
             // Default options...
-        });
+            repeat: true,
+        }, options);
 
         // Make sure we have all the required options provided and the values
         // are all correct
@@ -246,21 +247,31 @@ class Calamansi
     }
 
     nextTrack() {
-        this.switchTrack(
-            this._currentTrack + 1 < this.currentPlaylist().list.length
-                ? this._currentTrack + 1
-                : 0,
-            true
-        );
+        if (this._currentTrack + 1 < this.currentPlaylist().list.length) {
+            this.switchTrack(this._currentTrack + 1, true);
+        } else {
+            const jumpTo = this.options.repeat ? 0 : this._currentTrack;
+
+            if (jumpTo === 0) {
+                this.switchTrack(jumpTo, true);
+            }
+        }
     }
 
     prevTrack() {
-        this.switchTrack(
-            this._currentTrack - 1 >= 0
-                ? this._currentTrack - 1
-                : this.currentPlaylist().list.length - 1,
-            true
-        );
+        if (this._currentTrack - 1 >= 0) {
+            this.switchTrack(this._currentTrack - 1, true);
+        } else {
+            const jumpTo = this.options.repeat ? this.currentPlaylist().list.length - 1 : 0;
+
+            if (jumpTo !== 0) {
+                this.switchTrack(jumpTo, true);
+            }
+        }
+    }
+
+    toggleRepeat() {
+        this.options.repeat = ! this.options.repeat;
     }
 
     /**
