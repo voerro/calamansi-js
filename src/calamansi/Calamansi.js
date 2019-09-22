@@ -11,6 +11,7 @@ class Calamansi
             // Default options...
             repeat: false,
             shuffle: false,
+            volume: 100,
         }, options);
 
         // Make sure we have all the required options provided and the values
@@ -118,6 +119,10 @@ class Calamansi
 
         // Load the first playlist with at least 1 track
         this.loadPlaylist(this.currentPlaylist());
+
+        if (this.audio) {
+            this.audio.changeVolume(this.options.volume / 100);
+        }
     }
 
     generateUniqueId() {
