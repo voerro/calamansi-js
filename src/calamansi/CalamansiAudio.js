@@ -34,7 +34,7 @@ class CalamansiAudio
 
         // Data loading progress
         this.audio.addEventListener('progress', (event, progress) => {
-            // TODO: There seems to be no way to actually determine how much has
+            // NOTE: There seems to be no way to actually determine how much has
             // been loaded
         });
 

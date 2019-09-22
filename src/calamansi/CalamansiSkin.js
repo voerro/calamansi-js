@@ -152,6 +152,9 @@ class CalamansiSkin
                 } else if (event.target.classList.contains('control-toggle-repeat')) {
                     // "Repeat" button (checkbox)
                     this.calamansi.toggleRepeat();
+                } else if (event.target.classList.contains('control-toggle-shuffle')) {
+                    // "Shuffle" button (checkbox)
+                    this.calamansi.toggleShuffle();
                 } else if (event.target.classList.contains('playback-load') || event.target.classList.contains('playback-progress')) {
                     const position = event.layerX / event.target.parentNode.offsetWidth;
 
@@ -227,6 +230,10 @@ class CalamansiSkin
         });
 
         this.calamansi.on('playlistLoaded', (instance) => {
+            this.updatePlaylist();
+        });
+
+        this.calamansi.on('playlistReordered', (instance) => {
             this.updatePlaylist();
         });
 
@@ -353,11 +360,20 @@ class CalamansiSkin
     }
 
     updateCheckboxes() {
+        let el;
+
         // "Repeat"
-        let el = this.getEl('.control-toggle-repeat');
+        el = this.getEl('.control-toggle-repeat');
 
         if (el) {
             el.checked = this.calamansi.options.repeat;
+        }
+
+        // "Shuffle"
+        el = this.getEl('.control-toggle-shuffle');
+
+        if (el) {
+            el.checked = this.calamansi.options.shuffle;
         }
     }
 
@@ -373,7 +389,6 @@ class CalamansiSkin
         }
 
         if (el.nodeName.toLowerCase() === 'table') {
-            // TODO: Method to be implemented
             this.updatePlaylistTable(el);
         } else {
             this.updatePlaylistUl(el);
@@ -395,8 +410,8 @@ class CalamansiSkin
             template.classList.remove('template');
         }
 
-        let index = 0;
-        for (let track of this.calamansi.currentPlaylist().list) {
+        for (let index of this.calamansi._currentPlaylistOrder) {
+            const track = this.calamansi.currentPlaylist().list[index];
             let li = document.createElement('li');
 
             if (template) {
@@ -430,7 +445,7 @@ class CalamansiSkin
             }
 
             li.classList.add('playlist-item-li');
-            li.dataset.index = index;
+            li.dataset.index = this.calamansi._currentPlaylistOrder[index];
 
             li.addEventListener('dblclick', (event) => {
                 const el = this.findElParent(event.target, 'playlist-item-li');
@@ -439,8 +454,6 @@ class CalamansiSkin
             });
 
             ul.appendChild(li);
-
-            index++;
         }
 
         container.appendChild(ul);
@@ -453,8 +466,9 @@ class CalamansiSkin
 
         const tbody = document.createElement('tbody');
 
-        let index = 0;
-        for (let track of this.calamansi.currentPlaylist().list) {
+        // let index = 0;
+        for (let index of this.calamansi._currentPlaylistOrder) {
+            const track = this.calamansi.currentPlaylist().list[index];
             const tr = document.createElement('tr');
             tr.classList.add('playlist-item');
 
@@ -481,7 +495,7 @@ class CalamansiSkin
                     tr.classList.add('active');
                 }
 
-                tr.dataset.index = index;
+                tr.dataset.index = this.calamansi._currentPlaylistOrder[index];
 
                 tr.addEventListener('dblclick', (event) => {
                     const el = this.findElParent(event.target, 'playlist-item');
@@ -493,8 +507,6 @@ class CalamansiSkin
             }
 
             tbody.appendChild(tr);
-
-            index++;
         }
 
         table.appendChild(tbody);

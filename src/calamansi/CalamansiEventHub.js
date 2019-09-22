@@ -14,6 +14,7 @@ class CalamansiEventHub
             timeupdate: [],
             volumechange: [],
             playlistLoaded: [],
+            playlistReordered: [],
             trackInfoReady: [],
             trackSwitched: [],
         };

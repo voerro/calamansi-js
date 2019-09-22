@@ -9,7 +9,8 @@ class Calamansi
         /* DATA */
         this.options = Object.assign({
             // Default options...
-            repeat: true,
+            repeat: false,
+            shuffle: false,
         }, options);
 
         // Make sure we have all the required options provided and the values
@@ -41,6 +42,7 @@ class Calamansi
             timeupdate: [],
             volumechange: [],
             playlistLoaded: [],
+            playlistReordered: [],
             trackInfoReady: [],
             trackSwitched: [],
         };
@@ -51,6 +53,7 @@ class Calamansi
         this.playlists = [];
         this._currentPlaylist = null;
         this._currentTrack = null;
+        this._currentPlaylistOrder = [];
 
         /* INITIALIZE PLAYER INSTANCE */
         this.init();
@@ -183,10 +186,25 @@ class Calamansi
         if (!playlist) {
             return;
         }
+
+        if (this.options.shuffle) {
+            this.shuffleCurrentPlaylist(false);
+        } else {
+            this.unshuffleCurrentPlaylist(false);
+        }
         
         this.switchTrack(0);
 
         this.emit('playlistLoaded', this);
+    }
+
+    switchPlaylist(index) {
+        this._currentPlaylist = index;
+
+        // Load the first track to play
+        this.loadTrack(this.currentPlaylist());
+
+        this.emit('playlistSwitched', this);
     }
 
     loadTrack(track) {
@@ -242,7 +260,7 @@ class Calamansi
 
     currentTrack() {
         return this.currentPlaylist()
-            ? this.currentPlaylist().list[this._currentTrack]
+            ? this.currentPlaylist().list[this._currentPlaylistOrder[this._currentTrack]]
             : null;
     }
 
@@ -250,10 +268,8 @@ class Calamansi
         if (this._currentTrack + 1 < this.currentPlaylist().list.length) {
             this.switchTrack(this._currentTrack + 1, true);
         } else {
-            const jumpTo = this.options.repeat ? 0 : this._currentTrack;
-
-            if (jumpTo === 0) {
-                this.switchTrack(jumpTo, true);
+            if (this.options.repeat) {
+                this.switchTrack(0, true);
             }
         }
     }
@@ -262,16 +278,54 @@ class Calamansi
         if (this._currentTrack - 1 >= 0) {
             this.switchTrack(this._currentTrack - 1, true);
         } else {
-            const jumpTo = this.options.repeat ? this.currentPlaylist().list.length - 1 : 0;
-
-            if (jumpTo !== 0) {
-                this.switchTrack(jumpTo, true);
+            if (this.options.repeat) {
+                this.switchTrack(this.currentPlaylist().list.length - 1, true);
             }
         }
     }
 
     toggleRepeat() {
         this.options.repeat = ! this.options.repeat;
+    }
+
+    toggleShuffle() {
+        this.options.shuffle = ! this.options.shuffle;
+
+        if (this.options.shuffle) {
+            this.shuffleCurrentPlaylist();
+        } else {
+            this.unshuffleCurrentPlaylist();
+        }
+    }
+
+    unshuffleCurrentPlaylist(emitEvent = true) {
+        this._currentPlaylistOrder = Object.keys(this.currentPlaylist().list);
+
+        if (emitEvent) {
+            this.emit('playlistReordered', this);
+        }
+    }
+
+    shuffleCurrentPlaylist(emitEvent = true) {
+        if (this.currentPlaylist().list.length > 1) {
+            this._currentPlaylistOrder = [];
+
+            while (this._currentPlaylistOrder.length < this.currentPlaylist().list.length) {
+                let order = Math.floor(Math.random() * (this.currentPlaylist().list.length));
+
+                if (this._currentPlaylistOrder.indexOf(order) > -1) {
+                    continue;
+                }
+
+                this._currentPlaylistOrder.push(order);
+            }
+        } else {
+            this._currentPlaylistOrder = [0];
+        }
+
+        if (emitEvent) {
+            this.emit('playlistReordered', this);
+        }
     }
 
     /**
