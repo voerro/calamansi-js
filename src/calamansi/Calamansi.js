@@ -12,6 +12,7 @@ class Calamansi
             repeat: false,
             shuffle: false,
             volume: 100,
+            loadTrackInfo: false,
         }, options);
 
         // Make sure we have all the required options provided and the values
@@ -164,9 +165,6 @@ class Calamansi
                     playlist.list.push(track);
 
                     // Load track info
-                    // TODO: Loading track info should be optional. In-text
-                    // player probably won't need that, so let's save our
-                    // browser from making unnecessary requests
                     this.loadTrackInfo(track);
 
                     // Set the first playlist with at least 1 track as the
@@ -244,7 +242,7 @@ class Calamansi
             track.info.duration = audio.duration;
 
             // Read ID3 tags for MP3
-            if (track.sourceType === 'mp3') {
+            if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
                 (new Id3Reader(track.source)).getAllTags().then(tags => {
                     track.info = Object.assign(track.info, tags);
 
