@@ -127,6 +127,14 @@ class CalamansiSkin
             this.mouseDownTarget = null;
         });
 
+        this.el.addEventListener('touchstart', (event) => {
+            this.mouseDownTarget = event.target;
+        });
+
+        document.addEventListener('touchend', (event) => {
+            this.mouseDownTarget = null;
+        });
+
         this.el.addEventListener('click', (event) => {
             if (event.target.type !== 'checkbox') {
                 event.preventDefault();
@@ -192,6 +200,30 @@ class CalamansiSkin
 
                     // const position = event.layerX / parent.offsetWidth;
                     const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    this.calamansi.audio.changeVolume(position);
+                }
+            }
+        });
+
+        document.addEventListener('touchmove', (event) => {
+            // Audio (playback) controls
+            if (this.calamansi.audio && this.mouseDownTarget) {
+                if (this.mouseDownTarget.classList.contains('playback-load') || this.mouseDownTarget.classList.contains('playback-progress')) {
+                    // Smooth seeking
+                    const parent = this.mouseDownTarget.parentNode;
+
+                    const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+                } else if (this.mouseDownTarget.classList.contains('volume-bar') || this.mouseDownTarget.classList.contains('volume-value')) {
+                    // Smooth change of the volume
+                    const parent = this.mouseDownTarget.classList.contains('volume-bar')
+                        ? this.mouseDownTarget
+                        : this.mouseDownTarget.parentNode;
+
+                    // const position = event.layerX / parent.offsetWidth;
+                    const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
 
                     this.calamansi.audio.changeVolume(position);
                 }
