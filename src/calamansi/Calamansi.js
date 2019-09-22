@@ -271,21 +271,33 @@ class Calamansi
     nextTrack() {
         if (this._currentTrack + 1 < this.currentPlaylist().list.length) {
             this.switchTrack(this._currentTrack + 1, true);
+
+            return true;
         } else {
             if (this.options.repeat) {
                 this.switchTrack(0, true);
+
+                return true;
             }
         }
+
+        return false;
     }
 
     prevTrack() {
         if (this._currentTrack - 1 >= 0) {
             this.switchTrack(this._currentTrack - 1, true);
+
+            return true;
         } else {
             if (this.options.repeat) {
                 this.switchTrack(this.currentPlaylist().list.length - 1, true);
+
+                return true;
             }
         }
+
+        return false;
     }
 
     toggleRepeat() {
@@ -396,7 +408,9 @@ class Calamansi
         });
 
         this.on('trackEnded', (instance) => {
-            this.nextTrack();
+            if (!this.nextTrack()) {
+                this.emit('stop');
+            }
         })
     }
 }
