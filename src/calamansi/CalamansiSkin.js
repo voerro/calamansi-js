@@ -666,7 +666,11 @@ class CalamansiSkin
             const albumCover = this.getEl(`.track-info--albumCover`);
 
             if (albumCover && !info[albumCover]) {
-                albumCover.src = this.calamansi.options.defaultAlbumCover;
+                if (albumCover.nodeName.toLowerCase() === 'img') {
+                    albumCover.src = this.calamansi.options.defaultAlbumCover;
+                } else {
+                    albumCover.style.backgroundImage = `url('${this.calamansi.options.defaultAlbumCover}')`;
+                }
             }
         }
     }
