@@ -46,6 +46,9 @@ class CalamansiSkin
         this.el.parentNode.replaceChild(wrapper, this.el);
         this.el = wrapper;
 
+        // Load the JS after all the new elements have been appended
+        this.loadJs(this.path);
+
         return content;
     }
 
@@ -68,6 +71,27 @@ class CalamansiSkin
         link.href = cssPath;
 
         document.querySelector('head').appendChild(link);
+    }
+
+    /**
+     * Append a <script> with the skin's JS to the page if this skin's JS has
+     * not been appended yet
+     * 
+     * @param {*} path 
+     */
+    loadJs(path) {
+        const jsPath = `${path}/skin.js`;
+
+        // If the skin's CSS has already been loaded
+        if (document.querySelectorAll(`script[src="${jsPath}"]`).length > 0) {
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.setAttribute('src', jsPath);
+        script.setAttribute('type', 'text/javascript');
+
+        document.querySelector('head').appendChild(script);
     }
 
     async fetchHtml(path) {
@@ -609,7 +633,11 @@ class CalamansiSkin
 
             if (el) {
                 if (key === 'albumCover') {
-                    el.src = info[key].base64;
+                    if (el.nodeName.toLowerCase() === 'img') {
+                        el.src = info[key].base64;
+                    } else {
+                        el.style.backgroundImage = `url('${info[key].base64}')`;
+                    }
 
                     continue;
                 }

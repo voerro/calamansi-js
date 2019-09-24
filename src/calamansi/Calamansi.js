@@ -250,8 +250,6 @@ class Calamansi
                     onSuccess: (tags) => {
                         track.info = Object.assign(track.info, tags.tags);
 
-                        // console.log(tags.tags);
-
                         if (track.info.artist && track.info.title) {
                             track.info.name = `${track.info.artist} - ${track.info.title}`;
                         }
@@ -273,16 +271,6 @@ class Calamansi
                         this.emit('trackInfoReady', this, track);
                     }
                 });
-                
-                // .then(tags => {
-                //     track.info = Object.assign(track.info, tags);
-
-                //     if (track.info.artist && track.info.title) {
-                //         track.info.name = `${track.info.artist} - ${track.info.title}`;
-                //     }
-
-                //     this.emit('trackInfoReady', this, track);
-                // });
             } else {
                 this.emit('trackInfoReady', this, track);
             }
