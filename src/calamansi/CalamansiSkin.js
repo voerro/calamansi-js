@@ -166,38 +166,36 @@ class CalamansiSkin
 
             // Audio (playback) controls
             if (this.calamansi.audio) {
-                if (event.target.classList.contains('control-play')) {
+                if (this.containsClass(event.target, 'control-play')) {
                     // "Play" button - start playback from 00:00
                     this.calamansi.audio.playFromStart();
-                } else if (event.target.classList.contains('control-resume')) {
+                } else if (this.containsClass(event.target, 'control-resume')) {
                     // "Play" button - start or resume playback
                     this.calamansi.audio.play();
-                } else if (event.target.classList.contains('control-pause')) {
+                } else if (this.containsClass(event.target, 'control-pause')) {
                     // "Pause" button
                     this.calamansi.audio.pause();
-                } else if (event.target.classList.contains('control-stop')) {
+                } else if (this.containsClass(event.target, 'control-stop')) {
                     // "Stop" button
                     this.calamansi.audio.stop();
-                } else if (event.target.classList.contains('control-next-track')) {
+                } else if (this.containsClass(event.target, 'control-next-track')) {
                     // "Next Track" button
                     this.calamansi.nextTrack();
-                } else if (event.target.classList.contains('control-prev-track')) {
+                } else if (this.containsClass(event.target, 'control-prev-track')) {
                     // "Previoud Track" button
                     this.calamansi.prevTrack();
-                } else if (event.target.classList.contains('control-toggle-repeat')) {
-                    // "Repeat" button (checkbox)
-                    this.calamansi.toggleRepeat();
-                } else if (event.target.classList.contains('control-toggle-shuffle')) {
+                } else if (this.containsClass(event.target, 'control-toggle-loop')) {
+                    // "Loop" button (checkbox)
+                    this.calamansi.toggleLoop();
+                } else if (this.containsClass(event.target, 'control-toggle-shuffle')) {
                     // "Shuffle" button (checkbox)
                     this.calamansi.toggleShuffle();
-                } else if (event.target.classList.contains('playback-load') || event.target.classList.contains('playback-progress')) {
+                } else if (this.containsClass(event.target, 'playback-load') || this.containsClass(event.target, 'playback-progress')) {
                     const position = event.layerX / event.target.parentNode.offsetWidth;
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (event.target.classList.contains('volume-bar') || event.target.classList.contains('volume-value')) {
-                    const parent = event.target.classList.contains('volume-bar')
-                        ? event.target
-                        : event.target.parentNode;
+                } else if (this.containsClass(event.target, 'volume-bar') || this.containsClass(event.target, 'volume-value')) {
+                    const parent = this.findElParent(event.target, 'volume-bar');
 
                     const position = event.layerX / parent.offsetWidth;
 
@@ -209,21 +207,26 @@ class CalamansiSkin
         document.addEventListener('mousemove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.mouseDownTarget.classList.contains('playback-load') || this.mouseDownTarget.classList.contains('playback-progress')) {
+                if (this.containsClass(this.mouseDownTarget, 'playback-load') || this.containsClass(this.mouseDownTarget, 'playback-progress')) {
                     // Smooth seeking
                     const parent = this.mouseDownTarget.parentNode;
 
                     const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
 
-                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.mouseDownTarget.classList.contains('volume-bar') || this.mouseDownTarget.classList.contains('volume-value')) {
-                    // Smooth change of the volume
-                    const parent = this.mouseDownTarget.classList.contains('volume-bar')
-                        ? this.mouseDownTarget
-                        : this.mouseDownTarget.parentNode;
+                    if (position > 1.0) {
+                        position = 1;
+                    }
 
-                    // const position = event.layerX / parent.offsetWidth;
+                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar') || this.containsClass(this.mouseDownTarget, 'volume-value')) {
+                    // Smooth change of the volume
+                    const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
+
                     const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    if (position > 1.0) {
+                        position = 1;
+                    }
 
                     this.calamansi.audio.changeVolume(position);
                 }
@@ -233,21 +236,26 @@ class CalamansiSkin
         document.addEventListener('touchmove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.mouseDownTarget.classList.contains('playback-load') || this.mouseDownTarget.classList.contains('playback-progress')) {
+                if (this.containsClass(this.mouseDownTarget, 'playback-load') || this.containsClass(this.mouseDownTarget, 'playback-progress')) {
                     // Smooth seeking
                     const parent = this.mouseDownTarget.parentNode;
 
                     const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
 
-                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.mouseDownTarget.classList.contains('volume-bar') || this.mouseDownTarget.classList.contains('volume-value')) {
-                    // Smooth change of the volume
-                    const parent = this.mouseDownTarget.classList.contains('volume-bar')
-                        ? this.mouseDownTarget
-                        : this.mouseDownTarget.parentNode;
+                    if (position > 1.0) {
+                        position = 1;
+                    }
 
-                    // const position = event.layerX / parent.offsetWidth;
+                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar') || this.containsClass(this.mouseDownTarget, 'volume-value')) {
+                    // Smooth change of the volume
+                    const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
+
                     const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
+
+                    if (position > 1.0) {
+                        position = 1;
+                    }
 
                     this.calamansi.audio.changeVolume(position);
                 }
@@ -333,6 +341,10 @@ class CalamansiSkin
     }
 
     findElParent(item, className) {
+        if (!item.classList) {
+            return null;
+        }
+
         if (item.classList.contains(className)) {
             return item;
         }
@@ -342,6 +354,10 @@ class CalamansiSkin
         }
 
         return this.findElParent(item.parentNode, className);
+    }
+
+    containsClass(el, className) {
+        return el.classList.contains(className) || this.findElParent(el, className);
     }
 
     updatePlaybackDuration(duration) {
@@ -431,11 +447,11 @@ class CalamansiSkin
     updateCheckboxes() {
         let el;
 
-        // "Repeat"
-        el = this.getEl('.control-toggle-repeat');
+        // "Loop"
+        el = this.getEl('.control-toggle-loop');
 
         if (el) {
-            el.checked = this.calamansi.options.repeat;
+            el.checked = this.calamansi.options.loop;
         }
 
         // "Shuffle"
@@ -643,6 +659,7 @@ class CalamansiSkin
                 }
 
                 el.innerText = info[key];
+                el.title = info[key];
             }
 
             // Remove albumCover src if there's a DOM element and no data

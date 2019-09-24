@@ -3,12 +3,8 @@
 .calamansi-skin--julie-park {
     background: #FFFFFF;
     position: relative;
-    margin: auto;
-    width: 300px;
-    height: 300px;
-    /* width: 100%;
+    width: 100%;
     height: 100%;
-    border: 1px solid red; */
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 5px 5px 15px rgba(54, 79, 60, 0.4);
@@ -26,7 +22,6 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    /* border: 1px solid blue; */
 }
 
 .calamansi-skin--julie-park .heart {
@@ -34,12 +29,6 @@
     right: 0;
     color: #FFFFFF;
     margin: 10px;
-    transition: all .4s ease;
-}
-
-.calamansi-skin--julie-park .clicked {
-    color: #49654D;
-    transform: scale(1.2);
     transition: all .4s ease;
 }
 
@@ -67,7 +56,7 @@
 .calamansi-skin--julie-park .playback-bar {
     flex: 1;
     position: relative;
-    height: 5px;
+    height: .4rem;
     background: #cdd9c2;
     border-radius: 10px;
     font-family: "Questrial", sans-serif;
@@ -89,7 +78,7 @@
 
 .calamansi-skin--julie-park .playback-time, .calamansi-skin--julie-park .playback-time-left {
     color: #364F3C;
-    font-size: 10px;
+    font-size: .65rem;
     margin: 0 10px;
 }
 
@@ -109,16 +98,21 @@
     font-family: "Questrial", sans-serif;
     text-transform: uppercase;
     margin: 0;
+    padding: 0 1rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .calamansi-skin--julie-park .song-name {
-    font-size: .8em;
+    font-size: .8rem;
     letter-spacing: 3px;
     color: #364F3C;
 }
 
 .calamansi-skin--julie-park .artist-name {
-    font-size: .6em;
+    font-size: .6rem;
     letter-spacing: 1.5px;
     color: #557c5f;
     margin-top: 5px;
@@ -127,31 +121,34 @@
 .calamansi-skin--julie-park .controls {
     display: flex;
     align-items: center;
-    font-size: .8em;
+    font-size: .8rem;
     justify-content: center;
     color: #8BA989;
+    padding: 1rem;
 }
+.calamansi-skin--julie-park .controls .center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
 .calamansi-skin--julie-park .controls .play, .calamansi-skin--julie-park .controls .pause {
-    margin: 15px 25px;
+    margin: 0 25px;
     color: #6e946c;
 }
 .calamansi-skin--julie-park .controls .option {
-    left: 10px;
-    position: absolute;
-    font-size: .8em;
+    font-size: .8rem;
 }
-.calamansi-skin--julie-park .controls .add {
-    right: 10px;
-    position: absolute;
-    font-size: .8em;
+.calamansi-skin--julie-park .controls .loop {
+    font-size: .8rem;
 }
 .calamansi-skin--julie-park .controls .volume {
     margin-right: 30px;
-    font-size: .8em;
+    font-size: .8rem;
 }
 .calamansi-skin--julie-park .controls .shuffle {
     margin-left: 30px;
-    font-size: .8em;
+    font-size: .8rem;
 }
 
 .calamansi-skin--julie-park .play,
@@ -159,7 +156,7 @@
 .calamansi-skin--julie-park .next,
 .calamansi-skin--julie-park .previous,
 .calamansi-skin--julie-park .option,
-.calamansi-skin--julie-park .add,
+.calamansi-skin--julie-park .loop,
 .calamansi-skin--julie-park .volume,
 .calamansi-skin--julie-park .shuffle 
 {
@@ -170,11 +167,29 @@
 .calamansi-skin--julie-park .next:hover,
 .calamansi-skin--julie-park .previous:hover,
 .calamansi-skin--julie-park .option:hover
-.calamansi-skin--julie-park  .add:hover,
+.calamansi-skin--julie-park .loop:hover,
 .calamansi-skin--julie-park .volume:hover,
 .calamansi-skin--julie-park .shuffle:hover
 {
     color: #557c5f;
+}
+
+.calamansi-skin--julie-park .custom-checkbox {
+    position: relative;
+}
+.calamansi-skin--julie-park .custom-checkbox input {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+}
+.calamansi-skin--julie-park .custom-checkbox input:checked ~ i {
+    color: #49654D;
+    transition: all .4s ease;
 }
 
 /* Icon font */
@@ -219,6 +234,6 @@
 .calamansi-skin--julie-park .glyphter.fa-random:before {
     content: '\0048';
 }
-.calamansi-skin--julie-park .glyphter.fa-repeat:before {
+.calamansi-skin--julie-park .glyphter.fa-loop:before {
     content: '\0049';
 }

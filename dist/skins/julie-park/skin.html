@@ -1,5 +1,8 @@
-<div class="calamansi-skin--julie-park">
-    <div class="album track-info--albumCover"></div>
+<div class="calamansi-skin--julie-park" data-no-wrapper="1">
+    <div class="album track-info--albumCover">
+        <div class="heart"><i class="fas fa-heart"></i></div>
+    </div>
+
     <div class="info">
         <div class="playback-info">
             <div class="time playback-time">00:00</div>
@@ -16,15 +19,39 @@
             <h2 class="song-name track-info--title"></h2>
             <h3 class="artist-name track-info--artist"></h3>
         </div>
+
         <div class="controls">
-            <div class="option"><i class="glyphter fa-bars"></i></div>
-            <div class="volume"><i class="glyphter fa-volume-up"></i></div>
-            <div class="previous"><i class="glyphter fa-backward"></i></div>
-            <div class="play"><i class="glyphter fa-play"></i></div>
-            <!-- <div class="pause"><i class="glyphter fa-pause"></i></div> -->
-            <div class="next"><i class="glyphter fa-forward"></i></div>
-            <div class="shuffle"><i class="glyphter fa-random"></i></div>
-            <div class="add"><i class="glyphter fa-repeat"></i></div>
+            <div class="left">
+                <div class="option"><i class="glyphter fa-bars"></i></div>
+            </div>
+            
+            <div class="center">
+                <div class="volume"><i class="glyphter fa-volume-up"></i></div>
+                <div class="previous control-prev-track hide-on-initialized show-on-playlistLoaded"><i class="glyphter fa-backward"></i>
+                </div>
+                
+                <div class="play control-resume hide-on-play show-on-pause show-on-stop">
+                    <i class="glyphter fa-play"></i>
+                </div>
+                <div class="pause control-pause hide-on-initialized hide-on-pause hide-on-stop show-on-play">
+                    <i class="glyphter fa-pause"></i>
+                </div>
+                
+                <div class="next control-next-track hide-on-initialized show-on-playlistLoaded"><i class="glyphter fa-forward"></i>
+                </div>
+
+                <div class="shuffle custom-checkbox">
+                    <input type="checkbox" class="control-toggle-shuffle">
+                    <i class="glyphter fa-random"></i>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="loop custom-checkbox">
+                    <input type="checkbox" class="control-toggle-loop">
+                    <i class="glyphter fa-loop"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>

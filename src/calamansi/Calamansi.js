@@ -10,7 +10,7 @@ class Calamansi
         /* DATA */
         this.options = Object.assign({
             // Default options...
-            repeat: false,
+            loop: false,
             shuffle: false,
             volume: 100,
             loadTrackInfo: false,
@@ -293,7 +293,7 @@ class Calamansi
 
             return true;
         } else {
-            if (this.options.repeat) {
+            if (this.options.loop) {
                 this.switchTrack(0, true);
 
                 return true;
@@ -309,7 +309,7 @@ class Calamansi
 
             return true;
         } else {
-            if (this.options.repeat) {
+            if (this.options.loop) {
                 this.switchTrack(this.currentPlaylist().list.length - 1, true);
 
                 return true;
@@ -319,8 +319,8 @@ class Calamansi
         return false;
     }
 
-    toggleRepeat() {
-        this.options.repeat = ! this.options.repeat;
+    toggleLoop() {
+        this.options.loop = ! this.options.loop;
     }
 
     toggleShuffle() {
