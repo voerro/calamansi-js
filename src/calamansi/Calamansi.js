@@ -341,7 +341,10 @@ class Calamansi
     }
 
     unshuffleCurrentPlaylist(emitEvent = true) {
-        this._currentPlaylistOrder = Object.keys(this.currentPlaylist().list);
+        this._currentTrack = this._currentPlaylistOrder[this._currentTrack];
+        
+        this._currentPlaylistOrder = Object.keys(this.currentPlaylist().list)
+            .map(i => parseInt(i));
 
         if (emitEvent) {
             this.emit('playlistReordered', this);
@@ -361,6 +364,8 @@ class Calamansi
 
                 this._currentPlaylistOrder.push(order);
             }
+
+            this._currentTrack = this._currentPlaylistOrder.indexOf(this._currentTrack);
         } else {
             this._currentPlaylistOrder = [0];
         }
