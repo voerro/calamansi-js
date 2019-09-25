@@ -22,7 +22,10 @@
 
         <div class="controls">
             <div class="left">
-                <div class="option"><i class="glyphter fa-bars"></i></div>
+                <div class="option custom-checkbox">
+                    <input type="checkbox" class="toggle-playlist">
+                    <i class="glyphter fa-bars"></i>
+                </div>
             </div>
             
             <div class="center">
@@ -50,6 +53,15 @@
                 <div class="loop custom-checkbox">
                     <input type="checkbox" class="control-toggle-loop">
                     <i class="glyphter fa-loop"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="playlist-wrapper" data-simplebar>
+            <div class="playlist">
+                <div class="playlist-item template">
+                    <div class="playlist-item--name"></div>
+                    <div class="playlist-item--duration"></div>
                 </div>
             </div>
         </div>

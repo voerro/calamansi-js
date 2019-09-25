@@ -539,9 +539,11 @@ class CalamansiSkin
                                 break
                             case 'duration':
                                 el.innerText = this.formatTime(track.info[key]);
+                                el.title = this.formatTime(track.info[key]);
                                 break;
                             default:
                                 el.innerText = track.info[key];
+                                el.title = track.info[key];
                         }
                     }
                 }
@@ -553,6 +555,7 @@ class CalamansiSkin
                 li.appendChild(item);
             } else {
                 li.innerText = track.info.name;
+                li.title = track.info.name;
             }
 
             li.classList.add('playlist-item-li');
@@ -596,9 +599,11 @@ class CalamansiSkin
                             break
                         case 'duration':
                             td.innerText = this.formatTime(track.info[key]);
+                            td.title = this.formatTime(track.info[key]);
                             break;
                         default:
                             td.innerText = track.info[key];
+                            td.title = track.info[key];
                     }
                 }
 

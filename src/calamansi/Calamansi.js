@@ -244,6 +244,13 @@ class Calamansi
         audio.addEventListener('loadedmetadata', (event) => {
             track.info.duration = audio.duration;
 
+            // Unload the track, because I don't need this audio object anymore
+            // Otherwise it creates big lags and breaks the player behavior with
+            // as little as 5 tracks in a single playlist
+            audio.removeAttribute('src');
+            audio.load();
+            // delete audio;
+
             // Read ID3 tags for MP3
             if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
                 jsmediatags.read(window.location.href + track.source, {
