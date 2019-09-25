@@ -72,7 +72,7 @@
 .calamansi-skin--julie-park .playback-load {
     width: 100%;
     height: 0.3rem;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 .calamansi-skin--julie-park .playback-progress {
     position: absolute;
@@ -80,7 +80,7 @@
     background-color: #8BA989;
     width: 0%;
     height: 100%;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .calamansi-skin--julie-park .playback-time, .calamansi-skin--julie-park .playback-time-left {
@@ -151,10 +151,31 @@
 .calamansi-skin--julie-park .controls .volume {
     margin-right: 30px;
     font-size: .8rem;
+    display: flex;
+    align-items: center;
+}
+.calamansi-skin--julie-park .controls .volume:hover .volume-bar {
+    width: 5rem;
 }
 .calamansi-skin--julie-park .controls .shuffle {
     margin-left: 30px;
     font-size: .8rem;
+}
+
+.calamansi-skin--julie-park .controls .volume .volume-bar {
+    position: relative;
+    width: 0;
+    height: .4rem;
+    background-color: #cdd9c2;
+    margin-top: -.1rem;
+    margin-left: .5rem;
+    transition: all .2s ease;
+    border-radius: 10px;
+}
+.calamansi-skin--julie-park .controls .volume .volume-value {
+    height: 100%;
+    background-color: #8BA989;
+    border-radius: 10px;
 }
 
 .calamansi-skin--julie-park .play,

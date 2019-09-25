@@ -190,11 +190,13 @@ class CalamansiSkin
                 } else if (this.containsClass(event.target, 'control-toggle-shuffle')) {
                     // "Shuffle" button (checkbox)
                     this.calamansi.toggleShuffle();
-                } else if (this.containsClass(event.target, 'playback-load') || this.containsClass(event.target, 'playback-progress')) {
-                    const position = event.layerX / event.target.parentNode.offsetWidth;
+                } else if (this.containsClass(event.target, 'playback-bar')) {
+                    const parent = this.findElParent(event.target, 'playback-bar');
+
+                    const position = event.layerX / parent.offsetWidth;
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(event.target, 'volume-bar') || this.containsClass(event.target, 'volume-value')) {
+                } else if (this.containsClass(event.target, 'volume-bar')) {
                     const parent = this.findElParent(event.target, 'volume-bar');
 
                     const position = event.layerX / parent.offsetWidth;
@@ -207,9 +209,9 @@ class CalamansiSkin
         document.addEventListener('mousemove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'playback-load') || this.containsClass(this.mouseDownTarget, 'playback-progress')) {
+                if (this.containsClass(this.mouseDownTarget, 'playback-bar')) {
                     // Smooth seeking
-                    const parent = this.mouseDownTarget.parentNode;
+                    const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
 
                     const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
 
@@ -218,7 +220,7 @@ class CalamansiSkin
                     }
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar') || this.containsClass(this.mouseDownTarget, 'volume-value')) {
+                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar')) {
                     // Smooth change of the volume
                     const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
 
@@ -236,9 +238,9 @@ class CalamansiSkin
         document.addEventListener('touchmove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'playback-load') || this.containsClass(this.mouseDownTarget, 'playback-progress')) {
+                if (this.containsClass(this.mouseDownTarget, 'playback-bar')) {
                     // Smooth seeking
-                    const parent = this.mouseDownTarget.parentNode;
+                    const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
 
                     const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
 
@@ -247,7 +249,7 @@ class CalamansiSkin
                     }
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar') || this.containsClass(this.mouseDownTarget, 'volume-value')) {
+                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar')) {
                     // Smooth change of the volume
                     const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
 
