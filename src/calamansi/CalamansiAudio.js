@@ -115,6 +115,9 @@ class CalamansiAudio
     }
 
     changeVolume(volume) {
+        volume = volume >= 0 ? volume : 0;
+        volume = volume <= 1 ? volume : 1;
+        
         this.audio.volume = volume;
         this.volume = volume;
 

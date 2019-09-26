@@ -213,7 +213,13 @@ class CalamansiSkin
                     // Smooth seeking
                     const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
 
-                    const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+                    let position;
+
+                    if (this.containsClass(event.target, 'playback-bar')) {
+                        position = event.layerX / parent.offsetWidth;
+                    } else {
+                        position = (event.layerX - parent.offsetLeft) / parent.offsetWidth;
+                    }
 
                     if (position > 1.0) {
                         position = 1;
@@ -224,7 +230,13 @@ class CalamansiSkin
                     // Smooth change of the volume
                     const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
 
-                    const position = (event.clientX - parent.offsetLeft) / parent.offsetWidth;
+                    let position;
+
+                    if (this.containsClass(event.target, 'volume-bar')) {
+                        position = event.layerX / parent.offsetWidth;
+                    } else {
+                        position = (event.layerX - parent.offsetLeft) / parent.offsetWidth;
+                    }
 
                     if (position > 1.0) {
                         position = 1;
@@ -253,7 +265,7 @@ class CalamansiSkin
                     // Smooth change of the volume
                     const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
 
-                    const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
+                    let position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
 
                     if (position > 1.0) {
                         position = 1;
