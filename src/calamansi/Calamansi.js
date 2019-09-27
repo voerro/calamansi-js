@@ -163,6 +163,8 @@ class Calamansi
                     track.info = {};
                     track.info.filename = track.source.split('/').pop();
                     track.info.name = track.info.filename;
+                    track.info.titleOrFilename = track.info.filename;
+                    track.info.artistOrFilename = track.info.filename;
                     track.sourceType = track.info.filename.split('.').pop();
 
                     playlist.list.push(track);
@@ -242,11 +244,18 @@ class Calamansi
         if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
             jsmediatags.read(window.location.href + track.source, {
                 onSuccess: (tags) => {
-                    console.log(tags);
                     track.info = Object.assign(track.info, tags.tags);
 
                     if (track.info.artist && track.info.title) {
                         track.info.name = `${track.info.artist} - ${track.info.title}`;
+                    }
+
+                    if (track.info.title) {
+                        track.info.titleOrFilename = track.info.title;
+                    }
+                    
+                    if (track.info.artist) {
+                        track.info.artistOrFilename = track.info.artist;
                     }
 
                     if (track.info.track) {

@@ -9,11 +9,7 @@ var _csjpInfo = document.querySelector('.calamansi-skin--julie-park .info');
 
 document.querySelectorAll('.calamansi-skin--julie-park .toggle-playlist').forEach(function (el) {
     el.addEventListener('change', function (e) {
-        if (e.target.checked && !_csjpInfo.classList.contains('show-playlist')) {
-            _csjpInfo.classList.add('show-playlist');
-        } else if (!_csjpInfo.checked && _csjpInfo.classList.contains('show-playlist')) {
-            _csjpInfo.classList.remove('show-playlist');
-        }
+        _csjpInfo.classList.toggle('show-playlist');
     });
 });
 

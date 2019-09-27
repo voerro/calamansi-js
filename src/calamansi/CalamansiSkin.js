@@ -664,35 +664,36 @@ class CalamansiSkin
 
         const info = this.calamansi.currentTrack().info;
 
-        for (let key in info) {
-            let el = this.getEl(`.track-info--${key}`);
+        this.getEls('.track-info').forEach((el) => {
+            let key = null;
 
-            if (el) {
-                if (key === 'albumCover') {
-                    if (el.nodeName.toLowerCase() === 'img') {
-                        el.src = info[key].base64;
-                    } else {
-                        el.style.backgroundImage = `url('${info[key].base64}')`;
-                    }
+            for (let i = 0; i < el.classList.length; i++) {
+                if (/track-info--.*/.test(el.classList[i])) {
+                    key = el.classList[i].split('--')[1];
 
-                    continue;
+                    break;
                 }
-
-                el.innerText = info[key];
-                el.title = info[key];
             }
 
-            // Remove albumCover src if there's a DOM element and no data
-            const albumCover = this.getEl(`.track-info--albumCover`);
-
-            if (albumCover && !info[albumCover]) {
-                if (albumCover.nodeName.toLowerCase() === 'img') {
-                    albumCover.src = this.calamansi.options.defaultAlbumCover;
+            if (!key) {
+                return;
+            }
+            
+            if (key === 'albumCover') {
+                if (el.nodeName.toLowerCase() === 'img') {
+                    el.src = info[key]
+                        ? info[key].base64
+                        : this.calamansi.options.defaultAlbumCover;
                 } else {
-                    albumCover.style.backgroundImage = `url('${this.calamansi.options.defaultAlbumCover}')`;
+                    el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
                 }
+
+                return;
             }
-        }
+
+            el.innerText = info[key] ? info[key] : '';
+            el.title = info[key] ? info[key] : '';
+        });
     }
 }
 
