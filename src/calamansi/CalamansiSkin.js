@@ -419,11 +419,11 @@ class CalamansiSkin
     }
 
     updateVolume(volume) {
-        const el = this.getEl('.volume-value');
+        const els = this.getEls('.volume-value');
 
-        if (el) {
+        els.forEach(function (el) {
             el.style.width = (volume * 100) + '%';
-        }
+        });
     }
 
     formatTime(seconds) {

@@ -13,16 +13,18 @@
     transition: all .5s ease-in-out;
 
     font-family: "Questrial", sans-serif;
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
 }
-/* .calamansi-skin--julie-park:hover {
-    transform: scale(1.05);
-} */
 
 .calamansi-skin--julie-park .album {
     position: absolute;
     background: linear-gradient(rgba(54, 79, 60, 0.25), rgba(73, 101, 77, 0.55));
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     left: 0;
     top: 0;
     width: 100%;
@@ -38,13 +40,18 @@
     transition: all .4s ease;
 }
 
+.calamansi-skin--julie-park .space {
+    flex: 1;
+}
+
 .calamansi-skin--julie-park .info {
-    height: 115px;
+    /* height: 115px; */
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
     background: rgba(255, 255, 255, 0.85);
 }
 
@@ -64,7 +71,7 @@
 .calamansi-skin--julie-park .playback-bar {
     flex: 1;
     position: relative;
-    height: .4rem;
+    height: .4em;
     background: #cdd9c2;
     border-radius: 10px;
 }
@@ -85,7 +92,7 @@
 
 .calamansi-skin--julie-park .playback-time, .calamansi-skin--julie-park .playback-time-left {
     color: #364F3C;
-    font-size: .7rem;
+    font-size: .7em;
     margin: 0 10px;
 }
 
@@ -104,7 +111,7 @@
 .calamansi-skin--julie-park .song-name, .calamansi-skin--julie-park .artist-name {
     text-transform: uppercase;
     margin: 0;
-    padding: 0 1rem;
+    padding: 0 1em;
 
     white-space: nowrap;
     overflow: hidden;
@@ -112,13 +119,13 @@
 }
 
 .calamansi-skin--julie-park .song-name {
-    font-size: .8rem;
+    font-size: .8em;
     letter-spacing: 3px;
     color: #364F3C;
 }
 
 .calamansi-skin--julie-park .artist-name {
-    font-size: .6rem;
+    font-size: .6em;
     letter-spacing: 1.5px;
     color: #557c5f;
     margin-top: 5px;
@@ -127,55 +134,77 @@
 .calamansi-skin--julie-park .controls {
     display: flex;
     align-items: center;
-    font-size: .8rem;
+    font-size: .8em;
     justify-content: center;
     color: #8BA989;
-    padding: 1rem;
+    padding: 1em;
+}
+.calamansi-skin--julie-park .controls .row {
+    display: none;
 }
 .calamansi-skin--julie-park .controls .center {
     flex: 1;
     display: flex;
     justify-content: center;
 }
-
+.calamansi-skin--julie-park .controls .center > div {
+    margin: 0 1em;
+}
+.calamansi-skin--julie-park .controls .center div:first-of-type {
+    margin-left: 0;
+}
+.calamansi-skin--julie-park .controls .center div:last-of-type {
+    margin-right: 0;
+}
 .calamansi-skin--julie-park .controls .play, .calamansi-skin--julie-park .controls .pause {
-    margin: 0 25px;
     color: #6e946c;
 }
-.calamansi-skin--julie-park .controls .option {
-    font-size: .8rem;
-}
-.calamansi-skin--julie-park .controls .loop {
-    font-size: .8rem;
-}
+
 .calamansi-skin--julie-park .controls .volume {
-    margin-right: 30px;
-    font-size: .8rem;
     display: flex;
     align-items: center;
 }
-.calamansi-skin--julie-park .controls .volume:hover .volume-bar {
-    width: 5rem;
-}
-.calamansi-skin--julie-park .controls .shuffle {
-    margin-left: 30px;
-    font-size: .8rem;
-}
-
 .calamansi-skin--julie-park .controls .volume .volume-bar {
     position: relative;
     width: 0;
-    height: .4rem;
+    height: .4em;
     background-color: #cdd9c2;
-    margin-top: -.1rem;
-    margin-left: .5rem;
+    margin-top: -.1em;
     transition: all .2s ease;
     border-radius: 10px;
+}
+.calamansi-skin--julie-park .controls .volume:hover .volume-bar {
+    width: 5em;
+    margin-left: .5em;
 }
 .calamansi-skin--julie-park .controls .volume .volume-value {
     height: 100%;
     background-color: #8BA989;
     border-radius: 10px;
+}
+
+/* Small player size controls */
+.calamansi-skin--julie-park .controls.compact {
+    flex-direction: column;
+}
+.calamansi-skin--julie-park .controls.compact .left,
+.calamansi-skin--julie-park .controls.compact .center,
+.calamansi-skin--julie-park .controls.compact .right
+{
+    display: none;
+}
+.calamansi-skin--julie-park .controls.compact .row {
+    display: flex;
+}
+.calamansi-skin--julie-park .controls.compact .row:last-of-type {
+    margin-top: .5em;
+}
+.calamansi-skin--julie-park .controls.compact .row > div {
+    margin: 0 .5em;
+}
+.calamansi-skin--julie-park .controls.compact .volume:hover .volume-bar {
+    width: 3em;
+    margin-left: .5em;
 }
 
 .calamansi-skin--julie-park .play,
@@ -244,16 +273,16 @@
 }
 .calamansi-skin--julie-park .playlist .playlist-item {
     display: flex;
-    font-size: .8rem;
+    font-size: .8em;
     color: #364F3C;
-    padding: .5rem 1rem;
+    padding: .75em 1em;
 }
 .calamansi-skin--julie-park .playlist .playlist-item.active {
     background-color: #cdd9c2;
 }
 .calamansi-skin--julie-park .playlist .playlist-item--name {
     flex: 1;
-    padding-right: 1rem;
+    padding-right: 1em;
 
     white-space: nowrap;
     overflow: hidden;

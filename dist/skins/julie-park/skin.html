@@ -3,6 +3,8 @@
         <div class="heart"><i class="fas fa-heart"></i></div>
     </div>
 
+    <div class="space"></div>
+
     <div class="info">
         <div class="playback-info">
             <div class="time playback-time">00:00</div>
@@ -32,7 +34,9 @@
                 <div class="volume">
                     <i class="glyphter fa-volume-up"></i>
                     
-                    <div class="volume-bar vertical"><div class="volume-value"></div></div>
+                    <div class="volume-bar">
+                        <div class="volume-value"></div>
+                    </div>
                 </div>
 
                 <div class="previous control-prev-track hide-on-initialized show-on-playlistLoaded"><i class="glyphter fa-backward"></i>
@@ -58,6 +62,49 @@
                 <div class="loop custom-checkbox">
                     <input type="checkbox" class="control-toggle-loop">
                     <i class="glyphter fa-loop"></i>
+                </div>
+            </div>
+            
+            <!-- Compact size -->
+            <div class="row">
+                <div class="previous control-prev-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-backward"></i>
+                </div>
+                
+                <div class="play control-resume hide-on-play show-on-pause show-on-stop">
+                    <i class="glyphter fa-play"></i>
+                </div>
+                <div class="pause control-pause hide-on-initialized hide-on-pause hide-on-stop show-on-play">
+                    <i class="glyphter fa-pause"></i>
+                </div>
+                
+                <div class="next control-next-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-forward"></i>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="option custom-checkbox">
+                    <input type="checkbox" class="toggle-playlist">
+                    <i class="glyphter fa-bars"></i>
+                </div>
+            
+                <div class="shuffle custom-checkbox">
+                    <input type="checkbox" class="control-toggle-shuffle">
+                    <i class="glyphter fa-random"></i>
+                </div>
+
+                <div class="loop custom-checkbox">
+                    <input type="checkbox" class="control-toggle-loop">
+                    <i class="glyphter fa-loop"></i>
+                </div>
+
+                <div class="volume">
+                    <i class="glyphter fa-volume-up"></i>
+                
+                    <div class="volume-bar">
+                        <div class="volume-value"></div>
+                    </div>
                 </div>
             </div>
         </div>
