@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Questrial");
+@import url("https://fonts.googleapis.com/css?family=Open Sans");
 @import url("https://unpkg.com/simplebar@4.2.3/dist/simplebar.min.css");
 
 .calamansi-skin--julie-park {
@@ -12,8 +12,9 @@
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 
-    font-family: "Questrial", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 1rem;
+    line-height: 1.2;
 
     display: flex;
     flex-direction: column;
