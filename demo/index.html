@@ -51,7 +51,7 @@
         // });
 
         var dummyPlayer = new Calamansi(document.getElementById('player1'), {
-            skin: '../dist/skins/julie-park',
+            skin: '../dist/skins/dummy',
             playlists: {
                 'Everything': [
                     {
@@ -120,7 +120,8 @@
                 ],
             },
             // volume: 100,
-            // shuffle: false,
+            // shuffle: true,
+            loop: true,
             // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });

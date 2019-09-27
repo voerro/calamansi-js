@@ -276,15 +276,13 @@ class CalamansiSkin
             }
         });
 
-        const playbackRateSelect = this.getEl('.playback-rate');
-
-        if (playbackRateSelect) {
-            playbackRateSelect.addEventListener('change', (event) => {
+        this.getEls('.playback-rate').forEach((el) => {
+            el.addEventListener('change', (event) => {
                 if (this.calamansi.audio) {
-                    this.calamansi.audio.changePlaybackRate(parseFloat(playbackRateSelect.value));
+                    this.calamansi.audio.changePlaybackRate(parseFloat(el.value));
                 }
             })
-        }
+        });
     }
 
     addEventListeners() {
@@ -376,47 +374,37 @@ class CalamansiSkin
     }
 
     updatePlaybackDuration(duration) {
-        const el = this.getEl('.playback-duration');
-
-        if (el) {
+        this.getEls('.playback-duration').forEach((el) => {
             el.innerText = this.formatTime(duration);
-        }
+        });
     }
 
     updatePlaybackTime(currentTime) {
-        const el = this.getEl('.playback-time');
-
-        if (el) {
+        this.getEls('.playback-time').forEach((el) => {
             el.innerText = this.formatTime(currentTime);
-        }
+        });
     }
 
     updatePlaybackTimeLeft(time, duration) {
-        const el = this.getEl('.playback-time-left');
-
-        if (el) {
+        this.getEls('.playback-time-left').forEach((el) => {
             const timeLeft = duration - Math.floor(time);
 
             el.innerText = '-' + this.formatTime(timeLeft);
-        }
+        });
     }
 
     updatePlaybackProgress(time, duration) {
-        const el = this.getEl('.playback-progress');
-
-        if (el) {
+        this.getEls('.playback-progress').forEach((el) => {
             const progress = (time / duration) * 100;
 
             el.style.width = progress + '%';
-        }
+        });
     }
 
     updateLoadingProgress(progress) {
-        const el = this.getEl('.playback-load');
-
-        if (el) {
+        this.getEls('.playback-load').forEach((el) => {
             el.style.width = progress + '%';
-        }
+        });
     }
 
     updateVolume(volume) {
@@ -463,18 +451,14 @@ class CalamansiSkin
         let el;
 
         // "Loop"
-        el = this.getEl('.control-toggle-loop');
-
-        if (el) {
+        this.getEls('.control-toggle-loop').forEach((el) => {
             el.checked = this.calamansi.options.loop;
-        }
+        });
 
         // "Shuffle"
-        el = this.getEl('.control-toggle-shuffle');
-
-        if (el) {
+        this.getEls('.control-toggle-shuffle').forEach((el) => {
             el.checked = this.calamansi.options.shuffle;
-        }
+        });
     }
     
     updatePlaylistList() {
@@ -508,17 +492,13 @@ class CalamansiSkin
             return;
         }
         
-        const el = this.getEl('.playlist');
-
-        if (!el) {
-            return;
-        }
-
-        if (el.nodeName.toLowerCase() === 'table') {
-            this.updatePlaylistTable(el);
-        } else {
-            this.updatePlaylistUl(el);
-        }
+        this.getEls('.playlist').forEach((el) => {
+            if (el.nodeName.toLowerCase() === 'table') {
+                this.updatePlaylistTable(el);
+            } else {
+                this.updatePlaylistUl(el);
+            }
+        });
     }
 
     updatePlaylistUl(container) {
@@ -529,7 +509,7 @@ class CalamansiSkin
 
         const ul = document.createElement('ul');
 
-        let template = this.getEl('.playlist-item.template');
+        let template = this.findEl(container, '.playlist-item.template');
         
         if (template) {
             template = template.cloneNode(true);
@@ -644,9 +624,7 @@ class CalamansiSkin
     }
 
     updatePlaylistActiveTrack() {
-        let active = this.getEl('.playlist-item.active');
-
-        if (active) {
+        this.getEls('.playlist-item.active').forEach((active) => {
             active.classList.remove('active');
 
             let newActive = this.getEls('.playlist-item:not(.template)')[this.calamansi._currentTrack];
@@ -654,7 +632,7 @@ class CalamansiSkin
             if (newActive) {
                 newActive.classList.add('active');
             }
-        }
+        });
     }
 
     updateTrackInfo() {
