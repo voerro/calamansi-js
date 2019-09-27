@@ -19,6 +19,7 @@ class CalamansiAudio
     addEventListeners() {
         this.audio.addEventListener('loadedmetadata', (event) => {
             this.duration = this.audio.duration;
+            this.calamansi.currentTrack().info.duration = this.audio.duration;
 
             this.calamansi.emit('loadedmetadata', this.calamansi);
             CalamansiEvents.emit('loadedmetadata', this.calamansi);

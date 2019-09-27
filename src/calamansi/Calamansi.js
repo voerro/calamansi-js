@@ -238,50 +238,37 @@ class Calamansi
     }
 
     loadTrackInfo(track) {
-        // Read duration of each track asynchronously
-        let audio = new Audio(track.source);
+        // Read ID3 tags for MP3
+        if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
+            jsmediatags.read(window.location.href + track.source, {
+                onSuccess: (tags) => {
+                    console.log(tags);
+                    track.info = Object.assign(track.info, tags.tags);
 
-        audio.addEventListener('loadedmetadata', (event) => {
-            track.info.duration = audio.duration;
-
-            // Unload the track, because I don't need this audio object anymore
-            // Otherwise it creates big lags and breaks the player behavior with
-            // as little as 5 tracks in a single playlist
-            audio.removeAttribute('src');
-            audio.load();
-            // delete audio;
-
-            // Read ID3 tags for MP3
-            if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
-                jsmediatags.read(window.location.href + track.source, {
-                    onSuccess: (tags) => {
-                        track.info = Object.assign(track.info, tags.tags);
-
-                        if (track.info.artist && track.info.title) {
-                            track.info.name = `${track.info.artist} - ${track.info.title}`;
-                        }
-
-                        if (track.info.track) {
-                            track.info.trackNumber = parseInt(track.info.track.split('/')[0]);
-                        }
-
-                        if (track.info.picture) {
-                            let base64 = btoa(String.fromCharCode.apply(null, track.info.picture.data));
-
-                            track.info.picture = Object.assign(track.info.picture, {
-                                base64: 'data:' + track.info.picture.format + ';base64,' + base64
-                            });
-
-                            track.info.albumCover = track.info.picture;
-                        }
-
-                        this.emit('trackInfoReady', this, track);
+                    if (track.info.artist && track.info.title) {
+                        track.info.name = `${track.info.artist} - ${track.info.title}`;
                     }
-                });
-            } else {
-                this.emit('trackInfoReady', this, track);
-            }
-        });
+
+                    if (track.info.track) {
+                        track.info.trackNumber = parseInt(track.info.track.split('/')[0]);
+                    }
+
+                    if (track.info.picture) {
+                        let base64 = btoa(String.fromCharCode.apply(null, track.info.picture.data));
+
+                        track.info.picture = Object.assign(track.info.picture, {
+                            base64: 'data:' + track.info.picture.format + ';base64,' + base64
+                        });
+
+                        track.info.albumCover = track.info.picture;
+                    }
+
+                    this.emit('trackInfoReady', this, track);
+                }
+            });
+        } else {
+            this.emit('trackInfoReady', this, track);
+        }
     }
 
     currentPlaylist() {

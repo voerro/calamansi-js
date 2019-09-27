@@ -290,6 +290,7 @@ class CalamansiSkin
     addEventListeners() {
         this.calamansi.on('loadedmetadata', (instance) => {
             this.updatePlaybackDuration(instance.audio.duration);
+            this.updatePlaylist();
         });
 
         this.calamansi.on('timeupdate', (instance) => {
