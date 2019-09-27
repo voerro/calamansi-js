@@ -13,7 +13,8 @@ class Calamansi
             loop: false,
             shuffle: false,
             volume: 100,
-            loadTrackInfo: false,
+            preloadTrackInfo: false,
+            loadTrackInfoOnPlay: true,
             defaultAlbumCover: '',
         }, options);
 
@@ -170,7 +171,9 @@ class Calamansi
                     playlist.list.push(track);
 
                     // Load track info
-                    this.loadTrackInfo(track);
+                    if (this.options.preloadTrackInfo) {
+                        this.loadTrackInfo(track);
+                    }
 
                     // Set the first playlist with at least 1 track as the
                     // current playlist
@@ -224,6 +227,8 @@ class Calamansi
         }
 
         this.audio.load(track.source);
+
+        this.loadTrackInfo(track);
     }
 
     switchTrack(index, startPlaying = false) {
@@ -240,10 +245,15 @@ class Calamansi
     }
 
     loadTrackInfo(track) {
+        if (track.info._loaded === true) {
+            return;
+        }
+        
         // Read ID3 tags for MP3
-        if (this.options.loadTrackInfo && track.sourceType === 'mp3') {
+        if (track.sourceType === 'mp3') {
             jsmediatags.read(window.location.href + track.source, {
                 onSuccess: (tags) => {
+                    track.info._loaded = true;
                     track.info = Object.assign(track.info, tags.tags);
 
                     if (track.info.artist && track.info.title) {
@@ -275,8 +285,6 @@ class Calamansi
                     this.emit('trackInfoReady', this, track);
                 }
             });
-        } else {
-            this.emit('trackInfoReady', this, track);
         }
     }
 
