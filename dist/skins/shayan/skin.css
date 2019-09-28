@@ -19,6 +19,9 @@
 .calamansi-skin--shayan .info .artist,
 .calamansi-skin--shayan .info .name {
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .calamansi-skin--shayan .info .artist {
     color: #222;
