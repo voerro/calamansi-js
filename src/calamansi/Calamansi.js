@@ -10,7 +10,7 @@ class Calamansi
         /* DATA */
         this.options = Object.assign({
             // Default options...
-            loop: false,
+            loop: true,
             shuffle: false,
             volume: 100,
             preloadTrackInfo: false,
@@ -121,6 +121,7 @@ class Calamansi
         this.initialized = true;
 
         this.emit('initialized', this);
+        CalamansiEvents.emit('initialized', this);
 
         // Load the first playlist with at least 1 track
         this.loadPlaylist(this.currentPlaylist());
@@ -208,6 +209,7 @@ class Calamansi
         this.switchTrack(0);
 
         this.emit('playlistLoaded', this);
+        CalamansiEvents.emit('playlistLoaded', this);
     }
 
     switchPlaylist(index) {
@@ -217,11 +219,14 @@ class Calamansi
         this.loadPlaylist(this.currentPlaylist());
 
         this.emit('playlistSwitched', this);
+        CalamansiEvents.emit('playlistSwitched', this);
     }
 
     loadTrack(track) {
         if (!this.audio) {
             this.audio = new CalamansiAudio(this, track.source);
+
+            this.loadTrackInfo(track);
 
             return;
         }
@@ -238,6 +243,7 @@ class Calamansi
         this.loadTrack(this.currentTrack());
 
         this.emit('trackSwitched', this);
+        CalamansiEvents.emit('trackSwitched', this);
 
         if (startPlaying) {
             this.audio.play();
@@ -283,6 +289,7 @@ class Calamansi
                     }
 
                     this.emit('trackInfoReady', this, track);
+                    CalamansiEvents.emit('trackInfoReady', this);
                 }
             });
         }
@@ -352,6 +359,7 @@ class Calamansi
 
         if (emitEvent) {
             this.emit('playlistReordered', this);
+            CalamansiEvents.emit('playlistReordered', this);
         }
     }
 
@@ -376,6 +384,7 @@ class Calamansi
 
         if (emitEvent) {
             this.emit('playlistReordered', this);
+            CalamansiEvents.emit('playlistReordered', this);
         }
     }
 
@@ -385,13 +394,19 @@ class Calamansi
      * @param {*} event 
      * @param {*} callback 
      */
-    on(event, callback) {
-        // Ignore inexisting event types
-        if (!this.eventListeners[event]) {
-            return;
+    on(events, callback) {
+        if (typeof events === 'string') {
+            events = [events];
         }
 
-        this.eventListeners[event].push(callback);
+        for (let event of events) {
+            // Ignore inexisting event types
+            if (!this.eventListeners[event]) {
+                continue;
+            }
+
+            this.eventListeners[event].push(callback);
+        }
     }
 
     /**
@@ -445,6 +460,7 @@ class Calamansi
         this.on('trackEnded', (instance) => {
             if (!this.nextTrack()) {
                 this.emit('stop');
+                CalamansiEvents.emit('stop', this);
             }
         })
     }

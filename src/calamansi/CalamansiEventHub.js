@@ -45,13 +45,19 @@ class CalamansiEventHub
      * @param {*} event 
      * @param {*} callback 
      */
-    on(event, callback) {
-        // Ignore inexisting event types
-        if (!this.eventListeners[event]) {
-            return;
+    on(events, callback) {
+        if (typeof events === 'string') {
+            events = [events];
         }
 
-        this.eventListeners[event].push(callback);
+        for (let event of events) {
+            // Ignore inexisting event types
+            if (!this.eventListeners[event]) {
+                continue;
+            }
+
+            this.eventListeners[event].push(callback);
+        }
     }
 }
 
