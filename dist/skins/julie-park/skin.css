@@ -106,7 +106,9 @@
     text-align: center;
 }
 
-.calamansi-skin--julie-park .song-name, .calamansi-skin--julie-park .artist-name {
+.calamansi-skin--julie-park .song-name,
+.calamansi-skin--julie-park .artist-name
+{
     text-transform: uppercase;
     margin: 0;
     padding: 0 1em;

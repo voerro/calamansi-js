@@ -678,7 +678,7 @@ class CalamansiSkin
                 return;
             }
 
-            el.innerText = info[key] ? info[key] : '';
+            el.innerHTML = info[key] ? info[key] : '&nbsp;';
             el.title = info[key] ? info[key] : '';
         });
     }

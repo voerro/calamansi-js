@@ -45,6 +45,10 @@
         <div style="width: 300px;">
             <div id="player2">Loading player...</div>
         </div>
+
+        <div style="width: 300px;">
+            <div id="player3">Loading player...</div>
+        </div>
     </div>
     
     <script src="../dist/calamansi.js"></script>
@@ -111,6 +115,9 @@
                         source: 'files/Ne Obliviscaris - Xenoflux.mp3',
                     },
                     {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
                         source: 'files/Dark Lunacy - Cold Embrace.mp3',
                     },
                     {
@@ -129,7 +136,39 @@
             },
             // volume: 100,
             // shuffle: true,
-            loop: false,
+            // preloadTrackInfo: true,
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player3'), {
+            skin: '../dist/skins/emilcarlsson',
+            playlists: {
+                'Everything': [
+                    {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
+                    },
+                ],
+            },
+            // volume: 100,
+            // shuffle: true,
             // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });
