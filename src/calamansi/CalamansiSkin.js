@@ -516,8 +516,9 @@ class CalamansiSkin
             template.classList.remove('template');
         }
 
-        for (let index of this.calamansi._currentPlaylistOrder) {
-            const track = this.calamansi.currentPlaylist().list[index];
+        let index = 0;
+        for (let i of this.calamansi._currentPlaylistOrder) {
+            const track = this.calamansi.currentPlaylist().list[i];
             let li = document.createElement('li');
 
             if (template) {
@@ -554,7 +555,7 @@ class CalamansiSkin
             }
 
             li.classList.add('playlist-item-li');
-            li.dataset.index = this.calamansi._currentPlaylistOrder[index];
+            li.dataset.index = index;
 
             li.addEventListener('dblclick', (event) => {
                 const el = this.findElParent(event.target, 'playlist-item-li');
@@ -563,6 +564,8 @@ class CalamansiSkin
             });
 
             ul.appendChild(li);
+
+            index++;
         }
 
         container.appendChild(ul);
@@ -575,9 +578,9 @@ class CalamansiSkin
 
         const tbody = document.createElement('tbody');
 
-        // let index = 0;
-        for (let index of this.calamansi._currentPlaylistOrder) {
-            const track = this.calamansi.currentPlaylist().list[index];
+        let index = 0;
+        for (let i of this.calamansi._currentPlaylistOrder) {
+            const track = this.calamansi.currentPlaylist().list[i];
             const tr = document.createElement('tr');
             tr.classList.add('playlist-item');
 
@@ -602,22 +605,24 @@ class CalamansiSkin
                     }
                 }
 
-                if (track === this.calamansi.currentTrack()) {
-                    tr.classList.add('active');
-                }
-
-                tr.dataset.index = this.calamansi._currentPlaylistOrder[index];
-
-                tr.addEventListener('dblclick', (event) => {
-                    const el = this.findElParent(event.target, 'playlist-item');
-
-                    this.calamansi.switchTrack(parseInt(el.dataset.index), true);
-                });
-
                 tr.appendChild(td);
             }
 
+            if (track === this.calamansi.currentTrack()) {
+                tr.classList.add('active');
+            }
+
+            tr.dataset.index = index;
+
+            tr.addEventListener('dblclick', (event) => {
+                const el = this.findElParent(event.target, 'playlist-item');
+
+                this.calamansi.switchTrack(parseInt(el.dataset.index), true);
+            });
+
             tbody.appendChild(tr);
+            
+            index++;
         }
 
         table.appendChild(tbody);
