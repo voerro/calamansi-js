@@ -3,6 +3,7 @@
 .calamansi-skin--shayan {
     position: relative;
     padding-top: 60px;
+    font-family: 'Fira Sans', sans-serif;
 }
 .calamansi-skin--shayan .info {
     position: absolute;
