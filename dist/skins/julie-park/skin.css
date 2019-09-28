@@ -46,13 +46,10 @@
 }
 
 .calamansi-skin--julie-park .info {
-    /* height: 115px; */
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* position: absolute;
-    bottom: 0; */
     background: rgba(255, 255, 255, 0.85);
 }
 
@@ -261,8 +258,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
-    /* flex: 1; */
 }
 .calamansi-skin--julie-park .playlist ul {
     list-style: none;

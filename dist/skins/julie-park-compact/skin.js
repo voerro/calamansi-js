@@ -5,11 +5,11 @@ if (document.querySelectorAll(`script[src="https://unpkg.com/simplebar@4.2.3/dis
     document.querySelector('head').appendChild(script);
 }
 
-var _csjpInfo = document.querySelector('.calamansi-skin--julie-park .info');
+var _csjpc = document.querySelector('.calamansi-skin--julie-park-compact');
 
-document.querySelectorAll('.calamansi-skin--julie-park .toggle-playlist').forEach(function (el) {
+document.querySelectorAll('.calamansi-skin--julie-park-compact .toggle-playlist').forEach(function (el) {
     el.addEventListener('change', function (e) {
-        _csjpInfo.classList.toggle('show-playlist');
+        _csjpc.classList.toggle('show-playlist');
     });
 });
 
