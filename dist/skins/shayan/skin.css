@@ -7,7 +7,7 @@
 }
 .calamansi-skin--shayan .info {
     position: absolute;
-    height: 60px;
+    /* height: 60px; */
     bottom: 0;
     opacity: 0;
     left: 10px;
@@ -39,6 +39,7 @@
     height: 2px;
     width: 100%;
     position: relative;
+    margin-bottom: 10px;
 }
 .calamansi-skin--shayan .info .progress-bar .bar {
     position: absolute;
@@ -46,12 +47,9 @@
     top: 0;
     bottom: 0;
     background-color: red;
-    width: 10%;
     transition: all .2s ease;
 }
 .calamansi-skin--shayan .info.active {
-    /* top: -60px; */
-    /* bottom: 0; */
     bottom: 70px;
     opacity: 1;
     transition: all .5s ease;
@@ -60,7 +58,6 @@
     position: relative;
     background-color: #fff;
     border-radius: 15px;
-    width: 300px;
     height: 80px;
     z-index: 5;
     box-shadow: 0px 20px 20px 5px rgba(132, 132, 132, 0.3);

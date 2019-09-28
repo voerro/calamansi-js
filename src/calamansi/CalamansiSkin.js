@@ -399,6 +399,10 @@ class CalamansiSkin
 
             el.style.width = progress + '%';
         });
+
+        this.getEls('.playback-bar').forEach((el) => {
+            el.title = `${this.formatTime(this.calamansi.audio.currentTime)} / ${this.formatTime(this.calamansi.audio.duration)}`;
+        });
     }
 
     updateLoadingProgress(progress) {
