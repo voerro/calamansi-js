@@ -193,7 +193,13 @@ class CalamansiSkin
                 } else if (this.containsClass(event.target, 'slider')) {
                     const parent = this.findElParent(event.target, 'slider');
 
-                    const position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    let position;
+
+                    if (parent.classList.contains('slider-vertical')) {
+                        position = 1 - ((event.clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
+                    } else {
+                        position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    }
 
                     this.onSliderPositionChanged(parent, position);
                 }
@@ -209,7 +215,11 @@ class CalamansiSkin
 
                     let position;
 
-                    position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    if (parent.classList.contains('slider-vertical')) {
+                        position = 1 - ((event.clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
+                    } else {
+                        position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    }
 
                     if (position > 1.0) {
                         position = 1;
@@ -229,7 +239,13 @@ class CalamansiSkin
                     // Smooth seeking
                     const parent = this.findElParent(this.mouseDownTarget, 'slider');
 
-                    const position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    let position;
+
+                    if (parent.classList.contains('slider-vertical')) {
+                        position = 1 - ((event.touches[0].clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
+                    } else {
+                        position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
+                    }
 
                     if (position > 1.0) {
                         position = 1;
@@ -368,10 +384,16 @@ class CalamansiSkin
     }
 
     updatePlaybackProgress(time, duration) {
+        const progress = (time / duration) * 100;
+ 
         this.getEls('.playback-progress').forEach((el) => {
-            const progress = (time / duration) * 100;
+            let parent = this.findElParent(el, 'slider');
 
-            el.style.width = progress + '%';
+            if (!parent) {
+                return;
+            }
+
+            el.style[parent.classList.contains('slider-vertical') ? 'height' : 'width'] = progress + '%';
         });
 
         this.getEls('.playback-bar').forEach((el) => {
@@ -388,8 +410,14 @@ class CalamansiSkin
     updateVolume(volume) {
         const els = this.getEls('.volume-value');
 
-        els.forEach(function (el) {
-            el.style.width = (volume * 100) + '%';
+        els.forEach((el) => {
+            let parent = this.findElParent(el, 'slider');
+
+            if (!parent) {
+                return;
+            } 
+
+            el.style[parent.classList.contains('slider-vertical') ? 'height' : 'width'] = (volume * 100) + '%';
         });
     }
 
