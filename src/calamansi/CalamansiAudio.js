@@ -2,8 +2,9 @@ class CalamansiAudio
 {
     constructor(calamansi, source) {
         this.calamansi = calamansi;
-        this.audio = new Audio(source);
-        this.audio.load();
+        
+        this.audio = new Audio();
+        this.load(source);
 
         // Metadata
         this.duration = 0;
@@ -64,6 +65,18 @@ class CalamansiAudio
 
     load(source) {
         this.stop();
+
+        if (source.startsWith('https://api.soundcloud.com')) {
+            if (source.endsWith('/')) {
+                source = source.substring(0, source.length - 1);
+            }
+
+            if (!this.calamansi.options.soundcloudClientId) {
+                console.error('Please set your SoundCloud client id in the soundcloudClientId option to play SoundCloud tracks.');
+            }
+            
+            source += '/stream?client_id=' + this.calamansi.options.soundcloudClientId;
+        }
 
         this.audio.src = source;
         this.audio.load();

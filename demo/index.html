@@ -65,7 +65,7 @@
         new Calamansi(document.getElementById('player1'), {
             skin: '../dist/skins/julie-park',
             playlists: {
-                'Everything': [
+                'Everything': [ 
                     {
                         source: 'files/01 - Stabwound.mp3',
                     },
@@ -99,12 +99,20 @@
                     {
                         source: 'files/03-Communion.mp3',
                     },
+                    {
+                        source: 'https://api.soundcloud.com/tracks/85758018/',
+                        info: {
+                            artist: 'Young Thug',
+                            title: 'Hot (feat. Gunna)'
+                        }
+                    },
                 ],
             },
             // volume: 100,
             // shuffle: true,
             // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
         });
 
         new Calamansi(document.getElementById('player2'), {

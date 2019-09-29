@@ -16,6 +16,7 @@ class Calamansi
             preloadTrackInfo: false,
             loadTrackInfoOnPlay: true,
             defaultAlbumCover: '',
+            soundcloudClientId: '',
         }, options);
 
         // Make sure we have all the required options provided and the values
@@ -162,11 +163,17 @@ class Calamansi
                         continue;
                     }
 
-                    track.info = {};
-                    track.info.filename = track.source.split('/').pop();
-                    track.info.name = track.info.filename;
-                    track.info.titleOrFilename = track.info.filename;
-                    track.info.artistOrFilename = track.info.filename;
+                    track.info = track.info ? track.info : {};
+                    track.info.filename = this._getTrackFilename(track);
+                    track.info.name = track.info.title
+                        ? track.info.title
+                        : track.info.filename;
+                    track.info.titleOrFilename = track.info.title
+                        ? track.info.title
+                        : track.info.filename;
+                    track.info.artistOrFilename = track.info.artist
+                        ? track.info.artist
+                        : track.info.filename;
                     track.sourceType = track.info.filename.split('.').pop();
 
                     playlist.list.push(track);
@@ -252,6 +259,16 @@ class Calamansi
         if (startPlaying) {
             this.audio.play();
         }
+    }
+
+    _getTrackFilename(track) {
+        if (track.source.startsWith('https://api.soundcloud.com')) {
+            const trackId = track.source.substring(track.source.indexOf('/tracks/') + '/tracks/'.length).split('/')[0];
+
+            return 'SoundCloud track #' + trackId;
+        }
+
+        return track.source.split('/').pop();
     }
 
     loadTrackInfo(track) {
