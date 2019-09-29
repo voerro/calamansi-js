@@ -77,6 +77,9 @@
 .calamansi-skin--gregh .volume .volume-btn {
     cursor: pointer;
 }
+.calamansi-skin--gregh .volume .volume-btn.open path {
+    fill: #44BFA3;
+}
 .calamansi-skin--gregh .volume .volume-btn.open ~ .volume-controls {
     display: flex;
 }

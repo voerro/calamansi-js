@@ -46,8 +46,11 @@
 
     <!-- A player to be initialized manually -->
     <div style="display: flex; flex-direction: column;">
-        <div style="width: 500px; margin-top: 5rem;">
+        <div style="width: 300px; margin-top: 5rem;">
             <div id="player4">Loading player...</div>
+        </div>
+        <div style="width: 300px;">
+            <div id="player5">Loading player...</div>
         </div>
 
         <div style="width: 300px; height: 300px;">
@@ -194,6 +197,21 @@
         });
 
         new Calamansi(document.getElementById('player4'), {
+            skin: '../dist/skins/gregh',
+            playlists: {
+                'Everything': [
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                ],
+            },
+            // volume: 100,
+            // shuffle: true,
+            // preloadTrackInfo: true,
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player5'), {
             skin: '../dist/skins/gregh',
             playlists: {
                 'Everything': [

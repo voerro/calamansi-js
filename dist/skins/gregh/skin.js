@@ -1,4 +1,17 @@
 ;(function () {
+    var players = document.querySelectorAll('.calamansi-skin--gregh');
+
+    players.forEach(function (player) {
+        var volumeBtn = player.querySelector('.volume-btn');
+
+        if (!volumeBtn) {
+            return;
+        }
+
+        volumeBtn.addEventListener('click', function (e) {
+            volumeBtn.classList.toggle('open');
+        });
+    });
     // var audioPlayer = document.querySelector('.calamansi-skin--gregh');
     // var playPause = audioPlayer.querySelector('#playPause');
     // var playpauseBtn = audioPlayer.querySelector('.play-pause-btn');
