@@ -100,11 +100,11 @@
     width: 90px;
     height: 90px;
 
-    animation: rotation 3s infinite linear;
-    -webkit-animation: rotation 3s infinite linear;
+    animation: calamansi-skin--shayan--rotation 3s infinite linear;
+    -webkit-animation: calamansi-skin--shayan--rotation 3s infinite linear;
     animation-fill-mode: forwards;
 }
-@keyframes rotation {
+@keyframes calamansi-skin--shayan--rotation {
     0% {
         transform: rotate(0deg);
     }

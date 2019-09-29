@@ -7,6 +7,14 @@
     <title>Calamansi Audio Player by Voerro</title>
 
     <link rel="stylesheet" href="../dist/calamansi.css">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #eee, #ccc);
+        }
+
+        .calamansi { margin-bottom: 1rem; }
+    </style>
 </head>
 <body>
     <!-- Simple in-text players to be initialized automatically -->
@@ -37,7 +45,11 @@
     </p>
 
     <!-- A player to be initialized manually -->
-    <div style="display: flex;">
+    <div style="display: flex; flex-direction: column;">
+        <div style="width: 300px;">
+            <div id="player4">Loading player...</div>
+        </div>
+
         <div style="width: 300px; height: 300px;">
             <div id="player1">Loading player...</div>
         </div>
@@ -172,6 +184,21 @@
                     },
                     {
                         source: 'files/danke.mp3',
+                    },
+                ],
+            },
+            // volume: 100,
+            // shuffle: true,
+            // preloadTrackInfo: true,
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player4'), {
+            skin: '../dist/skins/gregh',
+            playlists: {
+                'Everything': [
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
                     },
                 ],
             },

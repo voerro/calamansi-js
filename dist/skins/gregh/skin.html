@@ -1,0 +1,172 @@
+<div class="calamansi-skin--gregh green-audio-player" data-no-wrapper="1">
+    <div class="loading hide-on-loadeddata show-on-trackSwitched">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="control control-resume hide-on-play show-on-pause show-on-stop show-on-loadeddata  hide-on-trackSwitched">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
+            <path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" />
+        </svg>
+    </div>
+
+    <div class="control control-pause hide-on-initialized hide-on-pause hide-on-stop show-on-play">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
+            <path fill="#566574" fill-rule="evenodd" d="M0 0h6v24H0zM12 0h6v24h-6z" />
+        </svg>
+    </div>
+
+    <div class="controls">
+        <span class="playback-time">0:00</span>
+        <div class="slider" data-direction="horizontal">
+            <div class="progress">
+                <div class="pin" id="progress-pin" data-method="rewind"></div>
+            </div>
+        </div>
+        <span class="playback-duration">0:00</span>
+    </div>
+
+    <div class="volume">
+        <div class="volume-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#566574" fill-rule="evenodd"
+                    d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z"
+                    id="speaker" />
+            </svg>
+        </div>
+        <div class="volume-controls hidden">
+            <div class="slider" data-direction="vertical">
+                <div class="progress">
+                    <div class="pin" id="volume-pin" data-method="changeVolume"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio crossorigin>
+        <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/355309/Swing_Jazz_Drum.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+
+<!-- <div class="calamansi-skin--julie-park" data-no-wrapper="1">
+    <div class="album track-info track-info--albumCover">
+        <div class="heart"><i class="fas fa-heart"></i></div>
+    </div>
+
+    <div class="space"></div>
+
+    <div class="info">
+        <div class="playback-info">
+            <div class="time playback-time">00:00</div>
+
+            <div class="playback-bar">
+                <div class="playback-load"></div>
+                <div class="playback-progress"></div>
+            </div>
+
+            <div class="time playback-time-left">-00:00</div>
+        </div>
+
+        <div class="currently-playing">
+            <p class="song-name track-info track-info--titleOrFilename"></p>
+            <p class="artist-name track-info track-info--artist"></p>
+        </div>
+
+        <div class="controls">
+            <div class="left">
+                <div class="option custom-checkbox">
+                    <input type="checkbox" class="toggle-playlist">
+                    <i class="glyphter fa-bars"></i>
+                </div>
+            </div>
+            
+            <div class="center">
+                <div class="volume">
+                    <i class="glyphter fa-volume-up"></i>
+                    
+                    <div class="volume-bar">
+                        <div class="volume-value"></div>
+                    </div>
+                </div>
+
+                <div class="previous control control-prev-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-backward"></i>
+                </div>
+                
+                <div class="play control control-resume hide-on-play show-on-pause show-on-stop">
+                    <i class="glyphter fa-play"></i>
+                </div>
+                <div class="pause control control-pause hide-on-initialized hide-on-pause hide-on-stop show-on-play">
+                    <i class="glyphter fa-pause"></i>
+                </div>
+                
+                <div class="next control control-next-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-forward"></i>
+                </div>
+
+                <div class="shuffle custom-checkbox">
+                    <input type="checkbox" class="control control-toggle-shuffle">
+                    <i class="glyphter fa-random"></i>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="loop custom-checkbox">
+                    <input type="checkbox" class="control control-toggle-loop">
+                    <i class="glyphter fa-loop"></i>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="previous control control-prev-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-backward"></i>
+                </div>
+                
+                <div class="play control control-resume hide-on-play show-on-pause show-on-stop">
+                    <i class="glyphter fa-play"></i>
+                </div>
+                <div class="pause control control-pause hide-on-initialized hide-on-pause hide-on-stop show-on-play">
+                    <i class="glyphter fa-pause"></i>
+                </div>
+                
+                <div class="next control control-next-track hide-on-initialized show-on-playlistLoaded">
+                    <i class="glyphter fa-forward"></i>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="option custom-checkbox">
+                    <input type="checkbox" class="control toggle-playlist">
+                    <i class="glyphter fa-bars"></i>
+                </div>
+            
+                <div class="shuffle custom-checkbox">
+                    <input type="checkbox" class="control control-toggle-shuffle">
+                    <i class="glyphter fa-random"></i>
+                </div>
+
+                <div class="loop custom-checkbox">
+                    <input type="checkbox" class="control control-toggle-loop">
+                    <i class="glyphter fa-loop"></i>
+                </div>
+
+                <div class="volume">
+                    <i class="glyphter fa-volume-up"></i>
+                
+                    <div class="volume-bar">
+                        <div class="volume-value"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="playlist-wrapper" data-simplebar>
+            <div class="playlist">
+                <div class="playlist-item template">
+                    <div class="playlist-item--name"></div>
+                    <div class="playlist-item--duration"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
