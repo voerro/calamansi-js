@@ -193,13 +193,13 @@ class CalamansiSkin
                 } else if (this.containsClass(event.target, 'playback-bar')) {
                     const parent = this.findElParent(event.target, 'playback-bar');
 
-                    const position = event.layerX / parent.offsetWidth;
+                    const position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
                 } else if (this.containsClass(event.target, 'volume-bar')) {
                     const parent = this.findElParent(event.target, 'volume-bar');
 
-                    const position = event.layerX / parent.offsetWidth;
+                    const position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     this.calamansi.audio.changeVolume(position);
                 }
@@ -215,14 +215,12 @@ class CalamansiSkin
 
                     let position;
 
-                    if (this.containsClass(event.target, 'playback-bar')) {
-                        position = event.layerX / parent.offsetWidth;
-                    } else {
-                        position = (event.layerX - parent.offsetLeft) / parent.offsetWidth;
-                    }
+                    position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     if (position > 1.0) {
                         position = 1;
+                    } else if (position < 0) {
+                        position = 0;
                     }
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
@@ -232,14 +230,12 @@ class CalamansiSkin
 
                     let position;
 
-                    if (this.containsClass(event.target, 'volume-bar')) {
-                        position = event.layerX / parent.offsetWidth;
-                    } else {
-                        position = (event.layerX - parent.offsetLeft) / parent.offsetWidth;
-                    }
+                    position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     if (position > 1.0) {
                         position = 1;
+                    } else if (position < 0) {
+                        position = 0;
                     }
 
                     this.calamansi.audio.changeVolume(position);
@@ -254,10 +250,12 @@ class CalamansiSkin
                     // Smooth seeking
                     const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
 
-                    const position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
+                    const position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     if (position > 1.0) {
                         position = 1;
+                    } else if (position < 0) {
+                        position = 0;
                     }
 
                     this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
@@ -265,10 +263,12 @@ class CalamansiSkin
                     // Smooth change of the volume
                     const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
 
-                    let position = (event.touches[0].clientX - parent.offsetLeft) / parent.offsetWidth;
+                    let position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
                     if (position > 1.0) {
                         position = 1;
+                    } else if (position < 0) {
+                        position = 0;
                     }
 
                     this.calamansi.audio.changeVolume(position);
