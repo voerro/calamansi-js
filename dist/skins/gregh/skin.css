@@ -1,7 +1,6 @@
 .calamansi-skin--gregh {
     width: 100%;
     box-sizing: border-box;
-    /* min-width: 300px; */
     height: 56px;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
     display: flex;
@@ -28,13 +27,13 @@
     cursor: pointer;
     position: relative;
 }
-.calamansi-skin--gregh .slider .progress {
+.calamansi-skin--gregh .slider .playback-progress {
     background-color: #44BFA3;
     border-radius: inherit;
     position: absolute;
     pointer-events: none;
 }
-.calamansi-skin--gregh .slider .progress .pin {
+.calamansi-skin--gregh .slider .playback-progress .pin {
     height: 16px;
     width: 16px;
     border-radius: 8px;
@@ -61,11 +60,11 @@
     border-radius: 2px;
     height: 4px;
 }
-.calamansi-skin--gregh .controls .slider .progress {
+.calamansi-skin--gregh .controls .slider .playback-progress {
     width: 0;
     height: 100%;
 }
-.calamansi-skin--gregh .controls .slider .progress .pin {
+.calamansi-skin--gregh .controls .slider .playback-progress .pin {
     right: -8px;
     top: -6px;
 }
@@ -103,12 +102,12 @@
     width: 6px;
     border-radius: 3px;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .progress {
+.calamansi-skin--gregh .volume .volume-controls .slider .playback-progress {
     bottom: 0;
     height: 100%;
     width: 6px;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .progress .pin {
+.calamansi-skin--gregh .volume .volume-controls .slider .playback-progress .pin {
     left: -5px;
     top: -8px;
 }
