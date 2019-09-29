@@ -226,14 +226,18 @@ class Calamansi
         if (!this.audio) {
             this.audio = new CalamansiAudio(this, track.source);
 
-            this.loadTrackInfo(track);
+            if (this.options.loadTrackInfoOnPlay) {
+                this.loadTrackInfo(track);
+            }
 
             return;
         }
 
         this.audio.load(track.source);
 
-        this.loadTrackInfo(track);
+        if (this.options.loadTrackInfoOnPlay) {
+            this.loadTrackInfo(track);
+        }
     }
 
     switchTrack(index, startPlaying = false) {
