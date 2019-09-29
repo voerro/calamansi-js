@@ -94,7 +94,7 @@
     z-index: 1;
 }
 .calamansi-skin--gregh .volume .volume-controls.hidden {
-    display: none;
+    /* display: none; */
 }
 .calamansi-skin--gregh .volume .volume-controls .slider {
     margin-top: 12px;
@@ -102,12 +102,12 @@
     width: 6px;
     border-radius: 3px;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .playback-progress {
+.calamansi-skin--gregh .volume .volume-controls .slider .volume-value {
     bottom: 0;
     height: 100%;
     width: 6px;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .playback-progress .pin {
+.calamansi-skin--gregh .volume .volume-controls .slider .volume-value .pin {
     left: -5px;
     top: -8px;
 }

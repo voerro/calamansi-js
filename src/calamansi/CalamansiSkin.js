@@ -190,18 +190,12 @@ class CalamansiSkin
                 } else if (this.containsClass(event.target, 'control-toggle-shuffle')) {
                     // "Shuffle" button (checkbox)
                     this.calamansi.toggleShuffle();
-                } else if (this.containsClass(event.target, 'playback-bar')) {
-                    const parent = this.findElParent(event.target, 'playback-bar');
+                } else if (this.containsClass(event.target, 'slider')) {
+                    const parent = this.findElParent(event.target, 'slider');
 
                     const position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
-                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(event.target, 'volume-bar')) {
-                    const parent = this.findElParent(event.target, 'volume-bar');
-
-                    const position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
-
-                    this.calamansi.audio.changeVolume(position);
+                    this.onSliderPositionChanged(parent, position);
                 }
             }
         });
@@ -209,9 +203,9 @@ class CalamansiSkin
         document.addEventListener('mousemove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'playback-bar')) {
+                if (this.containsClass(this.mouseDownTarget, 'slider')) {
                     // Smooth seeking
-                    const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
+                    const parent = this.findElParent(this.mouseDownTarget, 'slider');
 
                     let position;
 
@@ -223,22 +217,7 @@ class CalamansiSkin
                         position = 0;
                     }
 
-                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar')) {
-                    // Smooth change of the volume
-                    const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
-
-                    let position;
-
-                    position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
-
-                    if (position > 1.0) {
-                        position = 1;
-                    } else if (position < 0) {
-                        position = 0;
-                    }
-
-                    this.calamansi.audio.changeVolume(position);
+                    this.onSliderPositionChanged(parent, position);
                 }
             }
         });
@@ -246,9 +225,9 @@ class CalamansiSkin
         document.addEventListener('touchmove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'playback-bar')) {
+                if (this.containsClass(this.mouseDownTarget, 'slider')) {
                     // Smooth seeking
-                    const parent = this.findElParent(this.mouseDownTarget, 'playback-bar');
+                    const parent = this.findElParent(this.mouseDownTarget, 'slider');
 
                     const position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
 
@@ -258,20 +237,7 @@ class CalamansiSkin
                         position = 0;
                     }
 
-                    this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-                } else if (this.containsClass(this.mouseDownTarget, 'volume-bar')) {
-                    // Smooth change of the volume
-                    const parent = this.findElParent(this.mouseDownTarget, 'volume-bar');
-
-                    let position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
-
-                    if (position > 1.0) {
-                        position = 1;
-                    } else if (position < 0) {
-                        position = 0;
-                    }
-
-                    this.calamansi.audio.changeVolume(position);
+                    this.onSliderPositionChanged(parent, position);
                 }
             }
         });
@@ -371,6 +337,14 @@ class CalamansiSkin
 
     containsClass(el, className) {
         return el.classList.contains(className) || this.findElParent(el, className);
+    }
+
+    onSliderPositionChanged(el, position) {
+        if (el.classList.contains('playback-bar')) {
+            this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
+        } else if (el.classList.contains('volume-bar')) {
+            this.calamansi.audio.changeVolume(position);
+        }
     }
 
     updatePlaybackDuration(duration) {
