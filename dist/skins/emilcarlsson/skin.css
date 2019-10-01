@@ -10,7 +10,6 @@
     min-width: 300px;
     width: 300px;
     position: relative;
-    z-index: 2;
     border-radius: 5px;
     overflow: hidden;
     -webkit-box-shadow: 0px 3px 15px -1px rgba(0, 0, 0, 0.5);
@@ -24,7 +23,6 @@
     position: absolute;
     height: calc(100% + 1px);
     width: calc(100% + 1px);
-    z-index: 2;
     background: -moz-linear-gradient(-45deg, #333333 0%, #222222 100%);
     /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, #333333 0%, #222222 100%);
@@ -36,7 +34,6 @@
 .calamansi-skin--emilcarlsson .content {
     text-align: center;
     position: relative;
-    z-index: 3;
 }
 
 .calamansi-skin--emilcarlsson .content .track-info--titleOrFilename,

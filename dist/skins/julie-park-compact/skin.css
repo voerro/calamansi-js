@@ -226,7 +226,7 @@
     transition: all .4s ease;
 }
 
-.playlist-wrapper {
+.calamansi-skin--julie-park-compact .playlist-wrapper {
     display: none;
     min-height: 0;
     max-height: 100%;

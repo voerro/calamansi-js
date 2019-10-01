@@ -2,6 +2,7 @@
 @import url("https://unpkg.com/simplebar@4.2.3/dist/simplebar.min.css");
 
 .calamansi-skin--julie-park {
+    box-sizing: border-box;
     background: #FFFFFF;
     position: relative;
     width: 100%;
@@ -248,7 +249,7 @@
     transition: all .4s ease;
 }
 
-.playlist-wrapper {
+.calamansi-skin--julie-park .playlist-wrapper {
     flex: 1;
     height: 0;
     max-height: 100%;

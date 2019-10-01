@@ -13,7 +13,7 @@
             background: linear-gradient(to bottom right, #eee, #ccc);
         }
 
-        .calamansi { margin-bottom: 1rem; }
+        .calamansi { margin-bottom: 1rem !important; }
     </style>
 </head>
 <body>
@@ -46,15 +46,11 @@
 
     <!-- A player to be initialized manually -->
     <div style="display: flex; flex-direction: column;">
-        <div style="width: 300px; margin-top: 5rem;">
-            <div id="player4">Loading player...</div>
-        </div>
-        <div style="width: 300px;">
-            <div id="player5">Loading player...</div>
-        </div>
-
-        <div style="width: 300px; height: 300px;">
+        <div style="width: 300px; height: 300px; margin-top: 5rem;">
             <div id="player1">Loading player...</div>
+        </div>
+        <div style="width: 300px; height: 300px;">
+            <div id="player1-1">Loading player...</div>
         </div>
 
         <div style="width: 300px;">
@@ -62,7 +58,31 @@
         </div>
 
         <div style="width: 300px;">
+            <div id="player2-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
             <div id="player3">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player3-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player4">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player4-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player5">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player5-1">Loading player...</div>
         </div>
     </div>
     
@@ -123,14 +143,161 @@
                     },
                 ],
             },
-            // volume: 100,
-            // shuffle: true,
-            // preloadTrackInfo: true,
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player1-1'), {
+            skin: '../dist/skins/julie-park',
+            playlists: {
+                'Everything': [ 
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/Protest the Hero - Bloodmeat.mp3',
+                    },
+                    {
+                        source: 'files/Amatory - Черно-Белые Дни.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
+                    },
+                    {
+                        source: 'files/02-Anubis.mp3',
+                    },
+                    {
+                        source: 'files/03-Communion.mp3',
+                    },
+                    {
+                        source: 'https://api.soundcloud.com/tracks/85758018/',
+                        info: {
+                            artist: 'Young Thug',
+                            title: 'Hot (feat. Gunna)'
+                        }
+                    },
+                ],
+            },
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
             soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
         });
 
         new Calamansi(document.getElementById('player2'), {
+            skin: '../dist/skins/julie-park-compact',
+            playlists: {
+                'Everything': [ 
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/Protest the Hero - Bloodmeat.mp3',
+                    },
+                    {
+                        source: 'files/Amatory - Черно-Белые Дни.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
+                    },
+                    {
+                        source: 'files/02-Anubis.mp3',
+                    },
+                    {
+                        source: 'files/03-Communion.mp3',
+                    },
+                    {
+                        source: 'https://api.soundcloud.com/tracks/85758018/',
+                        info: {
+                            artist: 'Young Thug',
+                            title: 'Hot (feat. Gunna)'
+                        }
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player2-1'), {
+            skin: '../dist/skins/julie-park-compact',
+            playlists: {
+                'Everything': [ 
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/Protest the Hero - Bloodmeat.mp3',
+                    },
+                    {
+                        source: 'files/Amatory - Черно-Белые Дни.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
+                    },
+                    {
+                        source: 'files/02-Anubis.mp3',
+                    },
+                    {
+                        source: 'files/03-Communion.mp3',
+                    },
+                    {
+                        source: 'https://api.soundcloud.com/tracks/85758018/',
+                        info: {
+                            artist: 'Young Thug',
+                            title: 'Hot (feat. Gunna)'
+                        }
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player3'), {
             skin: '../dist/skins/shayan',
             playlists: {
                 'Everything': [
@@ -157,13 +324,40 @@
                     },
                 ],
             },
-            // volume: 100,
-            // shuffle: true,
-            // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });
 
-        new Calamansi(document.getElementById('player3'), {
+        new Calamansi(document.getElementById('player3-1'), {
+            skin: '../dist/skins/shayan',
+            playlists: {
+                'Everything': [
+                    {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player4'), {
             skin: '../dist/skins/emilcarlsson',
             playlists: {
                 'Everything': [
@@ -190,24 +384,36 @@
                     },
                 ],
             },
-            // volume: 100,
-            // shuffle: true,
-            // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });
 
-        new Calamansi(document.getElementById('player4'), {
-            skin: '../dist/skins/gregh',
+        new Calamansi(document.getElementById('player4-1'), {
+            skin: '../dist/skins/emilcarlsson',
             playlists: {
                 'Everything': [
                     {
+                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                    },
+                    {
+                        source: 'files/01 - Stabwound.mp3',
+                    },
+                    {
+                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                    },
+                    {
+                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    },
+                    {
                         source: 'files/Dominia - Harvester.mp3',
+                    },
+                    {
+                        source: 'files/kiitos.mp3',
+                    },
+                    {
+                        source: 'files/danke.mp3',
                     },
                 ],
             },
-            // volume: 100,
-            // shuffle: true,
-            // preloadTrackInfo: true,
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });
 
@@ -220,9 +426,18 @@
                     },
                 ],
             },
-            // volume: 100,
-            // shuffle: true,
-            // preloadTrackInfo: true,
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player5-1'), {
+            skin: '../dist/skins/gregh',
+            playlists: {
+                'Everything': [
+                    {
+                        source: 'files/Dominia - Harvester.mp3',
+                    },
+                ],
+            },
             defaultAlbumCover: '/dist/skins/default-album-cover.png',
         });
     </script>
