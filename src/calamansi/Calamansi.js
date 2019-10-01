@@ -118,8 +118,6 @@ class Calamansi
         this.skin = new CalamansiSkin(this, this.options.skin);
         await this.skin.init();
 
-        console.log('-- after await skin.init(): ' + this.id);
-
         this.el = document.getElementById(this.id);
 
         // Initialization done!
@@ -284,7 +282,6 @@ class Calamansi
         if (track.sourceType === 'mp3') {
             jsmediatags.read(window.location.href + track.source, {
                 onSuccess: (tags) => {
-                    track.info._loaded = true;
                     track.info = Object.assign(track.info, tags.tags);
 
                     if (track.info.artist && track.info.title) {
@@ -312,6 +309,8 @@ class Calamansi
 
                         track.info.albumCover = track.info.picture;
                     }
+
+                    track.info._loaded = true;
 
                     this.emit('trackInfoReady', this, track);
                     CalamansiEvents.emit('trackInfoReady', this);

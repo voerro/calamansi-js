@@ -86,39 +86,26 @@ class CalamansiSkin
 
             // If the skin's JS has already been loaded
             let script = document.querySelectorAll(`script[src="${jsPath}"]`);
-            // console.log(script);
 
             if (script.length > 0 && script[0].dataset.loaded) {
                 // Script already exists and is loaded
-                console.log('EXISTS: ' + this.calamansi.id)
                 resolve();
             } else if (script.length > 0) {
-                // Script already exists but hasn't been loaded
-                console.log('NOT LOADED: ' + this.calamansi.id)
-                // var loadTimeout = setTimeout(() => {
-
-                // }, 100);
-                script[0].onload = () => {
-                    console.log('existing script[0] loaded: ' + this.calamansi.id);
-                    script[0].dataset.loaded = '1';
-
-                    resolve();
-                }
+                // Script already exists but hasn't been loaded - try again later
+                setTimeout(() => {
+                    resolve(this.loadJs(path));
+                }, 100);
             } else {
                 // Script doesn't exist
-                console.log('DOES NOT EXIST: ' + this.calamansi.id)
                 script = document.createElement('script');
 
                 script.onload = () => {
-                    console.log('new script loaded: ' + this.calamansi.id);
                     script.dataset.loaded = '1';
 
                     resolve();
                 }
 
                 script.setAttribute('src', jsPath);
-                script.setAttribute('type', 'text/javascript');
-
                 document.querySelector('head').appendChild(script);
             }
         });
