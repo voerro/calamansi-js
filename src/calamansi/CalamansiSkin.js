@@ -542,30 +542,46 @@ class CalamansiSkin
         let index = 0;
         for (let i of this.calamansi._currentPlaylistOrder) {
             const track = this.calamansi.currentPlaylist().list[i];
+            const info = track.info;
             let li = document.createElement('li');
 
             if (template) {
                 const item = template.cloneNode(true);
 
-                for (let key in track.info) {
-                    let el = this.findEl(item, `.playlist-item--${key}`);
+                this.findEls(item, '.playlist-track-info').forEach((el) => {
+                    let key = null;
 
-                    if (el) {
+                    for (let i = 0; i < el.classList.length; i++) {
+                        if (/playlist-track-info--.*/.test(el.classList[i])) {
+                            key = el.classList[i].split('--')[1];
 
-                        switch (key) {
-                            case 'albumCover':
-                                // TODO: Display album cover
-                                break
-                            case 'duration':
-                                el.innerText = this.formatTime(track.info[key]);
-                                el.title = this.formatTime(track.info[key]);
-                                break;
-                            default:
-                                el.innerText = track.info[key];
-                                el.title = track.info[key];
+                            break;
                         }
                     }
-                }
+
+                    if (!key) {
+                        return;
+                    }
+
+                    switch (key) {
+                        case 'albumCover':
+                            if (el.nodeName.toLowerCase() === 'img') {
+                                el.src = info[key]
+                                    ? info[key].base64
+                                    : this.calamansi.options.defaultAlbumCover;
+                            } else {
+                                el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
+                            }
+                            break
+                        case 'duration':
+                            el.innerHTML = info[key] ? this.formatTime(info[key]) : '&nbsp;';
+                            el.title = info[key] ? this.formatTime(info[key]) : '';
+                            break;
+                        default:
+                            el.innerHTML = info[key] ? info[key] : '&nbsp;';
+                            el.title = info[key] ? info[key] : '';
+                    }
+                });
 
                 if (track === this.calamansi.currentTrack()) {
                     item.classList.add('active');
@@ -594,42 +610,72 @@ class CalamansiSkin
         container.appendChild(ul);
     }
 
-    updatePlaylistTable(table) {        
-        while (this.findEl(table, 'tbody')) {
-            table.removeChild(this.findEl(table, 'tbody'));
+    updatePlaylistTable(table) {
+        // TODO: tbody - remove all <tr> children
+        const tbody = this.findEl(table, 'tbody');
+
+        if (!tbody) {
+            console.error('.playlist element should contain <tbody> with a template row!');
+
+            return;
         }
 
-        const tbody = document.createElement('tbody');
+        for (let el of this.findEls(tbody, 'tr')) {
+            if (!el.classList.contains('template')) {
+                tbody.removeChild(el);
+            }
+        }
+
+        let template = this.findEl(tbody, '.playlist-item.template');
+
+        if (!template) {
+            console.error('.playlist element should contain a row template!');
+
+            return;
+        }
 
         let index = 0;
         for (let i of this.calamansi._currentPlaylistOrder) {
             const track = this.calamansi.currentPlaylist().list[i];
-            const tr = document.createElement('tr');
-            tr.classList.add('playlist-item');
+            const info = track.info;
 
-            for (let th of this.findEls(table, 'th')) {
-                const td = document.createElement('td');
-                const key = th.classList[0];
+            let tr = template.cloneNode(true);
+            tr.classList.remove('template');
 
-                td.classList.add(`playlist-item--${key}`);
+            this.findEls(tr, '.playlist-track-info').forEach((el) => {
+                let key = null;
 
-                if (track.info[key]) {
-                    switch (key) {
-                        case 'albumCover':
-                            // TODO: Display album cover
-                            break
-                        case 'duration':
-                            td.innerText = this.formatTime(track.info[key]);
-                            td.title = this.formatTime(track.info[key]);
-                            break;
-                        default:
-                            td.innerText = track.info[key];
-                            td.title = track.info[key];
+                for (let i = 0; i < el.classList.length; i++) {
+                    if (/playlist-track-info--.*/.test(el.classList[i])) {
+                        key = el.classList[i].split('--')[1];
+
+                        break;
                     }
                 }
 
-                tr.appendChild(td);
-            }
+                if (!key) {
+                    return;
+                }
+
+                switch (key) {
+                    case 'albumCover':
+                        if (el.nodeName.toLowerCase() === 'img') {
+                            el.src = info[key]
+                                ? info[key].base64
+                                : this.calamansi.options.defaultAlbumCover;
+                        } else {
+                            el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
+                        }
+                        break
+                    case 'duration':
+                        el.innerHTML = info[key] ? this.formatTime(info[key]) : '&nbsp;';
+                        el.title = info[key] ? this.formatTime(info[key]) : '';
+                        break;
+                    default:
+                        el.innerHTML = info[key] ? info[key] : '&nbsp;';
+                        el.title = info[key] ? info[key] : '';
+                }
+            });
 
             if (track === this.calamansi.currentTrack()) {
                 tr.classList.add('active');
@@ -644,6 +690,47 @@ class CalamansiSkin
             });
 
             tbody.appendChild(tr);
+
+            // const tr = document.createElement('tr');
+            // tr.classList.add('playlist-item');
+
+            // for (let th of this.findEls(table, 'th')) {
+            //     const td = document.createElement('td');
+            //     const key = th.classList[0];
+
+            //     td.classList.add(`playlist-track-info--${key}`);
+
+            //     if (track.info[key]) {
+            //         switch (key) {
+            //             case 'albumCover':
+            //                 // TODO: Display album cover
+            //                 break
+            //             case 'duration':
+            //                 td.innerText = this.formatTime(track.info[key]);
+            //                 td.title = this.formatTime(track.info[key]);
+            //                 break;
+            //             default:
+            //                 td.innerText = track.info[key];
+            //                 td.title = track.info[key];
+            //         }
+            //     }
+
+            //     tr.appendChild(td);
+            // }
+
+            // if (track === this.calamansi.currentTrack()) {
+            //     tr.classList.add('active');
+            // }
+
+            // tr.dataset.index = index;
+
+            // tr.addEventListener('dblclick', (event) => {
+            //     const el = this.findElParent(event.target, 'playlist-item');
+
+            //     this.calamansi.switchTrack(parseInt(el.dataset.index), true);
+            // });
+
+            // tbody.appendChild(tr);
             
             index++;
         }

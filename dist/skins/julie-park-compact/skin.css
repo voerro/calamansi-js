@@ -268,7 +268,7 @@
 .calamansi-skin--julie-park-compact .playlist .playlist-item.active {
     background-color: #cdd9c2;
 }
-.calamansi-skin--julie-park-compact .playlist .playlist-item--name {
+.calamansi-skin--julie-park-compact .playlist .playlist-track-info--name {
     flex: 1;
     padding-right: 1em;
 
