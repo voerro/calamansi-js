@@ -13,14 +13,6 @@
     -webkit-user-select: none;
     background-color: #fff;
 }
-.calamansi-skin--gregh .spinner {
-    width: 18px;
-    height: 18px;
-    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355309/loading.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    animation: calamansi-skin--gregh--spin 0.4s linear infinite;
-}
 .calamansi-skin--gregh .slider {
     flex-grow: 1;
     background-color: #D8D8D8;
@@ -119,11 +111,3 @@
     display: block;
 }
 
-@keyframes calamansi-skin--gregh--spin {
-    from {
-        transform: rotateZ(0);
-    }
-    to {
-        transform: rotateZ(1turn);
-    }
-}

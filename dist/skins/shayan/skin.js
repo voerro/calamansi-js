@@ -1,37 +1,35 @@
 ;(function () {
-    var players = document.querySelectorAll('.calamansi-skin--shayan');
-
     CalamansiEvents.on('play', function (instance) {
-        players.forEach(function (player) {
-            if (player.id == instance.id) {
-                var info = player.querySelector('.info');
-                var controlPanel = player.querySelector('.control-panel');
+        var player = instance.el;
 
-                if (info) {
-                    info.classList.add('active');
-                }
+        if (player.matches('.calamansi-skin--shayan')) {
+            var info = player.querySelector('.info');
+            var controlPanel = player.querySelector('.control-panel');
 
-                if (controlPanel) {
-                    controlPanel.classList.add('active');
-                }
+            if (info) {
+                info.classList.add('active');
             }
-        });
+
+            if (controlPanel) {
+                controlPanel.classList.add('active');
+            }
+        }
     });
 
     CalamansiEvents.on(['pause', 'stop'], function (instance) {
-        players.forEach(function (player) {
-            if (player.id == instance.id) {
-                var info = player.querySelector('.info');
-                var controlPanel = player.querySelector('.control-panel');
+        var player = instance.el;
 
-                if (info) {
-                    info.classList.remove('active');
-                }
+        if (player.matches('.calamansi-skin--shayan')) {
+            var info = player.querySelector('.info');
+            var controlPanel = player.querySelector('.control-panel');
 
-                if (controlPanel) {
-                    controlPanel.classList.remove('active');
-                }
+            if (info) {
+                info.classList.remove('active');
             }
-        });
+
+            if (controlPanel) {
+                controlPanel.classList.remove('active');
+            }
+        }
     });
 })();

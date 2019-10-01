@@ -10,7 +10,7 @@ class Calamansi
         /* DATA */
         this.options = Object.assign({
             // Default options...
-            loop: true,
+            loop: false,
             shuffle: false,
             volume: 100,
             preloadTrackInfo: false,
@@ -118,9 +118,13 @@ class Calamansi
         this.skin = new CalamansiSkin(this, this.options.skin);
         await this.skin.init();
 
+        console.log('-- after await skin.init(): ' + this.id);
+
+        this.el = document.getElementById(this.id);
+
         // Initialization done!
         this.initialized = true;
-
+        
         this.emit('initialized', this);
         CalamansiEvents.emit('initialized', this);
 

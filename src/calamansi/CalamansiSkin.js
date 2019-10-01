@@ -47,7 +47,8 @@ class CalamansiSkin
         this.el = wrapper;
 
         // Load the JS after all the new elements have been appended
-        this.loadJs(this.path);
+        // Wait for it to load and execute
+        await this.loadJs(this.path);
 
         return content;
     }
@@ -80,18 +81,47 @@ class CalamansiSkin
      * @param {*} path 
      */
     loadJs(path) {
-        const jsPath = `${path}/skin.js`;
+        return new Promise((resolve, reject) => {
+            const jsPath = `${path}/skin.js`;
 
-        // If the skin's CSS has already been loaded
-        if (document.querySelectorAll(`script[src="${jsPath}"]`).length > 0) {
-            return;
-        }
+            // If the skin's JS has already been loaded
+            let script = document.querySelectorAll(`script[src="${jsPath}"]`);
+            // console.log(script);
 
-        const script = document.createElement('script');
-        script.setAttribute('src', jsPath);
-        script.setAttribute('type', 'text/javascript');
+            if (script.length > 0 && script[0].dataset.loaded) {
+                // Script already exists and is loaded
+                console.log('EXISTS: ' + this.calamansi.id)
+                resolve();
+            } else if (script.length > 0) {
+                // Script already exists but hasn't been loaded
+                console.log('NOT LOADED: ' + this.calamansi.id)
+                // var loadTimeout = setTimeout(() => {
 
-        document.querySelector('head').appendChild(script);
+                // }, 100);
+                script[0].onload = () => {
+                    console.log('existing script[0] loaded: ' + this.calamansi.id);
+                    script[0].dataset.loaded = '1';
+
+                    resolve();
+                }
+            } else {
+                // Script doesn't exist
+                console.log('DOES NOT EXIST: ' + this.calamansi.id)
+                script = document.createElement('script');
+
+                script.onload = () => {
+                    console.log('new script loaded: ' + this.calamansi.id);
+                    script.dataset.loaded = '1';
+
+                    resolve();
+                }
+
+                script.setAttribute('src', jsPath);
+                script.setAttribute('type', 'text/javascript');
+
+                document.querySelector('head').appendChild(script);
+            }
+        });
     }
 
     async fetchHtml(path) {
