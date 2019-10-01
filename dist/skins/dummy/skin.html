@@ -76,7 +76,9 @@
         <select class="playlists"></select>
     </div>
 
-    <div class="playlist">
+    <!-- This playlist will be converted into an unordered list (<ul>).
+        Uncomment the code below to see how it works. -->
+    <!-- <div class="playlist">
         <div class="playlist-item template">
             <div>
                 <img style="width: 2rem; height: 2rem; margin-right: 1rem;" class="playlist-track-info playlist-track-info--albumCover">
@@ -85,8 +87,9 @@
             <div class="playlist-track-info playlist-track-info--name"></div>
             <div class="playlist-track-info playlist-track-info--duration"></div>
         </div>
-    </div>
+    </div> -->
 
+    <!-- This playlist will be displayed as a table -->
     <table class="playlist">
         <thead>
             <th class="albumCover"></th>
@@ -96,6 +99,7 @@
             <th class="album">Album</th>
             <th class="year">Year</th>
             <th class="duration">Length</th>
+            <th class="duration">Custom Field</th>
         </thead>
         <tbody>
             <tr class="playlist-item template">
@@ -103,11 +107,12 @@
                     <img style="width: 2rem; height: 2rem;" class="playlist-track-info playlist-track-info--albumCover">
                 </td>
                 <td class="playlist-track-info playlist-track-info--trackNumber"></td>
-                <td class="playlist-track-info playlist-track-info--name"></td>
+                <td class="playlist-track-info playlist-track-info--titleOrFilename"></td>
                 <td class="playlist-track-info playlist-track-info--artist"></td>
                 <td class="playlist-track-info playlist-track-info--album"></td>
                 <td class="playlist-track-info playlist-track-info--year"></td>
                 <td class="playlist-track-info playlist-track-info--duration"></td>
+                <td class="playlist-track-info playlist-track-info--custom1"></td>
             </tr>
         </tbody>
     </table>

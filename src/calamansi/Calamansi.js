@@ -310,6 +310,12 @@ class Calamansi
                         track.info.albumCover = track.info.picture;
                     }
 
+                    if (tags.tags.TYER || tags.tags.TDRC) {
+                        track.info.year = tags.tags.TYER ? parseInt(tags.tags.TYER.data) : (
+                            tags.tags.TDRC ? parseInt(tags.tags.TDRC.data) : null
+                        )
+                    }
+
                     track.info._loaded = true;
 
                     this.emit('trackInfoReady', this, track);

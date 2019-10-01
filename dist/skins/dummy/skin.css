@@ -6,6 +6,7 @@
     position: relative;
     height: 10px;
     background-color: #eee;
+    border: 1px solid #000;
 }
 .calamansi-skin--dummy .playback-load {
     height: 100%;
@@ -27,6 +28,7 @@
     width: 10%;
     height: 10px;
     background-color: #eee;
+    border: 1px solid #000;
 }
 .calamansi-skin--dummy .volume-value {
     height: 100%;
@@ -75,5 +77,5 @@
 }
 
 .calamansi-skin--dummy .playlist-item.active {
-    background-color: #eee;
+    background-color: rgb(185, 217, 231);
 }

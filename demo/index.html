@@ -23,11 +23,11 @@
 
         <span class="calamansi"
             data-skin="../dist/skins/pronunciation"
-            data-source="files/kiitos.mp3">kiitos</span>, and in German it is 
+            data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German it is 
 
         <span class="calamansi"
             data-skin="../dist/skins/pronunciation"
-            data-source="files/danke.mp3">danke</span>.
+            data-source="files/pronunciations/danke.mp3">danke</span>.
     </p>
 
     <p>
@@ -35,21 +35,26 @@
         
         <span class="calamansi"
             data-skin="../dist/skins/in-text"
-            data-source="files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3"
+            data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
         >Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span> or 
 
         <span class="calamansi"
             data-skin="../dist/skins/in-text"
-            data-source="files/Dominia - Harvester.mp3"
-        >Dominia - Harvester</span>
+            data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
+        >Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
     </p>
 
     <!-- A player to be initialized manually -->
     <div style="display: flex; flex-direction: column;">
-        <div style="width: 300px; height: 300px; margin-top: 5rem;">
+        <div style="margin-top: 5rem; margin-bottom: 1rem;">
+            <div id="player0">Loading player...</div>
+        </div>
+
+        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
             <div id="player1">Loading player...</div>
         </div>
-        <div style="width: 300px; height: 300px;">
+
+        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
             <div id="player1-1">Loading player...</div>
         </div>
 
@@ -85,7 +90,7 @@
             <div id="player5-1">Loading player...</div>
         </div>
     </div>
-    
+
     <script src="../dist/calamansi.js"></script>
 
     <script>
@@ -97,49 +102,95 @@
         //     });
         // });
 
+        new Calamansi(document.getElementById('player0'), {
+            skin: '../dist/skins/dummy',
+            playlists: {
+                'Metal': [
+                    {
+                        source: 'files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3',
+                        info: {
+                            custom1: 'Add any custom data to tracks. You can have as many custom fields as you want.'
+                        }
+                    },
+                    {
+                        source: 'files/metal/04. Forget Not.mp3'
+                    },
+                    {
+                        source: 'files/metal/03 Intra Venus.mp3'
+                    },
+                    {
+                        source: 'files/metal/02 - The Second Stone.mp3'
+                    },
+                    {
+                        source: 'files/metal/03 - The Essence Of Silence.mp3'
+                    },
+                    {
+                        source: 'files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3'
+                    },
+                    {
+                        source: 'files/metal/01 - Bloodmeat.mp3'
+                    },
+                    {
+                        source: 'files/metal/01 - C\'est la Vie.mp3'
+                    },
+                    {
+                        source: 'files/metal/08. Mist.mp3'
+                    },
+                    {
+                        source: 'files/metal/05. Cold Embrace.mp3'
+                    },
+                    {
+                        source: 'files/metal/10. Fall.mp3'
+                    },
+                    {
+                        source: 'files/metal/07. My Dying Pathway.mp3'
+                    },
+                ],
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+                'Rock': [
+                    {
+                        source: 'files/rock/Forever - The Lemming Shepherds.mp3',
+                    },
+                    {
+                        source: 'files/rock/No Photographs - Lost European.mp3',
+                    },
+                    {
+                        source: 'files/rock/The Man in the House of Cards - Lost European.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
         new Calamansi(document.getElementById('player1'), {
             skin: '../dist/skins/julie-park',
             playlists: {
-                'Everything': [ 
+                'Classics': [
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/Protest the Hero - Bloodmeat.mp3',
-                    },
-                    {
-                        source: 'files/Amatory - Черно-Белые Дни.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
-                    },
-                    {
-                        source: 'files/02-Anubis.mp3',
-                    },
-                    {
-                        source: 'files/03-Communion.mp3',
-                    },
-                    {
-                        source: 'https://api.soundcloud.com/tracks/85758018/',
-                        info: {
-                            artist: 'Young Thug',
-                            title: 'Hot (feat. Gunna)'
-                        }
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -150,46 +201,18 @@
         new Calamansi(document.getElementById('player1-1'), {
             skin: '../dist/skins/julie-park',
             playlists: {
-                'Everything': [ 
+                'Classics': [
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/Protest the Hero - Bloodmeat.mp3',
-                    },
-                    {
-                        source: 'files/Amatory - Черно-Белые Дни.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
-                    },
-                    {
-                        source: 'files/02-Anubis.mp3',
-                    },
-                    {
-                        source: 'files/03-Communion.mp3',
-                    },
-                    {
-                        source: 'https://api.soundcloud.com/tracks/85758018/',
-                        info: {
-                            artist: 'Young Thug',
-                            title: 'Hot (feat. Gunna)'
-                        }
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -200,46 +223,18 @@
         new Calamansi(document.getElementById('player2'), {
             skin: '../dist/skins/julie-park-compact',
             playlists: {
-                'Everything': [ 
+                'Classics': [
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/Protest the Hero - Bloodmeat.mp3',
-                    },
-                    {
-                        source: 'files/Amatory - Черно-Белые Дни.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
-                    },
-                    {
-                        source: 'files/02-Anubis.mp3',
-                    },
-                    {
-                        source: 'files/03-Communion.mp3',
-                    },
-                    {
-                        source: 'https://api.soundcloud.com/tracks/85758018/',
-                        info: {
-                            artist: 'Young Thug',
-                            title: 'Hot (feat. Gunna)'
-                        }
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -250,46 +245,18 @@
         new Calamansi(document.getElementById('player2-1'), {
             skin: '../dist/skins/julie-park-compact',
             playlists: {
-                'Everything': [ 
+                'Classics': [
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/Protest the Hero - Bloodmeat.mp3',
-                    },
-                    {
-                        source: 'files/Amatory - Черно-Белые Дни.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
-                    },
-                    {
-                        source: 'files/02-Anubis.mp3',
-                    },
-                    {
-                        source: 'files/03-Communion.mp3',
-                    },
-                    {
-                        source: 'https://api.soundcloud.com/tracks/85758018/',
-                        info: {
-                            artist: 'Young Thug',
-                            title: 'Hot (feat. Gunna)'
-                        }
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -300,27 +267,18 @@
         new Calamansi(document.getElementById('player3'), {
             skin: '../dist/skins/shayan',
             playlists: {
-                'Everything': [
+                'Classics': [
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -330,27 +288,18 @@
         new Calamansi(document.getElementById('player3-1'), {
             skin: '../dist/skins/shayan',
             playlists: {
-                'Everything': [
+                'Classics': [
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -360,27 +309,18 @@
         new Calamansi(document.getElementById('player4'), {
             skin: '../dist/skins/emilcarlsson',
             playlists: {
-                'Everything': [
+                'Classics': [
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -390,27 +330,18 @@
         new Calamansi(document.getElementById('player4-1'), {
             skin: '../dist/skins/emilcarlsson',
             playlists: {
-                'Everything': [
+                'Classics': [
                     {
-                        source: 'files/Ne Obliviscaris - Xenoflux.mp3',
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
                     },
                     {
-                        source: 'files/01 - Stabwound.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
                     },
                     {
-                        source: 'files/Dark Lunacy - Cold Embrace.mp3',
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
                     },
                     {
-                        source: 'files/Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux.mp3',
-                    },
-                    {
-                        source: 'files/Dominia - Harvester.mp3',
-                    },
-                    {
-                        source: 'files/kiitos.mp3',
-                    },
-                    {
-                        source: 'files/danke.mp3',
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
                     },
                 ],
             },
@@ -420,9 +351,9 @@
         new Calamansi(document.getElementById('player5'), {
             skin: '../dist/skins/gregh',
             playlists: {
-                'Everything': [
+                'Metal': [
                     {
-                        source: 'files/Dominia - Harvester.mp3',
+                        source: 'files/metal/08. Mist.mp3'
                     },
                 ],
             },
@@ -432,9 +363,9 @@
         new Calamansi(document.getElementById('player5-1'), {
             skin: '../dist/skins/gregh',
             playlists: {
-                'Everything': [
+                'Metal': [
                     {
-                        source: 'files/Dominia - Harvester.mp3',
+                        source: 'files/metal/08. Mist.mp3'
                     },
                 ],
             },
