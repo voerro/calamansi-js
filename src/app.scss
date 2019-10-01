@@ -1,3 +1,7 @@
 .control {
     cursor: pointer;
 }
+
+.slider {
+    touch-action: none;
+}
