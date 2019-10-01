@@ -87,6 +87,7 @@
 .calamansi-skin--julie-park-compact .song-name,
 .calamansi-skin--julie-park-compact .artist-name
 {
+    font-weight: 400;
     text-transform: uppercase;
     margin: 0;
     padding: 0 1em;
