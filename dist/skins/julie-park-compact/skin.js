@@ -12,7 +12,7 @@
             }
 
             player.querySelectorAll('.calamansi-skin--julie-park-compact .toggle-playlist').forEach(function (el) {
-                el.addEventListener('change', function (e) {
+                el.addEventListener('click', function (e) {
                     player.classList.toggle('show-playlist');
                 });
             });

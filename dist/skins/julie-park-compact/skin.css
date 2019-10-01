@@ -33,8 +33,8 @@
     background: rgba(255, 255, 255, 0.85);
 }
 
-.calamansi-skin--julie-park-compact.show-playlist .playlist-wrapper {
-    display: block;
+.calamansi-skin--julie-park-compact.show-playlist .playlist-container {
+    display: flex;
 }
 
 .calamansi-skin--julie-park-compact .playback-info {
@@ -226,10 +226,22 @@
     transition: all .4s ease;
 }
 
-.calamansi-skin--julie-park-compact .playlist-wrapper {
+.calamansi-skin--julie-park-compact .playlist-container {
     display: none;
-    min-height: 0;
-    max-height: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffdd;
+}
+.calamansi-skin--julie-park-compact .playlist-container .playlist-wrapper {
+    width: 100%;
+}
+.calamansi-skin--julie-park-compact .playlist-container .control {
+    display: flex;
+    align-items: flex-end;
+    font-size: .8em;
+    color: #49654D;
+    padding: 1em 1em;
 }
 .calamansi-skin--julie-park-compact .playlist {
     -webkit-touch-callout: none;
