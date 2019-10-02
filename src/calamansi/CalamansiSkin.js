@@ -177,7 +177,7 @@ class CalamansiSkin
         });
 
         this.el.addEventListener('click', (event) => {
-            if (event.target.type !== 'checkbox') {
+            if (event.target.type !== 'checkbox' && !event.target.classList.contains('link')) {
                 event.preventDefault();
             }
 
@@ -563,6 +563,13 @@ class CalamansiSkin
                         return;
                     }
 
+                    if (el.classList.contains('link')) {
+                        el.setAttribute('href', info[key] ? info[key] : '#');
+                        el.style.visibility = info[key] ? 'visible' : 'collapse';
+
+                        return;
+                    }
+
                     switch (key) {
                         case 'albumCover':
                             if (el.nodeName.toLowerCase() === 'img') {
@@ -657,6 +664,13 @@ class CalamansiSkin
                     return;
                 }
 
+                if (el.classList.contains('link')) {
+                    el.setAttribute('href', info[key] ? info[key] : '#');
+                    el.style.visibility = info[key] ? 'visible' : 'collapse';
+
+                    return;
+                }
+
                 switch (key) {
                     case 'albumCover':
                         if (el.nodeName.toLowerCase() === 'img') {
@@ -691,47 +705,6 @@ class CalamansiSkin
 
             tbody.appendChild(tr);
 
-            // const tr = document.createElement('tr');
-            // tr.classList.add('playlist-item');
-
-            // for (let th of this.findEls(table, 'th')) {
-            //     const td = document.createElement('td');
-            //     const key = th.classList[0];
-
-            //     td.classList.add(`playlist-track-info--${key}`);
-
-            //     if (track.info[key]) {
-            //         switch (key) {
-            //             case 'albumCover':
-            //                 // TODO: Display album cover
-            //                 break
-            //             case 'duration':
-            //                 td.innerText = this.formatTime(track.info[key]);
-            //                 td.title = this.formatTime(track.info[key]);
-            //                 break;
-            //             default:
-            //                 td.innerText = track.info[key];
-            //                 td.title = track.info[key];
-            //         }
-            //     }
-
-            //     tr.appendChild(td);
-            // }
-
-            // if (track === this.calamansi.currentTrack()) {
-            //     tr.classList.add('active');
-            // }
-
-            // tr.dataset.index = index;
-
-            // tr.addEventListener('dblclick', (event) => {
-            //     const el = this.findElParent(event.target, 'playlist-item');
-
-            //     this.calamansi.switchTrack(parseInt(el.dataset.index), true);
-            // });
-
-            // tbody.appendChild(tr);
-            
             index++;
         }
 
@@ -771,21 +744,28 @@ class CalamansiSkin
             if (!key) {
                 return;
             }
-            
-            if (key === 'albumCover') {
-                if (el.nodeName.toLowerCase() === 'img') {
-                    el.src = info[key]
-                        ? info[key].base64
-                        : this.calamansi.options.defaultAlbumCover;
-                } else {
-                    el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
-                }
+
+            if (el.classList.contains('link')) {
+                el.setAttribute('href', info[key] ? info[key] : '#');
+                el.style.visibility = info[key] ? 'visible' : 'collapse';
 
                 return;
             }
-
-            el.innerHTML = info[key] ? info[key] : '&nbsp;';
-            el.title = info[key] ? info[key] : '';
+            
+            switch (key) {
+                case 'albumCover':
+                    if (el.nodeName.toLowerCase() === 'img') {
+                        el.src = info[key]
+                            ? info[key].base64
+                            : this.calamansi.options.defaultAlbumCover;
+                    } else {
+                        el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
+                    }
+                    break;
+                default:
+                    el.innerHTML = info[key] ? info[key] : '&nbsp;';
+                    el.title = info[key] ? info[key] : '';
+            }          
         });
     }
 }
