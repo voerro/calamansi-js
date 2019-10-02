@@ -337,11 +337,11 @@ class CalamansiSkin
      * Updating the UI
      */
     getEl(selector) {
-        return document.querySelector(`#${this.el.id} ${selector}`);
+        return this.el.querySelector(`${selector}`);
     }
 
     getEls(selector) {
-        return document.querySelectorAll(`#${this.el.id} ${selector}`);
+        return this.el.querySelectorAll(`#${this.el.id} ${selector}`);
     }
 
     findEl(item, selector) {
@@ -548,47 +548,7 @@ class CalamansiSkin
             if (template) {
                 const item = template.cloneNode(true);
 
-                this.findEls(item, '.playlist-track-info').forEach((el) => {
-                    let key = null;
-
-                    for (let i = 0; i < el.classList.length; i++) {
-                        if (/playlist-track-info--.*/.test(el.classList[i])) {
-                            key = el.classList[i].split('--')[1];
-
-                            break;
-                        }
-                    }
-
-                    if (!key) {
-                        return;
-                    }
-
-                    if (el.classList.contains('link')) {
-                        el.setAttribute('href', info[key] ? info[key] : '#');
-                        el.style.visibility = info[key] ? 'visible' : 'collapse';
-
-                        return;
-                    }
-
-                    switch (key) {
-                        case 'albumCover':
-                            if (el.nodeName.toLowerCase() === 'img') {
-                                el.src = info[key]
-                                    ? info[key].base64
-                                    : this.calamansi.options.defaultAlbumCover;
-                            } else {
-                                el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
-                            }
-                            break
-                        case 'duration':
-                            el.innerHTML = info[key] ? this.formatTime(info[key]) : '&nbsp;';
-                            el.title = info[key] ? this.formatTime(info[key]) : '';
-                            break;
-                        default:
-                            el.innerHTML = info[key] ? info[key] : '&nbsp;';
-                            el.title = info[key] ? info[key] : '';
-                    }
-                });
+                this.updateFields(item, 'playlist-track-info', info);
 
                 if (track === this.calamansi.currentTrack()) {
                     item.classList.add('active');
@@ -649,47 +609,7 @@ class CalamansiSkin
             let tr = template.cloneNode(true);
             tr.classList.remove('template');
 
-            this.findEls(tr, '.playlist-track-info').forEach((el) => {
-                let key = null;
-
-                for (let i = 0; i < el.classList.length; i++) {
-                    if (/playlist-track-info--.*/.test(el.classList[i])) {
-                        key = el.classList[i].split('--')[1];
-
-                        break;
-                    }
-                }
-
-                if (!key) {
-                    return;
-                }
-
-                if (el.classList.contains('link')) {
-                    el.setAttribute('href', info[key] ? info[key] : '#');
-                    el.style.visibility = info[key] ? 'visible' : 'collapse';
-
-                    return;
-                }
-
-                switch (key) {
-                    case 'albumCover':
-                        if (el.nodeName.toLowerCase() === 'img') {
-                            el.src = info[key]
-                                ? info[key].base64
-                                : this.calamansi.options.defaultAlbumCover;
-                        } else {
-                            el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
-                        }
-                        break
-                    case 'duration':
-                        el.innerHTML = info[key] ? this.formatTime(info[key]) : '&nbsp;';
-                        el.title = info[key] ? this.formatTime(info[key]) : '';
-                        break;
-                    default:
-                        el.innerHTML = info[key] ? info[key] : '&nbsp;';
-                        el.title = info[key] ? info[key] : '';
-                }
-            });
+            this.updateFields(tr, 'playlist-track-info', info);
 
             if (track === this.calamansi.currentTrack()) {
                 tr.classList.add('active');
@@ -730,11 +650,15 @@ class CalamansiSkin
 
         const info = this.calamansi.currentTrack().info;
 
-        this.getEls('.track-info').forEach((el) => {
+        this.updateFields(this.el, 'track-info', info);
+    }
+
+    updateFields(parent, className, values) {
+        this.findEls(parent, `.${className}`).forEach((el) => {
             let key = null;
 
             for (let i = 0; i < el.classList.length; i++) {
-                if (/track-info--.*/.test(el.classList[i])) {
+                if (new RegExp(`${className}--.*`).test(el.classList[i])) {
                     key = el.classList[i].split('--')[1];
 
                     break;
@@ -746,26 +670,30 @@ class CalamansiSkin
             }
 
             if (el.classList.contains('link')) {
-                el.setAttribute('href', info[key] ? info[key] : '#');
-                el.style.visibility = info[key] ? 'visible' : 'collapse';
+                el.setAttribute('href', values[key] ? values[key] : '#');
+                el.style.visibility = values[key] ? 'visible' : 'collapse';
 
                 return;
             }
-            
+
             switch (key) {
                 case 'albumCover':
                     if (el.nodeName.toLowerCase() === 'img') {
-                        el.src = info[key]
-                            ? info[key].base64
+                        el.src = values[key]
+                            ? values[key].base64
                             : this.calamansi.options.defaultAlbumCover;
                     } else {
-                        el.style.backgroundImage = `url('${info[key] ? info[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
+                        el.style.backgroundImage = `url('${values[key] ? values[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
                     }
                     break;
+                case 'duration':
+                    el.innerHTML = values[key] ? this.formatTime(values[key]) : '&nbsp;';
+                    el.title = values[key] ? this.formatTime(values[key]) : '';
+                    break;
                 default:
-                    el.innerHTML = info[key] ? info[key] : '&nbsp;';
-                    el.title = info[key] ? info[key] : '';
-            }          
+                    el.innerHTML = values[key] ? values[key] : '&nbsp;';
+                    el.title = values[key] ? values[key] : '';
+            }
         });
     }
 }
