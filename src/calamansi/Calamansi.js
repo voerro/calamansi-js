@@ -166,6 +166,7 @@ class Calamansi
                     }
 
                     track.info = track.info ? track.info : {};
+                    track.info.url = track.source;
                     track.info.filename = this._getTrackFilename(track);
                     track.info.name = track.info.title
                         ? track.info.title
