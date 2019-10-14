@@ -1,16 +1,17 @@
-<div class="calamansi-skin--dummy">
-    <div>
+<div class="calamansi-skin--dummy" data-no-wrapper="1">
+    <div class="album-cover">
         <img class="track-info track-info--albumCover">
     </div>
 
-    <div>
+    <div class="track-name">
         <span class="track-info track-info--name"></span>
+    </div>
 
+    <div class="track-links">
         <a href="#"
             target="_blank"
-            class="link track-info track-info--url"
-            style="margin-left: 1rem;">Download</a>
-
+            class="link track-info track-info--url">Download</a>
+        
         <a href="#"
             target="_blank"
             class="link track-info track-info--buyUrl"
@@ -44,7 +45,7 @@
         </span>
     </div>
 
-    <div>
+    <div class="states">
         <label>
             <input type="checkbox" class="control control-toggle-loop"> Loop
         </label>
@@ -54,7 +55,7 @@
         </label>
     </div>
 
-    <div>
+    <div class="track-playback-info">
         <span class="playback-time">00:00</span> / <span class="playback-duration">00:00</span> (<span class="playback-time-left">-00:00</span>)
     </div>
 
@@ -63,11 +64,11 @@
         <div class="playback-progress"></div>
     </div>
 
-    <div>
+    <div class="volume-container">
         Volume: <div class="slider volume-bar"><div class="volume-value"></div></div>
     </div>
 
-    <div>
+    <div class="playback-speed-container">
         Playback Speed:
         <select class="playback-rate">
             <option value="0.25">0.25x</option>
@@ -80,7 +81,8 @@
         </select>
     </div>
 
-    <div>
+    <div class="playlists-select-container">
+        <p>Playlists:</p>
         <select class="playlists"></select>
     </div>
 
@@ -101,38 +103,40 @@
     </div> -->
 
     <!-- This playlist will be displayed as a table -->
-    <table class="playlist">
-        <thead>
-            <th></th>
-            <th>#</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Year</th>
-            <th>Length</th>
-            <th>Download</th>
-            <th>Custom Field</th>
-            <th>Custom Field 2</th>
-        </thead>
-        <tbody>
-            <tr class="playlist-item template">
-                <td>
-                    <img style="width: 2rem; height: 2rem;" class="playlist-track-info playlist-track-info--albumCover">
-                </td>
-                <td class="playlist-track-info playlist-track-info--trackNumber"></td>
-                <td class="playlist-track-info playlist-track-info--titleOrFilename"></td>
-                <td class="playlist-track-info playlist-track-info--artist"></td>
-                <td class="playlist-track-info playlist-track-info--album"></td>
-                <td class="playlist-track-info playlist-track-info--year"></td>
-                <td class="playlist-track-info playlist-track-info--duration"></td>
-                <td>
-                    <a href="#" target="_blank" class="link playlist-track-info playlist-track-info--url">Download</a>
-                </td>
-                <td class="playlist-track-info playlist-track-info--custom1"></td>
-                <td>
-                    <a href="#" target="_blank" class="link playlist-track-info playlist-track-info--buyUrl">BUY</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="playlist-container">
+        <table class="playlist">
+            <thead>
+                <th></th>
+                <th>#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Year</th>
+                <th>Length</th>
+                <th>Download</th>
+                <th>Custom Field</th>
+                <th>Custom Field 2</th>
+            </thead>
+            <tbody>
+                <tr class="playlist-item template">
+                    <td>
+                        <img style="width: 2rem; height: 2rem;" class="playlist-track-info playlist-track-info--albumCover">
+                    </td>
+                    <td class="playlist-track-info playlist-track-info--trackNumber"></td>
+                    <td class="playlist-track-info playlist-track-info--titleOrFilename"></td>
+                    <td class="playlist-track-info playlist-track-info--artist"></td>
+                    <td class="playlist-track-info playlist-track-info--album"></td>
+                    <td class="playlist-track-info playlist-track-info--year"></td>
+                    <td class="playlist-track-info playlist-track-info--duration"></td>
+                    <td>
+                        <a href="#" target="_blank" class="link playlist-track-info playlist-track-info--url">Download</a>
+                    </td>
+                    <td class="playlist-track-info playlist-track-info--custom1"></td>
+                    <td>
+                        <a href="#" target="_blank" class="link playlist-track-info playlist-track-info--buyUrl">BUY</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

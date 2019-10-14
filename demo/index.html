@@ -1,410 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calamansi Audio Player by Voerro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="../dist/calamansi.css">
+	<title>Calamansi - HTML5 & JS Audio Player by Voerro</title>
 
-    <style>
-        body {
-            background: linear-gradient(to bottom right, #eee, #ccc);
-        }
-
-        .calamansi { margin-bottom: 1rem !important; }
-    </style>
+	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="../dist/calamansi.css">
 </head>
 <body>
-    <!-- Simple in-text players to be initialized automatically -->
-    <p>
-        Did you know that "thank you" in Finnish is
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#features">Features</a></li>
+				<li><a href="#responsive-demo">Demo</a></li>
+				<li><a href="#fixed-size-demo">Demo 2</a></li>
+				<li><a href="#full-demo">Demo 3</a></li>
+				<li><a href="#buy">Buy</a></li>
+			</ul>
+		</nav>
 
-        <span class="calamansi"
-            data-skin="../dist/skins/pronunciation"
-            data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German it is 
+		<div class="section-header">
+			<h1 class="title">Calamansi.js</h1>
+			
+			<p class="subtitle">
+				A flexible feature-rich HTML5 & Vanilla JavaScript audio player by <a href="http://voerro.com"
+					target="_blank">Voerro</a>
+			</p>
+		</div>
+	</header>
 
-        <span class="calamansi"
-            data-skin="../dist/skins/pronunciation"
-            data-source="files/pronunciations/danke.mp3">danke</span>.
-    </p>
+	<section class="section-features" id="features">
+		<h2 class="title">Features</h2>
 
-    <p>
-        These in-text players are a bit more advances. You can play and pause full songs like
-        
-        <span class="calamansi"
-            data-skin="../dist/skins/in-text"
-            data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
-        >Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span> or 
+		<div class="columns">
+			<ul class="column">
+				<li>Made with pure HTML5, Vanilla JavaScript, CSS3 (no jQuery required!)</li>
+				<li>Flexible, responsive, multipurpose</li>
+				<li>Use one of the pre-built skins or create your own</li>
+				<li>Create your own or edit existing skins with simple HTML, CSS and optional JS</li>
+				<li>Works with files, audio streams, SoundCloud</li>
+			</ul>
 
-        <span class="calamansi"
-            data-skin="../dist/skins/in-text"
-            data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
-        >Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
-    </p>
+			<ul class="column">
+				<li>Reads ID3 from MP3 files and track info from SoundCloud</li>
+				<li>Provide your own or custom meta tags for tracks</li>
+				<li>Multiple playlists in one player</li>
+				<li>Multiple player instances on the same page</li>
+				<li>Control player instances with JS via API and events</li>
+			</ul>
+		</div>
+	</section>
 
-    <!-- A player to be initialized manually -->
-    <div style="display: flex; flex-direction: column;">
-        <div style="margin-top: 5rem; margin-bottom: 1rem;">
-            <div id="player0">Loading player...</div>
-        </div>
+	<section class="section-responsive-demo" id="responsive-demo">
+		<h2 class="title">Responsive Demo</h2>
+	</section>
 
-        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
-            <div id="player1">Loading player...</div>
-        </div>
+	<section class="section-fixed-size-demo" id="fixed-size-demo">
+		<h2 class="title">Fixed-Size Demo</h2>
+	</section>
 
-        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
-            <div id="player1-1">Loading player...</div>
-        </div>
+	<section  class="section-full-demo" id="full-demo">
+		<h2 class="title">Full-Featured Demo</h2>
 
-        <div style="width: 300px;">
-            <div id="player2">Loading player...</div>
-        </div>
+		<p class="subtitle">
+			This is a dummy skin without styling that demonstrates all the player features in one place.
+		</p>
 
-        <div style="width: 300px;">
-            <div id="player2-1">Loading player...</div>
-        </div>
+		<div>
+			<div id="full-demo-player">Loading player...</div>
+		</div>
+	</section>
 
-        <div style="width: 300px;">
-            <div id="player3">Loading player...</div>
-        </div>
+	<section class="section-buy" id="buy">
+		<h2 class="title">Buy Now and Get...</h2>
 
-        <div style="width: 300px;">
-            <div id="player3-1">Loading player...</div>
-        </div>
+		<ul>
+			<li>Player files to be included on the page</li>
+			<li>Documentation on how to install and use the player</li>
+			<li>Documentation on API and events</li>
+			<li>A few pre-built skins</li>
+			<li>Documentation on how skins work and how to create your own ones</li>
+		</ul>
 
-        <div style="width: 300px;">
-            <div id="player4">Loading player...</div>
-        </div>
+		<div class="buy-btn">
+			<a href="#">Buy</a>
+		</div>
+	</section>
 
-        <div style="width: 300px;">
-            <div id="player4-1">Loading player...</div>
-        </div>
+	<footer>
+		&copy; Voerro. All rights reserved.
+	</footer>
 
-        <div style="width: 300px;">
-            <div id="player5">Loading player...</div>
-        </div>
-
-        <div style="width: 300px;">
-            <div id="player5-1">Loading player...</div>
-        </div>
-    </div>
-
-    <script src="../dist/calamansi.js"></script>
-
-    <script>
-        var calamansis = Calamansi.autoload();
-
-        // calamansis.forEach(function (instance) {
-        //     instance.on('initialized', (calamansi) => {
-        //         console.log(`Calamansi initialized: ${calamansi.id}`);
-        //     });
-        // });
-
-        new Calamansi(document.getElementById('player0'), {
-            skin: '../dist/skins/dummy',
-            playlists: {
-                'Metal': [
-                    {
-                        source: 'files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3',
-                        info: {
-                            custom1: 'Add any custom fields to tracks inside the playlist data. You can have as many custom fields as you want.',
-                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/citadel-cd',
-                        },
-                    },
-                    {
-                        source: 'files/metal/04. Forget Not.mp3',
-                        info: {
-                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/portal-of-i-cd',
-                        },
-                    },
-                    {
-                        source: 'files/metal/03 Intra Venus.mp3',
-                        info: {
-                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/urn-cd',
-                        },
-                    },
-                    {
-                        source: 'files/metal/02 - The Second Stone.mp3',
-                        info: {
-                            buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
-                        },
-                    },
-                    {
-                        source: 'files/metal/03 - The Essence Of Silence.mp3',
-                        info: {
-                            buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
-                        },
-                    },
-                    {
-                        source: 'files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3',
-                        info: {
-                            buyUrl: 'https://epicawebshop.com/home/1307-design-your-universe-gold-edition-2cd-pre-order-727361506209.html',
-                        },
-                    },
-                    {
-                        source: 'files/metal/01 - Bloodmeat.mp3',
-                        info: {
-                            buyUrl: 'http://www.protestthehero.ca/records',
-                        },
-                    },
-                    {
-                        source: 'files/metal/01 - C\'est la Vie.mp3',
-                        info: {
-                            buyUrl: 'http://www.protestthehero.ca/records',
-                        },
-                    },
-                    {
-                        source: 'files/metal/08. Mist.mp3',
-                        info: {
-                            buyUrl: 'http://www.protestthehero.ca/records',
-                        },
-                    },
-                    {
-                        source: 'files/metal/05. Cold Embrace.mp3',
-                        info: {
-                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
-                        },
-                    },
-                    {
-                        source: 'files/metal/10. Fall.mp3',
-                        info: {
-                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
-                        },
-                    },
-                    {
-                        source: 'files/metal/07. My Dying Pathway.mp3',
-                        info: {
-                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/forget-me-not-album',
-                        },
-                    },
-                ],
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-                'Rock': [
-                    {
-                        source: 'files/rock/Forever - The Lemming Shepherds.mp3',
-                    },
-                    {
-                        source: 'files/rock/No Photographs - Lost European.mp3',
-                    },
-                    {
-                        source: 'files/rock/The Man in the House of Cards - Lost European.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-        });
-
-        new Calamansi(document.getElementById('player1'), {
-            skin: '../dist/skins/julie-park',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-        });
-
-        new Calamansi(document.getElementById('player1-1'), {
-            skin: '../dist/skins/julie-park',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-        });
-
-        new Calamansi(document.getElementById('player2'), {
-            skin: '../dist/skins/julie-park-compact',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-        });
-
-        new Calamansi(document.getElementById('player2-1'), {
-            skin: '../dist/skins/julie-park-compact',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-        });
-
-        new Calamansi(document.getElementById('player3'), {
-            skin: '../dist/skins/shayan',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-
-        new Calamansi(document.getElementById('player3-1'), {
-            skin: '../dist/skins/shayan',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-
-        new Calamansi(document.getElementById('player4'), {
-            skin: '../dist/skins/emilcarlsson',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-
-        new Calamansi(document.getElementById('player4-1'), {
-            skin: '../dist/skins/emilcarlsson',
-            playlists: {
-                'Classics': [
-                    {
-                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
-                    },
-                    {
-                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
-                    },
-                    {
-                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-
-        new Calamansi(document.getElementById('player5'), {
-            skin: '../dist/skins/gregh',
-            playlists: {
-                'Metal': [
-                    {
-                        source: 'files/metal/08. Mist.mp3'
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-
-        new Calamansi(document.getElementById('player5-1'), {
-            skin: '../dist/skins/gregh',
-            playlists: {
-                'Metal': [
-                    {
-                        source: 'files/metal/08. Mist.mp3'
-                    },
-                ],
-            },
-            defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        });
-    </script>
+	<script src="../dist/calamansi.js"></script>
+	<script src="assets/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calamansi Audio Player by Voerro</title>
+
+    <link rel="stylesheet" href="../dist/calamansi.css">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #eee, #ccc);
+        }
+
+        .calamansi { margin-bottom: 1rem !important; }
+    </style>
+</head>
+<body>
+    <!-- Simple in-text players to be initialized automatically -->
+    <p>
+        Did you know that "thank you" in Finnish is
+
+        <span class="calamansi"
+            data-skin="../dist/skins/pronunciation"
+            data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German it is 
+
+        <span class="calamansi"
+            data-skin="../dist/skins/pronunciation"
+            data-source="files/pronunciations/danke.mp3">danke</span>.
+    </p>
+
+    <p>
+        These in-text players are a bit more advances. You can play and pause full songs like
+        
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
+        >Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span> or 
+
+        <span class="calamansi"
+            data-skin="../dist/skins/in-text"
+            data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
+        >Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
+    </p>
+
+    <!-- A player to be initialized manually -->
+    <div style="display: flex; flex-direction: column;">
+        <div style="margin-top: 5rem; margin-bottom: 1rem;">
+            <div id="player0">Loading player...</div>
+        </div>
+
+        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
+            <div id="player1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px; height: 300px; margin-bottom: 1rem;">
+            <div id="player1-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player2">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player2-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player3">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player3-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player4">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player4-1">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player5">Loading player...</div>
+        </div>
+
+        <div style="width: 300px;">
+            <div id="player5-1">Loading player...</div>
+        </div>
+    </div>
+
+    <script src="../dist/calamansi.js"></script>
+
+    <script>
+        var calamansis = Calamansi.autoload();
+
+        // calamansis.forEach(function (instance) {
+        //     instance.on('initialized', (calamansi) => {
+        //         console.log(`Calamansi initialized: ${calamansi.id}`);
+        //     });
+        // });
+
+        new Calamansi(document.getElementById('player0'), {
+            skin: '../dist/skins/dummy',
+            playlists: {
+                'Metal': [
+                    {
+                        source: 'files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3',
+                        info: {
+                            custom1: 'Add any custom fields to tracks inside the playlist data. You can have as many custom fields as you want.',
+                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/citadel-cd',
+                        },
+                    },
+                    {
+                        source: 'files/metal/04. Forget Not.mp3',
+                        info: {
+                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/portal-of-i-cd',
+                        },
+                    },
+                    {
+                        source: 'files/metal/03 Intra Venus.mp3',
+                        info: {
+                            buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/urn-cd',
+                        },
+                    },
+                    {
+                        source: 'files/metal/02 - The Second Stone.mp3',
+                        info: {
+                            buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
+                        },
+                    },
+                    {
+                        source: 'files/metal/03 - The Essence Of Silence.mp3',
+                        info: {
+                            buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
+                        },
+                    },
+                    {
+                        source: 'files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3',
+                        info: {
+                            buyUrl: 'https://epicawebshop.com/home/1307-design-your-universe-gold-edition-2cd-pre-order-727361506209.html',
+                        },
+                    },
+                    {
+                        source: 'files/metal/01 - Bloodmeat.mp3',
+                        info: {
+                            buyUrl: 'http://www.protestthehero.ca/records',
+                        },
+                    },
+                    {
+                        source: 'files/metal/01 - C\'est la Vie.mp3',
+                        info: {
+                            buyUrl: 'http://www.protestthehero.ca/records',
+                        },
+                    },
+                    {
+                        source: 'files/metal/08. Mist.mp3',
+                        info: {
+                            buyUrl: 'http://www.protestthehero.ca/records',
+                        },
+                    },
+                    {
+                        source: 'files/metal/05. Cold Embrace.mp3',
+                        info: {
+                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
+                        },
+                    },
+                    {
+                        source: 'files/metal/10. Fall.mp3',
+                        info: {
+                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
+                        },
+                    },
+                    {
+                        source: 'files/metal/07. My Dying Pathway.mp3',
+                        info: {
+                            buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/forget-me-not-album',
+                        },
+                    },
+                ],
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+                'Rock': [
+                    {
+                        source: 'files/rock/Forever - The Lemming Shepherds.mp3',
+                    },
+                    {
+                        source: 'files/rock/No Photographs - Lost European.mp3',
+                    },
+                    {
+                        source: 'files/rock/The Man in the House of Cards - Lost European.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player1'), {
+            skin: '../dist/skins/julie-park',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player1-1'), {
+            skin: '../dist/skins/julie-park',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player2'), {
+            skin: '../dist/skins/julie-park-compact',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player2-1'), {
+            skin: '../dist/skins/julie-park-compact',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+            soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+        });
+
+        new Calamansi(document.getElementById('player3'), {
+            skin: '../dist/skins/shayan',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player3-1'), {
+            skin: '../dist/skins/shayan',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player4'), {
+            skin: '../dist/skins/emilcarlsson',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player4-1'), {
+            skin: '../dist/skins/emilcarlsson',
+            playlists: {
+                'Classics': [
+                    {
+                        source: 'files/classics/Rhapsody No. 2 in G Minor – Brahms.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op2_No1.mp3',
+                    },
+                    {
+                        source: 'files/classics/Skrjabin Etude_Op8_No12.mp3',
+                    },
+                    {
+                        source: 'files/classics/Double Violin Concerto 1st Movement - J.S. Bach.mp3',
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player5'), {
+            skin: '../dist/skins/gregh',
+            playlists: {
+                'Metal': [
+                    {
+                        source: 'files/metal/08. Mist.mp3'
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+
+        new Calamansi(document.getElementById('player5-1'), {
+            skin: '../dist/skins/gregh',
+            playlists: {
+                'Metal': [
+                    {
+                        source: 'files/metal/08. Mist.mp3'
+                    },
+                ],
+            },
+            defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        });
+    </script>
+</body>
+</html>
