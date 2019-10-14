@@ -1,3 +1,7 @@
+// Inline players
+Calamansi.autoload();
+
+// Dummy skin
 new Calamansi(document.getElementById('full-demo-player'), {
     skin: '../dist/skins/dummy',
     playlists: {

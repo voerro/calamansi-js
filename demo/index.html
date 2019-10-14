@@ -15,9 +15,10 @@
 		<nav>
 			<ul>
 				<li><a href="#features">Features</a></li>
-				<li><a href="#responsive-demo">Demo</a></li>
-				<li><a href="#fixed-size-demo">Demo 2</a></li>
-				<li><a href="#full-demo">Demo 3</a></li>
+				<li><a href="#responsive-demo">Responsive Demo</a></li>
+				<li><a href="#fixed-size-demo">Fixed-Size Demo</a></li>
+				<li><a href="#full-demo">Full-Featured Demo</a></li>
+				<li><a href="#inline-demo">Inline Demo</a></li>
 				<li><a href="#buy">Buy</a></li>
 			</ul>
 		</nav>
@@ -60,9 +61,17 @@
 
 	<section class="section-fixed-size-demo" id="fixed-size-demo">
 		<h2 class="title">Fixed-Size Demo</h2>
+
+		<select id="fixed-size-skin">
+			<option value="julie-park"></option>
+		</select>
+
+		<div id="fixed-size-player">
+
+		</div>
 	</section>
 
-	<section  class="section-full-demo" id="full-demo">
+	<section class="section-full-demo" id="full-demo">
 		<h2 class="title">Full-Featured Demo</h2>
 
 		<p class="subtitle">
@@ -71,6 +80,39 @@
 
 		<div>
 			<div id="full-demo-player">Loading player...</div>
+		</div>
+
+		<h3 class="title title2" id="inline-demo">Inline</h3>
+
+		<div class="inline-players">
+			<p>
+				Besides all the fancy skins, there are simple inline skins which you can integrate seemlesly into text. Check them out!
+			</p>
+		
+			<p>
+				Did you know that "thank you" in Finnish is
+		
+				<span class="calamansi" data-skin="../dist/skins/pronunciation"
+					data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German -
+		
+				<span class="calamansi" data-skin="../dist/skins/pronunciation"
+					data-source="files/pronunciations/danke.mp3">danke</span>?
+			</p>
+
+			<p>
+				<span class="calamansi" data-skin="../dist/skins/in-text"
+					data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
+				>Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span>
+
+				is a killer song from an Australian extreme progressive metal band. Another good song is
+
+				<span class="calamansi"
+					data-skin="../dist/skins/in-text"
+					data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
+				>Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
+
+				from a symphonic metal band from Netherlands.
+			</p>
 		</div>
 	</section>
 
