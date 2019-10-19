@@ -34,6 +34,14 @@
     font-size: 12px;
     margin-bottom: 8px;
 }
+.calamansi-skin--shayan .info .playback-times {
+    color: #222;
+    display: flex;
+    font-size: .85em;
+}
+.calamansi-skin--shayan .info .playback-time-separator {
+    flex: 1;
+}
 .calamansi-skin--shayan .info .progress-bar {
     background-color: #ddd;
     height: 2px;
