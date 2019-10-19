@@ -5,10 +5,9 @@
     background-position: center;
     
     color: white;
-    /* height: auto; */
-    height: 180px;
+    height: auto;
     min-width: 300px;
-    width: 300px;
+    width: 100%;
     position: relative;
     border-radius: 5px;
     overflow: hidden;
