@@ -3,6 +3,7 @@ class CalamansiSkin
     constructor(calamansi, path) {
         this.calamansi = calamansi;
         this.path = path;
+        this.content = '';
 
         this.el = calamansi.el;
 
@@ -12,10 +13,10 @@ class CalamansiSkin
 
     async init() {
         // Load and apply the skin
-        const content = await this.load();
+        this.content = await this.load();
 
         // Set UI elements
-        this.setUiElements(content);
+        this.setUiElements();
 
         // Activate the player's controls
         this.activateControls();
@@ -137,13 +138,13 @@ class CalamansiSkin
             });
     }
 
-    setUiElements(content) {
+    setUiElements() {
         // Insert the element's content inside the skin's content slot
         const contentSlots = document.querySelectorAll(`#${this.el.id} .slot--content`);
 
         if (contentSlots && contentSlots.length > 0) {
             contentSlots.forEach(slot => {
-                slot.innerHTML = content;
+                slot.innerHTML = this.content;
             });
         }
 
@@ -695,6 +696,11 @@ class CalamansiSkin
                     el.title = values[key] ? values[key] : '';
             }
         });
+    }
+
+    destroy() {
+        this.el.className = '';
+        this.el.innerHTML = this.content;
     }
 }
 

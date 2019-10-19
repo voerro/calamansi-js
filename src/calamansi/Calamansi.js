@@ -419,6 +419,11 @@ class Calamansi
         }
     }
 
+    destroy() {
+        this.audio.unload();
+        this.skin.destroy();
+    }
+
     /**
      * Register an event listener
      * 

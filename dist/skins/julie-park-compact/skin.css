@@ -5,7 +5,7 @@
     background: #FFFFFF;
     position: relative;
     width: 100%;
-    max-height: 300px;
+    height: auto;
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 5px 5px 15px rgba(54, 79, 60, 0.4);

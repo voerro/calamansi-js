@@ -115,6 +115,12 @@ class CalamansiAudio
         CalamansiEvents.emit('stop', this.calamansi);
     }
 
+    unload() {
+        this.audio.pause();
+        this.audio.removeAttribute('src');
+        this.audio.load();
+    }
+
     _setCurrentTime(time) {
         this.currentTime = time;
 

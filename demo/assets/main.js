@@ -1,5 +1,120 @@
+var responsivePlayer;
+
+function loadSkin(el, skin) {
+    if (responsivePlayer) {
+        responsivePlayer.destroy();
+    }
+
+    responsivePlayer = fixedSizePlayer = new Calamansi(el, {
+        skin: '../dist/skins/' + skin,
+        playlists: {
+            'Metal': [
+                {
+                    source: 'files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3',
+                    info: {
+                        custom1: 'Add any custom fields to tracks inside the playlist data. You can have as many custom fields as you want.',
+                        buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/citadel-cd',
+                    },
+                },
+                {
+                    source: 'files/metal/04. Forget Not.mp3',
+                    info: {
+                        buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/portal-of-i-cd',
+                    },
+                },
+                {
+                    source: 'files/metal/03 Intra Venus.mp3',
+                    info: {
+                        buyUrl: 'https://artistfirst.com.au/collections/ne-obliviscaris/products/urn-cd',
+                    },
+                },
+                {
+                    source: 'files/metal/02 - The Second Stone.mp3',
+                    info: {
+                        buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
+                    },
+                },
+                {
+                    source: 'files/metal/03 - The Essence Of Silence.mp3',
+                    info: {
+                        buyUrl: 'https://epicawebshop.com/music/143-the-quantum-enigma-cd-727361322229.html',
+                    },
+                },
+                {
+                    source: 'files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3',
+                    info: {
+                        buyUrl: 'https://epicawebshop.com/home/1307-design-your-universe-gold-edition-2cd-pre-order-727361506209.html',
+                    },
+                },
+                {
+                    source: 'files/metal/01 - Bloodmeat.mp3',
+                    info: {
+                        buyUrl: 'http://www.protestthehero.ca/records',
+                    },
+                },
+                {
+                    source: 'files/metal/01 - C\'est la Vie.mp3',
+                    info: {
+                        buyUrl: 'http://www.protestthehero.ca/records',
+                    },
+                },
+                {
+                    source: 'files/metal/08. Mist.mp3',
+                    info: {
+                        buyUrl: 'http://www.protestthehero.ca/records',
+                    },
+                },
+                {
+                    source: 'files/metal/05. Cold Embrace.mp3',
+                    info: {
+                        buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
+                    },
+                },
+                {
+                    source: 'files/metal/10. Fall.mp3',
+                    info: {
+                        buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/devoid-album',
+                    },
+                },
+                {
+                    source: 'files/metal/07. My Dying Pathway.mp3',
+                    info: {
+                        buyUrl: 'https://darklunacymetal.wixsite.com/darklunacy/product-page/forget-me-not-album',
+                    },
+                },
+            ],
+        },
+        defaultAlbumCover: '/dist/skins/default-album-cover.png',
+        soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
+    });
+}
+
 // Inline players
 Calamansi.autoload();
+
+// Responsive Skins
+var responsiveSkin = document.getElementById('responsive-skin-select');
+
+loadSkin(document.getElementById('responsive-player'), responsiveSkin.value);
+
+responsiveSkin.addEventListener('change', function (e) {
+    loadSkin(document.getElementById('responsive-player'), responsiveSkin.value);
+});
+
+// Responsive devices
+var responsivePlayerContainer = document.querySelector('.responsive-player-container');
+
+document.querySelectorAll('.responsive-device-switch').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector('.responsive-device-switch.active').classList.remove('active');
+        el.classList.add('active');
+
+        responsivePlayerContainer.style['max-width'] = el.dataset.width;
+        responsivePlayerContainer.style['max-height'] = el.dataset.height;
+    });
+});
 
 // Dummy skin
 new Calamansi(document.getElementById('full-demo-player'), {
@@ -109,3 +224,6 @@ new Calamansi(document.getElementById('full-demo-player'), {
     defaultAlbumCover: '/dist/skins/default-album-cover.png',
     soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
 });
+
+// Fixed-Size Skins
+// TODO:

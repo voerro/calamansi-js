@@ -8,6 +8,7 @@
 	<title>Calamansi - HTML5 & JS Audio Player by Voerro</title>
 
 	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="assets/glyphter.css">
 	<link rel="stylesheet" href="../dist/calamansi.css">
 </head>
 <body>
@@ -57,17 +58,61 @@
 
 	<section class="section-responsive-demo" id="responsive-demo">
 		<h2 class="title">Responsive Demo</h2>
+
+		<select id="responsive-skin-select">
+			<option value="julie-park">Julie Park</option>
+			<option value="julie-park-compact">Julie Park Compact</option>
+			<option value="emilcarlsson">Emil Carlsson</option>
+			<option value="gregh">Gregh</option>
+			<option value="shayan">Shayan</option>
+		</select>
+
+		<div class="responsive-devices">
+			<a href="#"
+				class="responsive-device-switch active"
+				title="PC"
+				data-width="100%"
+				data-height="100vh"
+			>
+				<i class="icon-pc"></i>
+			</a>
+
+			<a href="#"
+				class="responsive-device-switch"
+				title="Tablet"
+				data-width="1024px"
+				data-height="768px"
+			>
+				<i class="icon-tablet"></i>
+			</a>
+
+			<a href="#"
+				class="responsive-device-switch"
+				title="Phone"
+				data-width="375px"
+				data-height="667px"
+			>
+				<i class="icon-phone"></i>
+			</a>
+		</div>
+		
+		<div class="responsive-player-container">
+			<div id="responsive-player">
+				Loading player...
+			</div>
+		</div>
 	</section>
 
 	<section class="section-fixed-size-demo" id="fixed-size-demo">
 		<h2 class="title">Fixed-Size Demo</h2>
 
-		<select id="fixed-size-skin">
-			<option value="julie-park"></option>
+		<select id="fixed-size-skin-select">
+			<option value="julie-park">Julie Park</option>
+			<option value="julie-park-compact">Julie Park Compact</option>
 		</select>
 
 		<div id="fixed-size-player">
-
+			Loading player...
 		</div>
 	</section>
 
