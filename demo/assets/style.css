@@ -39,15 +39,16 @@ nav ul li {
 	margin: 0 1rem;
 }
 nav ul li a {
+	background: #6FC06A66;
 	color: #fff;
 	text-decoration: none;
 	font-weight: 600;
 	display: inline-block;
 	padding: .75rem 1.25rem;
+	border-radius: 8px;
 }
 nav ul li a:hover {
 	background: #6FC06A;
-	border-radius: 8px;
 }
 
 section .title {
@@ -221,6 +222,25 @@ footer {
 }
 
 /* Desktops */
-@media all and (min-width: 769px) {
-	
+@media all and (min-width: 1024px) {
+	nav {
+		display: block;
+	}
+
+	.section-header {
+		flex: 1;
+		padding-top: 15vh;
+	}
+
+	.section-features .columns {
+		display: flex;
+	}
+	.section-features .columns .column {
+		padding: 0 1rem;
+	}
+
+	.container {
+		width: 1024px;
+		margin: 0 auto;
+	}
 }

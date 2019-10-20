@@ -35,24 +35,26 @@
 	</header>
 
 	<section class="section-features" id="features">
-		<h2 class="title">Features</h2>
+		<div class="container">
+			<h2 class="title">Features</h2>
 
-		<div class="columns">
-			<ul class="column">
-				<li>Made with pure HTML5, Vanilla JavaScript, CSS3 (no jQuery required!)</li>
-				<li>Flexible, responsive, multipurpose</li>
-				<li>Use one of the pre-built skins or create your own</li>
-				<li>Create your own or edit existing skins with simple HTML, CSS and optional JS</li>
-				<li>Works with files, audio streams, SoundCloud</li>
-			</ul>
+			<div class="columns">
+				<ul class="column">
+					<li>Made with pure HTML5, Vanilla JavaScript, CSS3 (no jQuery required!)</li>
+					<li>Flexible, responsive, multipurpose</li>
+					<li>Use one of the pre-built skins or create your own</li>
+					<li>Create your own or edit existing skins with simple HTML, CSS and optional JS</li>
+					<li>Works with files, audio streams, SoundCloud</li>
+				</ul>
 
-			<ul class="column">
-				<li>Reads ID3 from MP3 files and track info from SoundCloud</li>
-				<li>Provide your own or custom meta tags for tracks</li>
-				<li>Multiple playlists in one player</li>
-				<li>Multiple player instances on the same page</li>
-				<li>Control player instances with JS via API and events</li>
-			</ul>
+				<ul class="column">
+					<li>Reads ID3 from MP3 files and track info from SoundCloud</li>
+					<li>Provide your own or custom meta tags for tracks</li>
+					<li>Multiple playlists in one player</li>
+					<li>Multiple player instances on the same page</li>
+					<li>Control player instances with JS via API and events</li>
+				</ul>
+			</div>
 		</div>
 	</section>
 
@@ -104,99 +106,108 @@
 	</section>
 
 	<section class="section-fixed-size-demo" id="fixed-size-demo">
-		<h2 class="title">Fixed-Size Demo</h2>
+		<div class="container">
+			<h2 class="title">Fixed-Size Demo</h2>
 
-		<div class="fixed-size-players-container">
-			<div style="width: 300px; height: 300px;">
-				<div class="fixed-size-player" data-skin="julie-park">
-					Loading player...
+			<div class="fixed-size-players-container">
+				<div style="width: 300px; height: 300px;">
+					<div class="fixed-size-player" data-skin="julie-park">
+						Loading player...
+					</div>
 				</div>
-			</div>
 
-			<div style="width: 300px;">
-				<div class="fixed-size-player" data-skin="julie-park-compact">
-					Loading player...
+				<div style="width: 300px;">
+					<div class="fixed-size-player" data-skin="julie-park-compact">
+						Loading player...
+					</div>
 				</div>
-			</div>
 
-			<div style="width: 300px;">
-				<div class="fixed-size-player" data-skin="emilcarlsson">
-					Loading player...
+				<div style="width: 300px;">
+					<div class="fixed-size-player" data-skin="emilcarlsson">
+						Loading player...
+					</div>
 				</div>
-			</div>
 
-			<div style="width: 300px;">
-				<div class="fixed-size-player" data-skin="gregh">
-					Loading player...
+				<div style="width: 300px;">
+					<div class="fixed-size-player" data-skin="gregh">
+						Loading player...
+					</div>
 				</div>
-			</div>
-			
-			<div style="width: 300px;">
-				<div class="fixed-size-player" data-skin="shayan">
-					Loading player...
+				
+				<div style="width: 300px;">
+					<div class="fixed-size-player" data-skin="shayan">
+						Loading player...
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<section class="section-full-demo" id="full-demo">
-		<h2 class="title">Full-Featured Demo</h2>
+		<div class="container">
+			<h2 class="title">Full-Featured Demo</h2>
 
-		<p class="subtitle">
-			This is a dummy skin without styling that demonstrates all the player features in one place.
-		</p>
-
-		<div>
-			<div id="full-demo-player">Loading player...</div>
-		</div>
-
-		<h3 class="title title2" id="inline-demo">Inline</h3>
-
-		<div class="inline-players">
-			<p>
-				Besides all the fancy skins, there are simple inline skins which you can integrate seemlesly into text. Check them out!
-			</p>
-		
-			<p>
-				Did you know that "thank you" in Finnish is
-		
-				<span class="calamansi" data-skin="../dist/skins/pronunciation"
-					data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German -
-		
-				<span class="calamansi" data-skin="../dist/skins/pronunciation"
-					data-source="files/pronunciations/danke.mp3">danke</span>?
+			<p class="subtitle">
+				This is a dummy skin without styling that demonstrates all the player features in one place.
 			</p>
 
-			<p>
-				<span class="calamansi" data-skin="../dist/skins/in-text"
-					data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
-				>Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span>
+			<div>
+				<div id="full-demo-player">Loading player...</div>
+			</div>
 
-				is a killer song from an Australian extreme progressive metal band. Another good song is
+			<h3 class="title title2" id="inline-demo">Inline</h3>
 
-				<span class="calamansi"
-					data-skin="../dist/skins/in-text"
-					data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
-				>Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
+			<div class="inline-players">
+				<p>
+					Besides all the fancy skins, there are simple inline skins which you can integrate seemlesly into text. Check them out!
+				</p>
+			
+				<p>
+					Did you know that "thank you" in Finnish is
+			
+					<span class="calamansi" data-skin="../dist/skins/pronunciation"
+						data-source="files/pronunciations/kiitos.mp3">kiitos</span>, and in German -
+			
+					<span class="calamansi" data-skin="../dist/skins/pronunciation"
+						data-source="files/pronunciations/danke.mp3">danke</span>?
+				</p>
 
-				from a symphonic metal band from Netherlands.
-			</p>
+				<p>
+					<span class="calamansi" data-skin="../dist/skins/in-text"
+						data-source="files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3"
+					>Ne Obliviscaris - Painters of the Tempest (Part II) Triptych Lux</span>
+
+					is a killer song from an Australian extreme progressive metal band. Another good song is
+
+					<span class="calamansi"
+						data-skin="../dist/skins/in-text"
+						data-source="files/metal/06. Epica - Kingdom Of Heaven (A New Age Dawns - Part V).mp3"
+					>Epica - Kingdom Of Heaven (A New Age Dawns - Part V)</span>
+
+					from a symphonic metal band from Netherlands.
+				</p>
+			</div>
 		</div>
 	</section>
 
 	<section class="section-buy" id="buy">
-		<h2 class="title">Buy Now and Get...</h2>
+		<div class="container">
+			<h2 class="title">Buy Now and Get...</h2>
 
-		<ul>
-			<li>Player files to be included on the page</li>
-			<li>Documentation on how to install and use the player</li>
-			<li>Documentation on API and events</li>
-			<li>A few pre-built skins</li>
-			<li>Documentation on how skins work and how to create your own ones</li>
-		</ul>
+			<ul>
+				<li>Player files to be included on the page</li>
+				<li>Documentation on how to install and use the player</li>
+				<li>Documentation on API and events</li>
+				<li>A few pre-built skins</li>
+				<li>Documentation on how skins work and how to create your own ones</li>
+			</ul>
 
-		<div class="buy-btn">
-			<a href="#">Buy</a>
+			<div class="buy-btn">
+				<a href="#">
+					<i class="icon-cart"></i>
+					Buy
+				</a>
+			</div>
 		</div>
 	</section>
 
