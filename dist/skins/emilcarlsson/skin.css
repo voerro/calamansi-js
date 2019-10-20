@@ -58,9 +58,12 @@
     height: 3px;
     margin: 0 0 15px 0;
     background: #ffffff33;
+    padding: .25em 0;
+    position: relative;
 }
 .calamansi-skin--emilcarlsson .content .playback-progress {
-    position: relative; 
+    position: absolute;
+    top: 0;
     height: 100%;
     background: linear-gradient(to right, #3498db 0%, #9b59b6 72%);
 }
@@ -167,4 +170,10 @@
 }
 .calamansi-skin--emilcarlsson .glyphter.fa-loop:before {
     content: '\0049';
+}
+
+@media all and (min-width: 1024px) {
+    .calamansi-skin--emilcarlsson .content .playback-bar {
+        padding: 0;
+    }
 }
