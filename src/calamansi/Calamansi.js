@@ -281,7 +281,7 @@ class Calamansi
         
         // Read ID3 tags for MP3
         if (track.sourceType === 'mp3') {
-            jsmediatags.read(window.location.href + track.source, {
+            jsmediatags.read(window.location.origin + window.location.pathname + track.source, {
                 onSuccess: (tags) => {
                     track.info = Object.assign(track.info, tags.tags);
 
