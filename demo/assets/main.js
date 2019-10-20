@@ -140,6 +140,7 @@ document.querySelectorAll('.responsive-device-switch').forEach(function (el) {
 
         responsivePlayerContainer.style['max-width'] = el.dataset.width;
         responsivePlayerContainer.style['max-height'] = el.dataset.height;
+        responsivePlayerContainer.style.height = el.dataset.height;
     });
 });
 
@@ -153,7 +154,6 @@ new Calamansi(document.getElementById('full-demo-player'), {
 
 // Fixed-Size Skins
 document.querySelectorAll('.fixed-size-player').forEach(function (el) {
-    // console.log(el.dataset.skin);
     new Calamansi(el, {
         skin: '../dist/skins/' + el.dataset.skin,
         playlists: playlists,
@@ -161,17 +161,3 @@ document.querySelectorAll('.fixed-size-player').forEach(function (el) {
         soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
     });
 });
-
-// var skins = [
-//     'julie-park',
-//     'julie-park-compact',
-// ];
-
-// for (var i = 0; i < skins.length; i++) {
-//     new Calamansi(document.getElementById('fixed-size-player-' + (i + 1)), {
-//         skin: '../dist/skins/' + skins[i],
-//         playlists: playlists,
-//         defaultAlbumCover: '/dist/skins/default-album-cover.png',
-//         soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
-//     });
-// }
