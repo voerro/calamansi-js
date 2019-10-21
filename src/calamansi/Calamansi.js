@@ -279,7 +279,7 @@ class Calamansi
             return 'soundcloud';
         }
 
-        return track.info.filename.split('.').pop();z
+        return track.info.filename.split('.').pop();
     }
 
     loadTrackInfo(track) {
