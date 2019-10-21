@@ -1,12 +1,12 @@
 import CalamansiAudio from './CalamansiAudio';
 import CalamansiSkin from './CalamansiSkin';
-
-// import Id3Reader from './services/Id3Reader';
-let jsmediatags = require('../vendor/jsmediatags.min.js');
+import TrackInfoReader from './services/TrackInfoReader';
 
 class Calamansi
 {
     constructor(el, options = {}) {
+        this.trackInfoReader = new TrackInfoReader();
+
         /* DATA */
         this.options = Object.assign({
             // Default options...
@@ -177,7 +177,7 @@ class Calamansi
                     track.info.artistOrFilename = track.info.artist
                         ? track.info.artist
                         : track.info.filename;
-                    track.sourceType = track.info.filename.split('.').pop();
+                    track.sourceType = this.getTrackSourceType(track);
 
                     playlist.list.push(track);
 
@@ -274,56 +274,30 @@ class Calamansi
         return track.source.split('/').pop();
     }
 
+    getTrackSourceType(track) {
+        if (track.source.startsWith('https://api.soundcloud.com')) {
+            return 'soundcloud';
+        }
+
+        return track.info.filename.split('.').pop();z
+    }
+
     loadTrackInfo(track) {
         if (track.info._loaded === true) {
             return;
         }
-        
-        // Read ID3 tags for MP3
-        if (track.sourceType === 'mp3') {
-            jsmediatags.read(window.location.origin + window.location.pathname + track.source, {
-                onSuccess: (tags) => {
-                    track.info = Object.assign(track.info, tags.tags);
 
-                    if (track.info.artist && track.info.title) {
-                        track.info.name = `${track.info.artist} - ${track.info.title}`;
-                    }
-
-                    if (track.info.title) {
-                        track.info.titleOrFilename = track.info.title;
-                    }
-                    
-                    if (track.info.artist) {
-                        track.info.artistOrFilename = track.info.artist;
-                    }
-
-                    if (track.info.track) {
-                        track.info.trackNumber = parseInt(track.info.track.split('/')[0]);
-                    }
-
-                    if (track.info.picture) {
-                        let base64 = btoa(String.fromCharCode.apply(null, track.info.picture.data));
-
-                        track.info.picture = Object.assign(track.info.picture, {
-                            base64: 'data:' + track.info.picture.format + ';base64,' + base64
-                        });
-
-                        track.info.albumCover = track.info.picture;
-                    }
-
-                    if (tags.tags.TYER || tags.tags.TDRC) {
-                        track.info.year = tags.tags.TYER ? parseInt(tags.tags.TYER.data) : (
-                            tags.tags.TDRC ? parseInt(tags.tags.TDRC.data) : null
-                        )
-                    }
-
-                    track.info._loaded = true;
-
-                    this.emit('trackInfoReady', this, track);
-                    CalamansiEvents.emit('trackInfoReady', this);
+        this.trackInfoReader.read(track)
+            .then(trackInfo => {
+                if (!trackInfo._loaded) {
+                    return;
                 }
+
+                track.info = Object.assign(track.info, trackInfo);
+
+                this.emit('trackInfoReady', this, track);
+                CalamansiEvents.emit('trackInfoReady', this);
             });
-        }
     }
 
     currentPlaylist() {
