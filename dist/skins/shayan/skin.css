@@ -11,7 +11,7 @@
     opacity: 0;
     left: 10px;
     right: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
     padding: 5px 15px 5px 110px;
     border-radius: 15px;
     transition: all .5s ease;
@@ -143,17 +143,8 @@
     transition: background-color .3s ease;
     -webkit-transition: background-color .3s ease;
 }
-.calamansi-skin--shayan .control-panel .controls .prev:hover,
-.calamansi-skin--shayan .control-panel .controls .play:hover,
-.calamansi-skin--shayan .control-panel .controls .next:hover {
+.calamansi-skin--shayan .control-panel .controls .control:hover {
     background-color: #eee;
-    transition: background-color .3s ease;
-    -webkit-transition: background-color .3s ease;
-}
-.calamansi-skin--shayan .control-panel .controls .prev:active,
-.calamansi-skin--shayan .control-panel .controls .play:active,
-.calamansi-skin--shayan .control-panel .controls .next:active {
-    background-color: #fff;
     transition: background-color .3s ease;
     -webkit-transition: background-color .3s ease;
 }
