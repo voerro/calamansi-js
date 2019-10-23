@@ -1,4 +1,10 @@
 var playlists = {
+    // 'SoundCloud': [
+    //     {
+    //         // source: 'https://soundcloud.com/fueled_by_ramen/still-into-you',
+    //         source: 'https://api.soundcloud.com/tracks/90787841',
+    //     }
+    // ],
     'Metal': [
         {
             source: 'files/metal/02. Painters of the Tempest (Part II) Triptych Lux.mp3',
@@ -108,11 +114,10 @@ function loadSkin(el, skin) {
         responsivePlayer.destroy();
     }
 
-    responsivePlayer = fixedSizePlayer = new Calamansi(el, {
+    responsivePlayer = new Calamansi(el, {
         skin: '../dist/skins/' + skin,
         playlists: playlists,
         defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
     });
 }
 
@@ -144,12 +149,11 @@ document.querySelectorAll('.responsive-device-switch').forEach(function (el) {
     });
 });
 
-// Dummy skin
+// Dummy skin / Full-Featured Demo
 new Calamansi(document.getElementById('full-demo-player'), {
     skin: '../dist/skins/dummy',
     playlists: playlists,
     defaultAlbumCover: '/dist/skins/default-album-cover.png',
-    soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
 });
 
 // Fixed-Size Skins
@@ -158,6 +162,5 @@ document.querySelectorAll('.fixed-size-player').forEach(function (el) {
         skin: '../dist/skins/' + el.dataset.skin,
         playlists: playlists,
         defaultAlbumCover: '/dist/skins/default-album-cover.png',
-        soundcloudClientId: '933bc67dd9ff18eab500e8992a6b6a5f',
     });
 });
