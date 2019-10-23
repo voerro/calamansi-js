@@ -5,10 +5,8 @@ import TrackInfoReader from './services/TrackInfoReader';
 class Calamansi
 {
     constructor(el, options = {}) {
-        this.trackInfoReader = new TrackInfoReader();
-
         /* DATA */
-        this.options = Object.assign({
+        this._options = Object.assign({
             // Default options...
             loop: false,
             shuffle: false,
@@ -22,7 +20,7 @@ class Calamansi
         // Make sure we have all the required options provided and the values
         // are all correct
         try {
-            this.validateOptions();
+            this._validateOptions();
         } catch (error) {
             console.error(`Calamansi intialization error: ${error}`);
 
@@ -30,12 +28,14 @@ class Calamansi
         }
 
         /* STATE */
-        this.initialized = false;
+        this._initialized = false;
+
+        this._trackInfoReader = new TrackInfoReader(this._options.soundcloudClientId);
 
         this.el = el;
-        this.id = el.id ? el.id : this.generateUniqueId();
+        this.id = el.id ? el.id : this._generateUniqueId();
 
-        this.eventListeners = {
+        this._eventListeners = {
             initialized: [],
             play: [],
             pause: [],
@@ -55,20 +55,22 @@ class Calamansi
             trackSwitched: [],
         };
 
-        this.skin = null;
+        this._skin = null;
         this.audio = null;
         
-        this.playlists = [];
+        this._playlists = [];
         this._currentPlaylist = null;
         this._currentTrack = null;
         this._currentPlaylistOrder = [];
 
         /* INITIALIZE PLAYER INSTANCE */
-        this.init();
+        this._init();
     }
 
     /**
      * Automatically initialize all the player instances
+     * 
+     * @param string className = 'calamansi'
      */
     static autoload(className = 'calamansi') {
         const calamansis = [];
@@ -76,7 +78,7 @@ class Calamansi
 
         // Initialize all the player instances
         elements.forEach(el => {
-            calamansis.push(new Calamansi(el, this.readOptionsFromElement(el)));
+            calamansis.push(new Calamansi(el, this._readOptionsFromElement(el)));
         });
 
         return calamansis;
@@ -87,7 +89,7 @@ class Calamansi
      * 
      * @param {*} el 
      */
-    static readOptionsFromElement(el) {
+    static _readOptionsFromElement(el) {
         const options = {};
 
         options.skin = el.dataset.skin ? el.dataset.skin : null;
@@ -101,44 +103,44 @@ class Calamansi
         return options;
     }
 
-    validateOptions() {
-        if (!this.options.skin) {
+    _validateOptions() {
+        if (!this._options.skin) {
             throw 'No skin provided.';
         }
     }
 
-    async init() {
+    async _init() {
         // Prepare playlists/audio source, load the first track to play
-        this.preparePlaylists();
+        this._preparePlaylists();
 
         // Register internal event listeners
-        this.registerEventListeners();
+        this._registerEventListeners();
 
         // Initialize the skin
-        this.skin = new CalamansiSkin(this, this.options.skin);
-        await this.skin.init();
+        this._skin = new CalamansiSkin(this, this._options.skin);
+        await this._skin.init();
 
         this.el = document.getElementById(this.id);
 
         // Initialization done!
-        this.initialized = true;
+        this._initialized = true;
         
-        this.emit('initialized', this);
-        CalamansiEvents.emit('initialized', this);
+        this._emit('initialized', this);
+        CalamansiEvents._emit('initialized', this);
 
         // Load the first playlist with at least 1 track
-        this.loadPlaylist(this.currentPlaylist());
+        this._loadPlaylist(this.currentPlaylist());
 
         if (this.audio) {
-            this.audio.changeVolume(this.options.volume / 100);
+            this.audio.changeVolume(this._options.volume / 100);
         }
     }
 
-    generateUniqueId() {
+    _generateUniqueId() {
         const id = Math.random().toString(36).substr(2, 5);
 
         return document.querySelectorAll(`calamansi-${id}`).length > 0
-            ? this.generateUniqueId()
+            ? this._generateUniqueId()
             : `calamansi-${id}`;
     }
 
@@ -146,21 +148,21 @@ class Calamansi
      * Read playlist information from the provided options, select the first
      * playlist and track to be played
      */
-    preparePlaylists() {
-        if (this.options.playlists && Object.keys(this.options.playlists).length > 0) {
+    _preparePlaylists() {
+        if (this._options.playlists && Object.keys(this._options.playlists).length > 0) {
             let playlistIndex = 0;
 
-            for (let name in this.options.playlists) {
+            for (let name in this._options.playlists) {
                 let playlist = {
                     name: name,
                     list: []
                 };
                 
-                if (!Array.isArray(this.options.playlists[name])) {
+                if (!Array.isArray(this._options.playlists[name])) {
                     continue;
                 }
 
-                for (let track of this.options.playlists[name]) {
+                for (let track of this._options.playlists[name]) {
                     if (!track.source) {
                         continue;
                     }
@@ -177,13 +179,13 @@ class Calamansi
                     track.info.artistOrFilename = track.info.artist
                         ? track.info.artist
                         : track.info.filename;
-                    track.sourceType = this.getTrackSourceType(track);
+                    track.sourceType = this._getTrackSourceType(track);
 
                     playlist.list.push(track);
 
                     // Load track info
-                    if (this.options.preloadTrackInfo) {
-                        this.loadTrackInfo(track);
+                    if (this._options.preloadTrackInfo) {
+                        this._loadTrackInfo(track);
                     }
 
                     // Set the first playlist with at least 1 track as the
@@ -193,7 +195,7 @@ class Calamansi
                     }
                 }
                 
-                this.playlists.push(playlist);
+                this._playlists.push(playlist);
 
                 playlistIndex++;
             }
@@ -205,39 +207,44 @@ class Calamansi
         }
     }
 
-    loadPlaylist(playlist) {
+    _loadPlaylist(playlist) {
         if (!playlist) {
             return;
         }
 
-        if (this.options.shuffle) {
-            this.shuffleCurrentPlaylist(false);
+        if (this._options.shuffle) {
+            this._shuffleCurrentPlaylist(false);
         } else {
-            this.unshuffleCurrentPlaylist(false);
+            this._unshuffleCurrentPlaylist(false);
         }
         
         this.switchTrack(0);
 
-        this.emit('playlistLoaded', this);
-        CalamansiEvents.emit('playlistLoaded', this);
+        this._emit('playlistLoaded', this);
+        CalamansiEvents._emit('playlistLoaded', this);
     }
 
+    /**
+     * Switch to a playlist by index
+     * 
+     * @param int index
+     */
     switchPlaylist(index) {
         this._currentPlaylist = index;
 
         // Load the first track to play
-        this.loadPlaylist(this.currentPlaylist());
+        this._loadPlaylist(this.currentPlaylist());
 
-        this.emit('playlistSwitched', this);
-        CalamansiEvents.emit('playlistSwitched', this);
+        this._emit('playlistSwitched', this);
+        CalamansiEvents._emit('playlistSwitched', this);
     }
 
-    loadTrack(track) {
+    _loadTrack(track) {
         if (!this.audio) {
             this.audio = new CalamansiAudio(this, track.source);
 
-            if (this.options.loadTrackInfoOnPlay) {
-                this.loadTrackInfo(track);
+            if (this._options.loadTrackInfoOnPlay) {
+                this._loadTrackInfo(track);
             }
 
             return;
@@ -245,19 +252,25 @@ class Calamansi
 
         this.audio.load(track.source);
 
-        if (this.options.loadTrackInfoOnPlay) {
-            this.loadTrackInfo(track);
+        if (this._options.loadTrackInfoOnPlay) {
+            this._loadTrackInfo(track);
         }
     }
 
+    /**
+     * Switch to a track by index
+     * 
+     * @param int index
+     * @param boolean startPlaying = false
+     */
     switchTrack(index, startPlaying = false) {
         this._currentTrack = index;
 
         // Load the first track to play
-        this.loadTrack(this.currentTrack());
+        this._loadTrack(this.currentTrack());
 
-        this.emit('trackSwitched', this);
-        CalamansiEvents.emit('trackSwitched', this);
+        this._emit('trackSwitched', this);
+        CalamansiEvents._emit('trackSwitched', this);
 
         if (startPlaying) {
             this.audio.play();
@@ -265,29 +278,27 @@ class Calamansi
     }
 
     _getTrackFilename(track) {
-        if (track.source.startsWith('https://api.soundcloud.com')) {
-            const trackId = track.source.substring(track.source.indexOf('/tracks/') + '/tracks/'.length).split('/')[0];
-
-            return 'SoundCloud track #' + trackId;
+        if (track.source.startsWith('https://soundcloud.com')) {
+            return track.source;
         }
 
         return track.source.split('/').pop();
     }
 
-    getTrackSourceType(track) {
-        if (track.source.startsWith('https://api.soundcloud.com')) {
+    _getTrackSourceType(track) {
+        if (track.source.startsWith('https://soundcloud.com')) {
             return 'soundcloud';
         }
 
         return track.info.filename.split('.').pop();
     }
 
-    loadTrackInfo(track) {
+    _loadTrackInfo(track) {
         if (track.info._loaded === true) {
             return;
         }
 
-        this.trackInfoReader.read(track)
+        this._trackInfoReader.read(track)
             .then(trackInfo => {
                 if (!trackInfo._loaded) {
                     return;
@@ -295,28 +306,37 @@ class Calamansi
 
                 track.info = Object.assign(track.info, trackInfo);
 
-                this.emit('trackInfoReady', this, track);
-                CalamansiEvents.emit('trackInfoReady', this);
+                this._emit('trackInfoReady', this, track);
+                CalamansiEvents._emit('trackInfoReady', this);
             });
     }
 
+    /**
+     * Get the current playlist
+     */
     currentPlaylist() {
-        return this.playlists[this._currentPlaylist];
+        return this._playlists[this._currentPlaylist];
     }
 
+    /**
+     * Get the current track
+     */
     currentTrack() {
         return this.currentPlaylist()
             ? this.currentPlaylist().list[this._currentPlaylistOrder[this._currentTrack]]
             : null;
     }
 
+    /**
+     * Switch to the next track
+     */
     nextTrack() {
         if (this._currentTrack + 1 < this.currentPlaylist().list.length) {
             this.switchTrack(this._currentTrack + 1, true);
 
             return true;
         } else {
-            if (this.options.loop) {
+            if (this._options.loop) {
                 this.switchTrack(0, true);
 
                 return true;
@@ -326,13 +346,16 @@ class Calamansi
         return false;
     }
 
+    /**
+     * Switch to the previous track
+     */
     prevTrack() {
         if (this._currentTrack - 1 >= 0) {
             this.switchTrack(this._currentTrack - 1, true);
 
             return true;
         } else {
-            if (this.options.loop) {
+            if (this._options.loop) {
                 this.switchTrack(this.currentPlaylist().list.length - 1, true);
 
                 return true;
@@ -342,33 +365,39 @@ class Calamansi
         return false;
     }
 
+    /**
+     * Toggle playlist loop
+     */
     toggleLoop() {
-        this.options.loop = ! this.options.loop;
+        this._options.loop = ! this._options.loop;
     }
 
+    /**
+     * Toggle playlist shuffle
+     */
     toggleShuffle() {
-        this.options.shuffle = ! this.options.shuffle;
+        this._options.shuffle = ! this._options.shuffle;
 
-        if (this.options.shuffle) {
-            this.shuffleCurrentPlaylist();
+        if (this._options.shuffle) {
+            this._shuffleCurrentPlaylist();
         } else {
-            this.unshuffleCurrentPlaylist();
+            this._unshuffleCurrentPlaylist();
         }
     }
 
-    unshuffleCurrentPlaylist(emitEvent = true) {
+    _unshuffleCurrentPlaylist(_emitEvent = true) {
         this._currentTrack = this._currentPlaylistOrder[this._currentTrack];
         
         this._currentPlaylistOrder = Object.keys(this.currentPlaylist().list)
             .map(i => parseInt(i));
 
-        if (emitEvent) {
-            this.emit('playlistReordered', this);
-            CalamansiEvents.emit('playlistReordered', this);
+        if (_emitEvent) {
+            this._emit('playlistReordered', this);
+            CalamansiEvents._emit('playlistReordered', this);
         }
     }
 
-    shuffleCurrentPlaylist(emitEvent = true) {
+    _shuffleCurrentPlaylist(_emitEvent = true) {
         if (this.currentPlaylist().list.length > 1) {
             this._currentPlaylistOrder = [];
 
@@ -387,22 +416,25 @@ class Calamansi
             this._currentPlaylistOrder = [0];
         }
 
-        if (emitEvent) {
-            this.emit('playlistReordered', this);
-            CalamansiEvents.emit('playlistReordered', this);
+        if (_emitEvent) {
+            this._emit('playlistReordered', this);
+            CalamansiEvents._emit('playlistReordered', this);
         }
     }
 
+    /**
+     * Destroy the player instance
+     */
     destroy() {
         this.audio.unload();
-        this.skin.destroy();
+        this._skin.destroy();
     }
 
     /**
-     * Register an event listener
+     * Register an event listener (subscribe to an event)
      * 
-     * @param {*} event 
-     * @param {*} callback 
+     * @param string|array events
+     * @param function callback 
      */
     on(events, callback) {
         if (typeof events === 'string') {
@@ -411,38 +443,38 @@ class Calamansi
 
         for (let event of events) {
             // Ignore inexisting event types
-            if (!this.eventListeners[event]) {
+            if (!this._eventListeners[event]) {
                 continue;
             }
 
-            this.eventListeners[event].push(callback);
+            this._eventListeners[event].push(callback);
         }
     }
 
     /**
-     * Emit an event. Call all the event listeners' callbacks.
+     * _Emit an event. Call all the event listeners' callbacks.
      * 
      * @param {*} event 
      * @param {*} data 
      * @param {*} data 
      */
-    emit(event, instance, data = {}) {
+    _emit(event, instance, data = {}) {
         // Sometimes the player initialization might fail
-        if (!this.initialized) {
+        if (!this._initialized) {
             return;
         }
 
         // Ignore inexisting event types
-        if (!this.eventListeners[event]) {
+        if (!this._eventListeners[event]) {
             return;
         }
 
-        for (let callback of this.eventListeners[event]) {
+        for (let callback of this._eventListeners[event]) {
             callback(instance, data);
         }
 
         // DOM elements visibility can be dependent on events
-        document.querySelectorAll(`#${this.skin.el.id} .hide-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this._skin.el.id} .hide-on-${event}`).forEach(el => {
             if (el.style.display == 'none') {
                 return;
             }
@@ -451,12 +483,12 @@ class Calamansi
             el.style.display = 'none';
         });
 
-        document.querySelectorAll(`#${this.skin.el.id} .show-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this._skin.el.id} .show-on-${event}`).forEach(el => {
             el.style.display = el.dataset.display;
         });
     }
 
-    registerEventListeners() {
+    _registerEventListeners() {
         CalamansiEvents.on('play', (instance) => {
             // Pause all players when one of the players on the page has started
             // playing
@@ -469,8 +501,8 @@ class Calamansi
 
         this.on('trackEnded', (instance) => {
             if (!this.nextTrack()) {
-                this.emit('stop');
-                CalamansiEvents.emit('stop', this);
+                this._emit('stop');
+                CalamansiEvents._emit('stop', this);
             }
         })
     }

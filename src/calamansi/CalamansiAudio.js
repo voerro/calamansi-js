@@ -1,7 +1,7 @@
 class CalamansiAudio
 {
     constructor(calamansi, source) {
-        this.calamansi = calamansi;
+        this._calamansi = calamansi;
         
         this.audio = new Audio();
         this.load(source);
@@ -14,24 +14,24 @@ class CalamansiAudio
         this.currentTime = 0;
         this.volume = this.audio.volume;
         
-        this.addEventListeners();
+        this._addEventListeners();
     }
 
-    addEventListeners() {
+    _addEventListeners() {
         this.audio.addEventListener('loadedmetadata', (event) => {
             this.duration = this.audio.duration;
-            this.calamansi.currentTrack().info.duration = this.audio.duration;
+            this._calamansi.currentTrack().info.duration = this.audio.duration;
 
-            this.calamansi.emit('loadedmetadata', this.calamansi);
-            CalamansiEvents.emit('loadedmetadata', this.calamansi);
+            this._calamansi._emit('loadedmetadata', this._calamansi);
+            CalamansiEvents._emit('loadedmetadata', this._calamansi);
         });
 
         // Fired when the first frame of the media has finished loading.
         this.audio.addEventListener('loadeddata', (event) => {
             this._setCurrentTime(this.audio.currentTime);
 
-            this.calamansi.emit('loadeddata', this.calamansi);
-            CalamansiEvents.emit('loadeddata', this.calamansi);
+            this._calamansi._emit('loadeddata', this._calamansi);
+            CalamansiEvents._emit('loadeddata', this._calamansi);
         });
 
         // Data loading progress
@@ -44,11 +44,11 @@ class CalamansiAudio
         this.audio.addEventListener('canplaythrough', (event) => {
             this.loadedPercent = 100;
 
-            this.calamansi.emit('canplaythrough', this.calamansi);
-            CalamansiEvents.emit('canplaythrough', this.calamansi);
+            this._calamansi._emit('canplaythrough', this._calamansi);
+            CalamansiEvents._emit('canplaythrough', this._calamansi);
 
-            this.calamansi.emit('loadingProgress', this.calamansi);
-            CalamansiEvents.emit('loadingProgress', this.calamansi);
+            this._calamansi._emit('loadingProgress', this._calamansi);
+            CalamansiEvents._emit('loadingProgress', this._calamansi);
         });
 
         this.audio.addEventListener('timeupdate', (event) => {
@@ -58,11 +58,16 @@ class CalamansiAudio
         this.audio.addEventListener('ended', (event) => {
             this._setCurrentTime(0);
 
-            this.calamansi.emit('trackEnded', this.calamansi);
-            CalamansiEvents.emit('trackEnded', this.calamansi);
+            this._calamansi._emit('trackEnded', this._calamansi);
+            CalamansiEvents._emit('trackEnded', this._calamansi);
         });
     }
 
+    /**
+     * Load an audio track from a source
+     * 
+     * @param string source 
+     */
     load(source) {
         this.stop();
 
@@ -71,50 +76,65 @@ class CalamansiAudio
                 source = source.substring(0, source.length - 1);
             }
 
-            if (!this.calamansi.options.soundcloudClientId) {
+            if (!this._calamansi._options.soundcloudClientId) {
                 console.error('Please set your SoundCloud client id in the soundcloudClientId option to play SoundCloud tracks.');
             }
             
-            source += '/stream?client_id=' + this.calamansi.options.soundcloudClientId;
+            source += '/stream?client_id=' + this._calamansi._options.soundcloudClientId;
         }
 
         this.audio.src = source;
         this.audio.load();
     }
 
+    /**
+     * Start playing the current track from the start
+     */
     playFromStart() {
         this.audio.pause();
         this.audio.currentTime = 0;
         this.currentTime = 0;
         this.audio.play();
 
-        this.calamansi.emit('play', this.calamansi);
-        CalamansiEvents.emit('play', this.calamansi);
+        this._calamansi._emit('play', this._calamansi);
+        CalamansiEvents._emit('play', this._calamansi);
     }
 
+    /**
+     * Start/resume playback of the current track
+     */
     play() {
         this.audio.play();
 
-        this.calamansi.emit('play', this.calamansi);
-        CalamansiEvents.emit('play', this.calamansi);
+        this._calamansi._emit('play', this._calamansi);
+        CalamansiEvents._emit('play', this._calamansi);
     }
 
+    /**
+     * Pause playback of the current track
+     */
     pause() {
         this.audio.pause();
 
-        this.calamansi.emit('pause', this.calamansi);
-        CalamansiEvents.emit('pause', this.calamansi);
+        this._calamansi._emit('pause', this._calamansi);
+        CalamansiEvents._emit('pause', this._calamansi);
     }
 
+    /**
+     * Stop playback of the current track
+     */
     stop() {
         this.audio.pause();
         this.audio.currentTime = 0;
         this.currentTime = 0;
 
-        this.calamansi.emit('stop', this.calamansi);
-        CalamansiEvents.emit('stop', this.calamansi);
+        this._calamansi._emit('stop', this._calamansi);
+        CalamansiEvents._emit('stop', this._calamansi);
     }
 
+    /**
+     * Unload the currently loaded audio
+     */
     unload() {
         this.audio.pause();
         this.audio.removeAttribute('src');
@@ -124,16 +144,26 @@ class CalamansiAudio
     _setCurrentTime(time) {
         this.currentTime = time;
 
-        this.calamansi.emit('timeupdate', this.calamansi);
-        CalamansiEvents.emit('timeupdate', this.calamansi);
+        this._calamansi._emit('timeupdate', this._calamansi);
+        CalamansiEvents._emit('timeupdate', this._calamansi);
     }
 
+    /**
+     * Seek to a position
+     * 
+     * @param int time (seconds)
+     */
     seekTo(time) {
         this.audio.currentTime = time;
 
         this._setCurrentTime(time);
     }
 
+    /**
+     * Set player's volume
+     * 
+     * @param float volume [0.0-1.0]
+     */
     changeVolume(volume) {
         volume = volume >= 0 ? volume : 0;
         volume = volume <= 1 ? volume : 1;
@@ -141,16 +171,21 @@ class CalamansiAudio
         this.audio.volume = volume;
         this.volume = volume;
 
-        this.calamansi.emit('volumechange', this.calamansi);
-        CalamansiEvents.emit('volumechange', this.calamansi);
+        this._calamansi._emit('volumechange', this._calamansi);
+        CalamansiEvents._emit('volumechange', this._calamansi);
     }
 
+    /**
+     * Set player's playback rate
+     * 
+     * @param float rate [0.0-1.0]
+     */
     changePlaybackRate(rate) {
         this.playbackRate = rate;
         this.audio.playbackRate = rate;
 
-        this.calamansi.emit('ratechange', this.calamansi);
-        CalamansiEvents.emit('ratechange', this.calamansi);
+        this._calamansi._emit('ratechange', this._calamansi);
+        CalamansiEvents._emit('ratechange', this._calamansi);
     }
 }
 

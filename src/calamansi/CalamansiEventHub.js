@@ -28,7 +28,7 @@ class CalamansiEventHub
      * @param {*} instance
      * @param {*} data 
      */
-    emit(event, instance, data = {}) {
+    _emit(event, instance, data = {}) {
         // Ignore inexisting event types
         if (!this.eventListeners[event]) {
             return;

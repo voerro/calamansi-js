@@ -476,12 +476,12 @@ class CalamansiSkin
 
         // "Loop"
         this.getEls('.control-toggle-loop').forEach((el) => {
-            el.checked = this.calamansi.options.loop;
+            el.checked = this.calamansi._options.loop;
         });
 
         // "Shuffle"
         this.getEls('.control-toggle-shuffle').forEach((el) => {
-            el.checked = this.calamansi.options.shuffle;
+            el.checked = this.calamansi._options.shuffle;
         });
     }
     
@@ -682,9 +682,9 @@ class CalamansiSkin
                     if (el.nodeName.toLowerCase() === 'img') {
                         el.src = values[key]
                             ? values[key].base64
-                            : this.calamansi.options.defaultAlbumCover;
+                            : this.calamansi._options.defaultAlbumCover;
                     } else {
-                        el.style.backgroundImage = `url('${values[key] ? values[key].base64 : this.calamansi.options.defaultAlbumCover}')`;
+                        el.style.backgroundImage = `url('${values[key] ? values[key].base64 : this.calamansi._options.defaultAlbumCover}')`;
                     }
                     break;
                 case 'duration':
