@@ -1,0 +1,480 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
+
+.calamansi-skin--nerios {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.calamansi-skin--nerios header {
+    position: relative;
+}
+.calamansi-skin--nerios header .track-info--albumCover {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all .2s ease-in-out;
+}
+.calamansi-skin--nerios header .placeholder-svg {
+    width: 100%;
+    height: auto;
+}
+.calamansi-skin--nerios header .section-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 1em;
+    width: 100%;
+    text-shadow: 0 0 3px #000;
+    opacity: .9;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1em;
+}
+.calamansi-skin--nerios header .right {
+    display: none;
+}
+.calamansi-skin--nerios header .controls {
+    display: none;
+}
+
+.calamansi-skin--nerios .main-section {
+    flex: 1;
+    display: flex;
+    position: relative;
+    background-color: #131313;
+    overflow: hidden;
+}
+.calamansi-skin--nerios .content-main {
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    
+    position: absolute;
+    opacity: 1;
+}
+
+.calamansi-skin--nerios main {
+    flex: 1;
+    background-color: #131313;
+    padding: 1em 1em;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.calamansi-skin--nerios .section-playback-controls {
+    padding-bottom: 1em;
+}
+.calamansi-skin--nerios .section-playback-controls .playback-bar {
+    position: relative;
+    padding: .5em 0;
+}
+.calamansi-skin--nerios .section-playback-controls .playback-bar-bg {
+    height: 3px;
+    background-color: #666666;
+}
+.calamansi-skin--nerios .section-playback-controls .playback-progress {
+    height: 3px;
+    background-color: #ed4f46;
+    position: relative;
+}
+.calamansi-skin--nerios .section-playback-controls .playback-progress::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -5px;
+    height: 13px;
+    width: 3px;
+    background-color: #fff;
+}
+.calamansi-skin--nerios .section-playback-controls .section-playback-times {
+    display: flex;
+    font-size: .75em;
+    color: #5d5d5d;
+}
+.calamansi-skin--nerios .section-playback-controls .section-playback-times > div:first-of-type {
+    flex: 1;
+    text-align: left;
+}
+
+.calamansi-skin--nerios .section-track-info {
+    padding: 0 1em;
+    text-align: center;
+}
+.calamansi-skin--nerios .section-track-info .track-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.calamansi-skin--nerios .section-track-info .track-info--titleOrFilename {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .9em;
+}
+.calamansi-skin--nerios .section-track-info .track-info--artist {
+    color: #969696;
+    font-size: .75em;
+}
+
+.calamansi-skin--nerios .section-controls {
+    flex: 1;
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calamansi-skin--nerios .section-controls {
+    font-size: 1.25em;
+}
+.calamansi-skin--nerios .section-controls .control-resume,
+.calamansi-skin--nerios .section-controls .control-pause
+{
+    font-size: 1.75em;
+    margin: 0 1em;
+}
+
+.calamansi-skin--nerios footer {
+    min-height: 40px;
+    height: 6%;
+    background-color: #131313;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calamansi-skin--nerios footer > div {
+    flex: 1;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+}
+
+.calamansi-skin--nerios .custom-checkbox {
+    position: relative;
+}
+.calamansi-skin--nerios .custom-checkbox input {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(2);
+}
+.calamansi-skin--nerios .custom-checkbox input:checked ~ i {
+    color: #ed4f46;
+    transition: all .4s ease;
+}
+
+/* 
+ * Show playlist
+ */
+.calamansi-skin--nerios.show-playlist header .section-header {
+    display: flex;
+    margin: 1em;
+    margin-top: 3em;
+}
+.calamansi-skin--nerios.show-playlist header .track-info--albumCover {
+    width: 30%;
+    height: auto;
+    border-radius: .25em;
+    flex-shrink: 0;
+}
+.calamansi-skin--nerios.show-playlist header .right {
+    display: flex;
+    flex-direction: column;
+    
+    overflow: hidden;
+    flex: 1;
+    padding-left: 1em;
+}
+.calamansi-skin--nerios.show-playlist header .section-controls {
+    text-shadow: none;
+}
+.calamansi-skin--nerios.show-playlist header .section-track-info {
+    flex: 1;
+    text-align: left;
+    padding: 0;
+}
+.calamansi-skin--nerios.show-playlist header .section-track-info .track-info {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.calamansi-skin--nerios.show-playlist header .section-track-info .track-info--titleOrFilename {
+    color: #000000;
+}
+.calamansi-skin--nerios.show-playlist header .section-playback-controls {
+    padding-bottom: .25em;
+}
+.calamansi-skin--nerios.show-playlist header .section-playback-controls .playback-bar {
+    padding-top: 0;
+    padding-bottom: .25em;
+}
+.calamansi-skin--nerios.show-playlist header .section-playback-controls .playback-progress::after {
+    background-color: #131313;
+}
+
+.calamansi-skin--nerios.show-playlist .main-section .content-main {
+    opacity: 0;
+}
+.calamansi-skin--nerios.show-playlist .main-section .content-playlist {
+    transform: translateX(0%);
+}
+
+.calamansi-skin--nerios .content-playlist {
+    min-width: 0;
+    width: 100%;
+    min-height: 0;
+    height: 100%;
+
+    position: absolute;
+    transform: translateX(-110%);
+    z-index: 1;
+    transition: all .2s ease-in-out;
+
+    display: flex;
+    flex-direction: column;
+}
+.calamansi-skin--nerios .content-playlist .playlist-wrapper {
+    min-height: 0;
+    height: 100%;
+    flex: 1;
+    padding-bottom: 2em;
+}
+.calamansi-skin--nerios .content-playlist .simplebar-scrollbar::before {
+    background-color: #ffffff;
+}
+.calamansi-skin--nerios .content-playlist .playlist {
+    padding: 1em;
+}
+.calamansi-skin--nerios .content-playlist .playlist ul {
+    list-style: none;
+}
+.calamansi-skin--nerios .content-playlist .playlist .playlist-item {
+    display: flex;
+    padding: .75em;
+    background-color: #1d1d1d;
+    margin-bottom: .1em;
+    font-size: .9em;
+}
+.calamansi-skin--nerios .content-playlist .playlist .playlist-item .playlist-track-info--name {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.calamansi-skin--nerios .content-playlist .playlist .playlist-item .playlist-track-info--duration {
+    padding-left: .5em;
+    color: #8a8a8a;
+}
+.calamansi-skin--nerios .content-playlist .playlist .playlist-item.active .playlist-track-info--name {
+    color: #ed4f46;
+}
+
+.calamansi-skin--nerios .content-playlist .controls {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    bottom: 0;
+
+    background: linear-gradient(to bottom, #13131300, #131313dd, #131313);
+    width: 100%;
+}
+.calamansi-skin--nerios .content-playlist .controls .control {
+    font-size: 1em;
+}
+.calamansi-skin--nerios .content-playlist .controls .control-resume,
+.calamansi-skin--nerios .content-playlist .controls .control-pause
+{
+    margin: 0 1em;
+}
+
+
+/*
+ * Responsiveness 
+ */
+@media all and (orientation: landscape) {
+    .calamansi-skin--nerios {
+        flex-direction: row;
+    }
+
+    .calamansi-skin--nerios header {
+        height: 100%;
+    }
+    .calamansi-skin--nerios header .section-header {
+        height: 100%;
+        border: 2px solid red;
+    }
+    .calamansi-skin--nerios header .placeholder-svg {
+        height: 100%;
+        width: auto;
+    }
+
+    .calamansi-skin--nerios .main-section {
+        min-width: 0;
+    }
+
+    .calamansi-skin--nerios .section-track-info .track-info {
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* .calamansi-skin--nerios header {
+        min-height: 100%;
+        height: 100%;
+        width: 50%;
+        padding-left: 100%;
+        padding-bottom: 0;
+    } */
+
+    /*
+     * Playlist visible
+     */
+    .calamansi-skin--nerios.show-playlist header {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+    .calamansi-skin--nerios.show-playlist header .section-header {
+        height: auto;
+        border: 1px solid red;
+    }
+    .calamansi-skin--nerios.show-playlist header .track-info--albumCover {
+        height: 100%;
+        width: auto;
+        border-radius: .25em;
+        flex-shrink: 0;
+    }
+
+    .calamansi-skin--nerios.show-playlist header .controls {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        color: #1d1d1d;
+
+        padding: 1em;
+        padding-bottom: 0;
+    }
+    .calamansi-skin--nerios.show-playlist header .controls .playback-controls {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calamansi-skin--nerios.show-playlist header .controls .playback-controls {
+        font-size: 1.25em;
+    }
+    .calamansi-skin--nerios.show-playlist header .controls .playback-controls .control-resume,
+    .calamansi-skin--nerios.show-playlist header .controls .playback-controls .control-pause
+    {
+        font-size: 1.75em;
+        margin: 0 1em;
+    }
+
+    .calamansi-skin--nerios.show-playlist header .controls .other-controls {
+        min-height: 40px;
+        height: 6%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .calamansi-skin--nerios.show-playlist header .controls .other-controls > div {
+        flex: 1;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.25em;
+    }
+
+    .calamansi-skin--nerios .content-playlist {
+        position: absolute;
+        transform: translateX(0%);
+        transform: translateY(-100%);
+    }
+    .calamansi-skin--nerios .content-playlist .controls {
+        display: none;
+    }
+    .calamansi-skin--nerios .content-playlist .playlist-wrapper {
+        padding-bottom: 0;
+    }
+}
+/* @media all and (min-width: 769px) {
+    .calamansi-skin--nerios header {
+        width: 50%;
+        padding-bottom: 50%;
+    }
+} */
+
+/* Generated by Glyphter (http://www.glyphter.com) on  Sat Oct 26 2019*/
+@font-face {
+    font-family: 'calamansi-skin--nerios--glyphter';
+    src: url('fonts/Glyphter.eot');
+    src: url('fonts/Glyphter.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Glyphter.woff') format('woff'),
+         url('fonts/Glyphter.ttf') format('truetype'),
+         url('fonts/Glyphter.svg#Glyphter') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.calamansi-skin--nerios .glyphter:before {
+    display: inline-block;
+    font-family: 'calamansi-skin--nerios--glyphter';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+.calamansi-skin--nerios .glyphter.fa-playlist:before {
+    content: '\0041';
+}
+.calamansi-skin--nerios .glyphter.fa-search:before {
+    content: '\0042';
+}
+.calamansi-skin--nerios .glyphter.fa-play:before {
+    content: '\0043';
+}
+.calamansi-skin--nerios .glyphter.fa-pause:before {
+    content: '\0044';
+}
+.calamansi-skin--nerios .glyphter.fa-next:before {
+    content: '\0045';
+}
+.calamansi-skin--nerios .glyphter.fa-prev:before {
+    content: '\0046';
+}
+.calamansi-skin--nerios .glyphter.fa-shuffle:before {
+    content: '\0047';
+}
+.calamansi-skin--nerios .glyphter.fa-loop:before {
+    content: '\0048';
+}
+.calamansi-skin--nerios .glyphter.fa-options:before {
+    content: '\0049';
+}
