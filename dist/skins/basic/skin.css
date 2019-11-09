@@ -1,4 +1,4 @@
-.calamansi-skin--gregh {
+.calamansi-skin--basic {
     width: 100%;
     box-sizing: border-box;
     height: 56px;
@@ -13,19 +13,19 @@
     -webkit-user-select: none;
     background-color: #fff;
 }
-.calamansi-skin--gregh .slider {
+.calamansi-skin--basic .slider {
     flex-grow: 1;
     background-color: #D8D8D8;
     cursor: pointer;
     position: relative;
 }
-.calamansi-skin--gregh .slider .playback-progress {
+.calamansi-skin--basic .slider .playback-progress {
     background-color: #44BFA3;
     border-radius: inherit;
     position: absolute;
     pointer-events: none;
 }
-.calamansi-skin--gregh .slider .pin {
+.calamansi-skin--basic .slider .pin {
     height: 16px;
     width: 16px;
     border-radius: 8px;
@@ -34,7 +34,7 @@
     pointer-events: all;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
 }
-.calamansi-skin--gregh .controls {
+.calamansi-skin--basic .controls {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 18px;
@@ -46,36 +46,36 @@
     margin-left: 24px;
     margin-right: 24px;
 }
-.calamansi-skin--gregh .controls .slider {
+.calamansi-skin--basic .controls .slider {
     margin-left: 16px;
     margin-right: 16px;
     border-radius: 2px;
     height: 4px;
 }
-.calamansi-skin--gregh .controls .slider .playback-progress {
+.calamansi-skin--basic .controls .slider .playback-progress {
     width: 0;
     height: 100%;
 }
-.calamansi-skin--gregh .controls .slider .playback-progress .pin {
+.calamansi-skin--basic .controls .slider .playback-progress .pin {
     right: -8px;
     top: -6px;
 }
-.calamansi-skin--gregh .controls span {
+.calamansi-skin--basic .controls span {
     cursor: default;
 }
-.calamansi-skin--gregh .volume {
+.calamansi-skin--basic .volume {
     position: relative;
 }
-.calamansi-skin--gregh .volume .volume-btn {
+.calamansi-skin--basic .volume .volume-btn {
     cursor: pointer;
 }
-.calamansi-skin--gregh .volume .volume-btn.open path {
+.calamansi-skin--basic .volume .volume-btn.open path {
     fill: #44BFA3;
 }
-.calamansi-skin--gregh .volume .volume-btn.open ~ .volume-controls {
+.calamansi-skin--basic .volume .volume-btn.open ~ .volume-controls {
     display: flex;
 }
-.calamansi-skin--gregh .volume .volume-controls {
+.calamansi-skin--basic .volume .volume-controls {
     width: 30px;
     height: 135px;
     background-color: rgba(0, 0, 0, 0.62);
@@ -88,13 +88,13 @@
     display: none;
     z-index: 1;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider {
+.calamansi-skin--basic .volume .volume-controls .slider {
     margin-top: 12px;
     margin-bottom: 12px;
     width: 6px;
     border-radius: 3px;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .volume-value {
+.calamansi-skin--basic .volume .volume-controls .slider .volume-value {
     bottom: 0;
     height: 100%;
     width: 6px;
@@ -102,12 +102,12 @@
     background-color: #44BFA3;
     position: absolute;
 }
-.calamansi-skin--gregh .volume .volume-controls .slider .volume-value .pin {
+.calamansi-skin--basic .volume .volume-controls .slider .volume-value .pin {
     left: -5px;
     top: -8px;
 }
 
-.calamansi-skin--gregh svg, .calamansi-skin--gregh img {
+.calamansi-skin--basic svg, .calamansi-skin--basic img {
     display: block;
 }
 

@@ -1,10 +1,4 @@
-<div class="calamansi-skin--julie-park" data-no-wrapper="1">
-    <div class="album track-info track-info--albumCover">
-        <div class="heart"><i class="fas fa-heart"></i></div>
-    </div>
-
-    <div class="space"></div>
-
+<div class="calamansi-skin--calamansi-compact" data-no-wrapper="1">
     <div class="info">
         <div class="playback-info">
             <div class="time playback-time">00:00</div>
@@ -18,14 +12,13 @@
         </div>
 
         <div class="currently-playing">
-            <p class="song-name track-info track-info--titleOrFilename"></p>
-            <p class="artist-name track-info track-info--artist"></p>
+            <h2 class="song-name track-info track-info--titleOrFilename"></h2>
+            <h3 class="artist-name track-info track-info--artist"></h3>
         </div>
 
         <div class="controls noselect">
             <div class="left">
-                <div class="option custom-checkbox">
-                    <input type="checkbox" class="toggle-playlist">
+                <div class="option control toggle-playlist">
                     <i class="glyphter fa-bars"></i>
                 </div>
             </div>
@@ -34,13 +27,12 @@
                 <div class="volume">
                     <i class="glyphter fa-volume-up"></i>
                     
-                    <div class="slider volume-bar">
+                    <div class="volume-bar">
                         <div class="volume-value"></div>
                     </div>
                 </div>
 
-                <div class="previous control control-prev-track hide-on-initialized show-on-playlistLoaded">
-                    <i class="glyphter fa-backward"></i>
+                <div class="previous control control-prev-track hide-on-initialized show-on-playlistLoaded"><i class="glyphter fa-backward"></i>
                 </div>
                 
                 <div class="play control control-resume hide-on-play show-on-pause show-on-stop">
@@ -50,8 +42,7 @@
                     <i class="glyphter fa-pause"></i>
                 </div>
                 
-                <div class="next control control-next-track hide-on-initialized show-on-playlistLoaded">
-                    <i class="glyphter fa-forward"></i>
+                <div class="next control control-next-track hide-on-initialized show-on-playlistLoaded"><i class="glyphter fa-forward"></i>
                 </div>
 
                 <div class="shuffle custom-checkbox">
@@ -86,8 +77,7 @@
             </div>
             
             <div class="row">
-                <div class="option custom-checkbox">
-                    <input type="checkbox" class="control toggle-playlist">
+                <div class="option control toggle-playlist">
                     <i class="glyphter fa-bars"></i>
                 </div>
             
@@ -104,11 +94,17 @@
                 <div class="volume">
                     <i class="glyphter fa-volume-up"></i>
                 
-                    <div class="volume-bar">
+                    <div class="slider volume-bar">
                         <div class="volume-value"></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="playlist-container">
+        <div class="control toggle-playlist noselect">
+            <i class="glyphter fa-bars"></i>
         </div>
 
         <div class="playlist-wrapper" data-simplebar>

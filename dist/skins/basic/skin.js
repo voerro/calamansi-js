@@ -2,7 +2,7 @@
     CalamansiEvents.on('initialized', function (instance) {
         var player = instance.el;
 
-        if (player.matches('.calamansi-skin--gregh')) {
+        if (player.matches('.calamansi-skin--basic')) {
             var volumeBtn = player.querySelector('.volume-btn');
 
             if (!volumeBtn) {

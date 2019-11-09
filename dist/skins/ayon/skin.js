@@ -2,7 +2,7 @@
     CalamansiEvents.on('play', function (instance) {
         var player = instance.el;
 
-        if (player.matches('.calamansi-skin--shayan')) {
+        if (player.matches('.calamansi-skin--ayon')) {
             var info = player.querySelector('.info');
             var controlPanel = player.querySelector('.control-panel');
 
@@ -19,7 +19,7 @@
     CalamansiEvents.on(['pause', 'stop'], function (instance) {
         var player = instance.el;
 
-        if (player.matches('.calamansi-skin--shayan')) {
+        if (player.matches('.calamansi-skin--ayon')) {
             var info = player.querySelector('.info');
             var controlPanel = player.querySelector('.control-panel');
 
