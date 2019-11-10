@@ -20,7 +20,7 @@
     flex-direction: column;
 }
 
-.calamansi-skin--calamansi-compact .heart {
+.calamansi-skin--calamansi-compact .clmns--heart {
     position: absolute;
     right: 0;
     color: #FFFFFF;
@@ -28,23 +28,23 @@
     transition: all .4s ease;
 }
 
-.calamansi-skin--calamansi-compact .info {
+.calamansi-skin--calamansi-compact .clmns--info {
     width: 100%;
     background: rgba(255, 255, 255, 0.85);
 }
 
-.calamansi-skin--calamansi-compact.show-playlist .playlist-container {
+.calamansi-skin--calamansi-compact.clmns--show-playlist .clmns--playlist-container {
     display: flex;
 }
 
-.calamansi-skin--calamansi-compact .playback-info {
+.calamansi-skin--calamansi-compact .clmns--playback-info {
     display: flex;
     align-items: center;
     margin-top: 15px;
     margin-bottom: 10px;
 }
 
-.calamansi-skin--calamansi-compact .playback-bar {
+.calamansi-skin--calamansi-compact .clmns--playback-bar {
     flex: 1;
     position: relative;
     height: .4em;
@@ -52,12 +52,12 @@
     border-radius: 10px;
 }
 
-.calamansi-skin--calamansi-compact .playback-load {
+.calamansi-skin--calamansi-compact .clmns--playback-load {
     width: 100%;
     height: 100%;
     border-radius: 10px;
 }
-.calamansi-skin--calamansi-compact .playback-progress {
+.calamansi-skin--calamansi-compact .clmns--playback-progress {
     position: absolute;
     top: 0;
     background-color: #8BA989;
@@ -66,26 +66,26 @@
     border-radius: 10px;
 }
 
-.calamansi-skin--calamansi-compact .playback-time, .calamansi-skin--calamansi-compact .playback-time-left {
+.calamansi-skin--calamansi-compact .clmns--playback-time, .calamansi-skin--calamansi-compact .clmns--playback-time-left {
     color: #364F3C;
     font-size: .7em;
     margin: 0 10px;
 }
 
-.calamansi-skin--calamansi-compact .playback-time {
+.calamansi-skin--calamansi-compact .clmns--playback-time {
     left: 15px;
 }
 
-.calamansi-skin--calamansi-compact .playback-time-left {
+.calamansi-skin--calamansi-compact .clmns--playback-time-left {
     right: 15px;
 }
 
-.calamansi-skin--calamansi-compact .currently-playing {
+.calamansi-skin--calamansi-compact .clmns--currently-playing {
     text-align: center;
 }
 
-.calamansi-skin--calamansi-compact .song-name,
-.calamansi-skin--calamansi-compact .artist-name
+.calamansi-skin--calamansi-compact .clmns--song-name,
+.calamansi-skin--calamansi-compact .clmns--artist-name
 {
     font-weight: 400;
     text-transform: uppercase;
@@ -97,20 +97,20 @@
     text-overflow: ellipsis;
 }
 
-.calamansi-skin--calamansi-compact .song-name {
+.calamansi-skin--calamansi-compact .clmns--song-name {
     font-size: .8em;
     letter-spacing: 3px;
     color: #364F3C;
 }
 
-.calamansi-skin--calamansi-compact .artist-name {
+.calamansi-skin--calamansi-compact .clmns--artist-name {
     font-size: .6em;
     letter-spacing: 1.5px;
     color: #557c5f;
     margin-top: 5px;
 }
 
-.calamansi-skin--calamansi-compact .controls {
+.calamansi-skin--calamansi-compact .clmns--controls {
     display: flex;
     align-items: center;
     font-size: .8em;
@@ -118,32 +118,32 @@
     color: #8BA989;
     padding: 1em;
 }
-.calamansi-skin--calamansi-compact .controls .row {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--row {
     display: none;
 }
-.calamansi-skin--calamansi-compact .controls .center {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--center {
     flex: 1;
     display: flex;
     justify-content: center;
 }
-.calamansi-skin--calamansi-compact .controls .center > div {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--center > div {
     margin: 0 1em;
 }
-.calamansi-skin--calamansi-compact .controls .center div:first-of-type {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--center div:first-of-type {
     margin-left: 0;
 }
-.calamansi-skin--calamansi-compact .controls .center div:last-of-type {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--center div:last-of-type {
     margin-right: 0;
 }
-.calamansi-skin--calamansi-compact .controls .play, .calamansi-skin--calamansi-compact .controls .pause {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--play, .calamansi-skin--calamansi-compact .clmns--controls .clmns--pause {
     color: #6e946c;
 }
 
-.calamansi-skin--calamansi-compact .controls .volume {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--volume {
     display: flex;
     align-items: center;
 }
-.calamansi-skin--calamansi-compact .controls .volume .volume-bar {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--volume .clmns--volume-bar {
     position: relative;
     width: 0;
     height: .4em;
@@ -152,67 +152,67 @@
     transition: all .2s ease;
     border-radius: 10px;
 }
-.calamansi-skin--calamansi-compact .controls .volume:hover .volume-bar {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--volume:hover .clmns--volume-bar {
     width: 5em;
     margin-left: .5em;
 }
-.calamansi-skin--calamansi-compact .controls .volume .volume-value {
+.calamansi-skin--calamansi-compact .clmns--controls .clmns--volume .clmns--volume-value {
     height: 100%;
     background-color: #8BA989;
     border-radius: 10px;
 }
 
 /* Small player size controls */
-.calamansi-skin--calamansi-compact .controls.compact {
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact {
     flex-direction: column;
 }
-.calamansi-skin--calamansi-compact .controls.compact .left,
-.calamansi-skin--calamansi-compact .controls.compact .center,
-.calamansi-skin--calamansi-compact .controls.compact .right
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--left,
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--center,
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--right
 {
     display: none;
 }
-.calamansi-skin--calamansi-compact .controls.compact .row {
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--row {
     display: flex;
 }
-.calamansi-skin--calamansi-compact .controls.compact .row:last-of-type {
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--row:last-of-type {
     margin-top: .5em;
 }
-.calamansi-skin--calamansi-compact .controls.compact .row > div {
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--row > div {
     margin: 0 .5em;
 }
-.calamansi-skin--calamansi-compact .controls.compact .volume:hover .volume-bar {
+.calamansi-skin--calamansi-compact .clmns--controls.clmns--compact .clmns--volume:hover .clmns--volume-bar {
     width: 3em;
     margin-left: .5em;
 }
 
-.calamansi-skin--calamansi-compact .play,
-.calamansi-skin--calamansi-compact .pause,
-.calamansi-skin--calamansi-compact .next,
-.calamansi-skin--calamansi-compact .previous,
-.calamansi-skin--calamansi-compact .option,
-.calamansi-skin--calamansi-compact .loop,
-.calamansi-skin--calamansi-compact .volume,
-.calamansi-skin--calamansi-compact .shuffle 
+.calamansi-skin--calamansi-compact .clmns--play,
+.calamansi-skin--calamansi-compact .clmns--pause,
+.calamansi-skin--calamansi-compact .clmns--next,
+.calamansi-skin--calamansi-compact .clmns--previous,
+.calamansi-skin--calamansi-compact .clmns--option,
+.calamansi-skin--calamansi-compact .clmns--loop,
+.calamansi-skin--calamansi-compact .clmns--volume,
+.calamansi-skin--calamansi-compact .clmns--shuffle 
 {
     transition: all .5s ease;
 }
-.calamansi-skin--calamansi-compact .play:hover,
-.calamansi-skin--calamansi-compact .pause:hover,
-.calamansi-skin--calamansi-compact .next:hover,
-.calamansi-skin--calamansi-compact .previous:hover,
-.calamansi-skin--calamansi-compact .option:hover
-.calamansi-skin--calamansi-compact .loop:hover,
-.calamansi-skin--calamansi-compact .volume:hover,
-.calamansi-skin--calamansi-compact .shuffle:hover
+.calamansi-skin--calamansi-compact .clmns--play:hover,
+.calamansi-skin--calamansi-compact .clmns--pause:hover,
+.calamansi-skin--calamansi-compact .clmns--next:hover,
+.calamansi-skin--calamansi-compact .clmns--previous:hover,
+.calamansi-skin--calamansi-compact .clmns--option:hover
+.calamansi-skin--calamansi-compact .clmns--loop:hover,
+.calamansi-skin--calamansi-compact .clmns--volume:hover,
+.calamansi-skin--calamansi-compact .clmns--shuffle:hover
 {
     color: #557c5f;
 }
 
-.calamansi-skin--calamansi-compact .custom-checkbox {
+.calamansi-skin--calamansi-compact .clmns--custom-checkbox {
     position: relative;
 }
-.calamansi-skin--calamansi-compact .custom-checkbox input {
+.calamansi-skin--calamansi-compact .clmns--custom-checkbox input {
     position: absolute;
 
     width: 0;
@@ -222,46 +222,46 @@
     margin: 0;
     opacity: 0;
 }
-.calamansi-skin--calamansi-compact .custom-checkbox input:checked ~ i {
+.calamansi-skin--calamansi-compact .clmns--custom-checkbox input:checked ~ i {
     color: #49654D;
     transition: all .4s ease;
 }
 
-.calamansi-skin--calamansi-compact .playlist-container {
+.calamansi-skin--calamansi-compact .clmns--playlist-container {
     display: none;
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: #ffffffdd;
 }
-.calamansi-skin--calamansi-compact .playlist-container .playlist-wrapper {
+.calamansi-skin--calamansi-compact .clmns--playlist-container .clmns--playlist-wrapper {
     width: 100%;
 }
-.calamansi-skin--calamansi-compact .playlist-container .control {
+.calamansi-skin--calamansi-compact .clmns--playlist-container .clmns--control {
     display: flex;
     align-items: flex-end;
     font-size: .8em;
     color: #49654D;
     padding: 1em 1em;
 }
-.calamansi-skin--calamansi-compact .playlist ul {
+.calamansi-skin--calamansi-compact .clmns--playlist ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.playlist-item.template {
+.clmns--playlist-item.clmns--template {
     display: none !important;
 }
-.calamansi-skin--calamansi-compact .playlist .playlist-item {
+.calamansi-skin--calamansi-compact .clmns--playlist .clmns--playlist-item {
     display: flex;
     font-size: .8em;
     color: #364F3C;
     padding: .75em 1em;
 }
-.calamansi-skin--calamansi-compact .playlist .playlist-item.active {
+.calamansi-skin--calamansi-compact .clmns--playlist .clmns--playlist-item.clmns--active {
     background-color: #cdd9c2;
 }
-.calamansi-skin--calamansi-compact .playlist .playlist-track-info--name {
+.calamansi-skin--calamansi-compact .clmns--playlist .clmns--playlist-track-info--name {
     flex: 1;
     padding-right: 1em;
 
@@ -275,7 +275,7 @@
 }
 
 /* Icon font */
-/* Generated by Glyphter (http://www.glyphter.com) on  Sun Sep 22 2019*/
+/* Generated by Glyphter (http://www.clmns--glyphter.com) on  Sun Sep 22 2019*/
 @font-face {
     font-family: 'calamansi-skin--calamansi-compact--glyphter';
     src: url('fonts/Glyphter.eot');
@@ -286,7 +286,7 @@
     font-weight: normal;
     font-style: normal;
 }
-.calamansi-skin--calamansi-compact .glyphter:before{
+.calamansi-skin--calamansi-compact .clmns--glyphter:before{
 	display: inline-block;
    font-family: 'calamansi-skin--calamansi-compact--glyphter';
    font-style: normal;
@@ -295,28 +295,28 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-play:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-play:before {
     content: '\0041';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-pause:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-pause:before {
     content: '\0042';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-backward:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-backward:before {
     content: '\0044';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-forward:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-forward:before {
     content: '\0045';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-bars:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-bars:before {
     content: '\0046';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-volume-up:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-volume-up:before {
     content: '\0047';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-random:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-random:before {
     content: '\0048';
 }
-.calamansi-skin--calamansi-compact .glyphter.fa-loop:before {
+.calamansi-skin--calamansi-compact .clmns--glyphter.clmns--fa-loop:before {
     content: '\0049';
 }
 

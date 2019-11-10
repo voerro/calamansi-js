@@ -4,15 +4,15 @@
     height: auto;
 }
 
-.calamansi .control {
+.calamansi .clmns--control {
     cursor: pointer;
 }
 
-.calamansi .slider {
+.calamansi .clmns--slider {
     touch-action: none;
 }
 
-.calamansi .noselect {
+.calamansi .clmns--noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

@@ -13,19 +13,19 @@
     -webkit-user-select: none;
     background-color: #fff;
 }
-.calamansi-skin--basic .slider {
+.calamansi-skin--basic .clmns--slider {
     flex-grow: 1;
     background-color: #D8D8D8;
     cursor: pointer;
     position: relative;
 }
-.calamansi-skin--basic .slider .playback-progress {
+.calamansi-skin--basic .clmns--slider .clmns--playback-progress {
     background-color: #44BFA3;
     border-radius: inherit;
     position: absolute;
     pointer-events: none;
 }
-.calamansi-skin--basic .slider .pin {
+.calamansi-skin--basic .clmns--slider .clmns--pin {
     height: 16px;
     width: 16px;
     border-radius: 8px;
@@ -34,7 +34,7 @@
     pointer-events: all;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
 }
-.calamansi-skin--basic .controls {
+.calamansi-skin--basic .clmns--controls {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 18px;
@@ -46,36 +46,36 @@
     margin-left: 24px;
     margin-right: 24px;
 }
-.calamansi-skin--basic .controls .slider {
+.calamansi-skin--basic .clmns--controls .clmns--slider {
     margin-left: 16px;
     margin-right: 16px;
     border-radius: 2px;
     height: 4px;
 }
-.calamansi-skin--basic .controls .slider .playback-progress {
+.calamansi-skin--basic .clmns--controls .clmns--slider .clmns--playback-progress {
     width: 0;
     height: 100%;
 }
-.calamansi-skin--basic .controls .slider .playback-progress .pin {
+.calamansi-skin--basic .clmns--controls .clmns--slider .clmns--playback-progress .clmns--pin {
     right: -8px;
     top: -6px;
 }
-.calamansi-skin--basic .controls span {
+.calamansi-skin--basic .clmns--controls span {
     cursor: default;
 }
-.calamansi-skin--basic .volume {
+.calamansi-skin--basic .clmns--volume {
     position: relative;
 }
-.calamansi-skin--basic .volume .volume-btn {
+.calamansi-skin--basic .clmns--volume .clmns--volume-btn {
     cursor: pointer;
 }
-.calamansi-skin--basic .volume .volume-btn.open path {
+.calamansi-skin--basic .clmns--volume .clmns--volume-btn.clmns--open path {
     fill: #44BFA3;
 }
-.calamansi-skin--basic .volume .volume-btn.open ~ .volume-controls {
+.calamansi-skin--basic .clmns--volume .clmns--volume-btn.clmns--open ~ .clmns--volume-controls {
     display: flex;
 }
-.calamansi-skin--basic .volume .volume-controls {
+.calamansi-skin--basic .clmns--volume .clmns--volume-controls {
     width: 30px;
     height: 135px;
     background-color: rgba(0, 0, 0, 0.62);
@@ -88,13 +88,13 @@
     display: none;
     z-index: 1;
 }
-.calamansi-skin--basic .volume .volume-controls .slider {
+.calamansi-skin--basic .clmns--volume .clmns--volume-controls .clmns--slider {
     margin-top: 12px;
     margin-bottom: 12px;
     width: 6px;
     border-radius: 3px;
 }
-.calamansi-skin--basic .volume .volume-controls .slider .volume-value {
+.calamansi-skin--basic .clmns--volume .clmns--volume-controls .clmns--slider .clmns--volume-value {
     bottom: 0;
     height: 100%;
     width: 6px;
@@ -102,12 +102,12 @@
     background-color: #44BFA3;
     position: absolute;
 }
-.calamansi-skin--basic .volume .volume-controls .slider .volume-value .pin {
+.calamansi-skin--basic .clmns--volume .clmns--volume-controls .clmns--slider .clmns--volume-value .clmns--pin {
     left: -5px;
     top: -8px;
 }
 
-.calamansi-skin--basic svg, .calamansi-skin--basic img {
+.calamansi-skin--basic .clmns--svg {
     display: block;
 }
 

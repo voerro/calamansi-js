@@ -278,7 +278,7 @@ class Calamansi
     }
 
     _getTrackFilename(track) {
-        if (track.source.startsWith('https://soundcloud.com')) {
+        if (track.source.startsWith('https://api.soundcloud.com')) {
             return track.source;
         }
 
@@ -286,7 +286,7 @@ class Calamansi
     }
 
     _getTrackSourceType(track) {
-        if (track.source.startsWith('https://soundcloud.com')) {
+        if (track.source.startsWith('https://api.soundcloud.com')) {
             return 'soundcloud';
         }
 
@@ -474,7 +474,7 @@ class Calamansi
         }
 
         // DOM elements visibility can be dependent on events
-        document.querySelectorAll(`#${this._skin.el.id} .hide-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this._skin.el.id} .clmns--hide-on-${event}`).forEach(el => {
             if (el.style.display == 'none') {
                 return;
             }
@@ -483,7 +483,7 @@ class Calamansi
             el.style.display = 'none';
         });
 
-        document.querySelectorAll(`#${this._skin.el.id} .show-on-${event}`).forEach(el => {
+        document.querySelectorAll(`#${this._skin.el.id} .clmns--show-on-${event}`).forEach(el => {
             el.style.display = el.dataset.display;
         });
     }

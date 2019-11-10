@@ -4,7 +4,7 @@
     text-decoration: none;
 }
 
-.calamansi-skin--pronunciation .slot--content {
+.calamansi-skin--pronunciation .clmns--slot--content {
     text-decoration: underline;
 }
 
@@ -19,7 +19,7 @@
     font-weight: normal;
     font-style: normal;
 }
-.calamansi-skin--pronunciation [class*='icon-']:before{
+.calamansi-skin--pronunciation [class*='clmns--icon-']:before{
 	display: inline-block;
     font-family: 'calamansi-skin--pronunciation--glyphter';
     font-style: normal;
@@ -30,6 +30,6 @@
     margin-right: 0.25rem;
     font-size: .9em;
 }
-.calamansi-skin--pronunciation .icon-play:before {
+.calamansi-skin--pronunciation .clmns--icon-play:before {
     content: '\0041';
 }

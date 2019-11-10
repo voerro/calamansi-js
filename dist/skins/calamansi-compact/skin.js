@@ -11,16 +11,16 @@
                 document.querySelector('head').appendChild(script);
             }
 
-            player.querySelectorAll('.calamansi-skin--calamansi-compact .toggle-playlist').forEach(function (el) {
+            player.querySelectorAll('.calamansi-skin--calamansi-compact .clmns--toggle-playlist').forEach(function (el) {
                 el.addEventListener('click', function (e) {
-                    player.classList.toggle('show-playlist');
+                    player.classList.toggle('clmns--show-playlist');
                 });
             });
 
-            var controls = player.querySelector('.controls');
+            var controls = player.querySelector('.clmns--controls');
 
             if (controls.offsetWidth < 300) {
-                controls.classList.add('compact');
+                controls.classList.add('clmns--compact');
             }
         }
     });

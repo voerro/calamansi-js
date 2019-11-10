@@ -13,7 +13,7 @@
     font-weight: normal;
     font-style: normal;
 }
-.calamansi-skin--in-text [class*='icon-']:before{
+.calamansi-skin--in-text [class*='clmns--icon-']:before{
 	display: inline-block;
     font-family: 'calamansi-skin--in-text--glyphter';
     font-style: normal;
@@ -24,12 +24,12 @@
     margin-right: 0.25rem;
     font-size: .9em;
 }
-.calamansi-skin--in-text .icon-play:before {
+.calamansi-skin--in-text .clmns--icon-play:before {
     content: '\0041';
 }
-.calamansi-skin--in-text .icon-pause:before {
+.calamansi-skin--in-text .clmns--icon-pause:before {
     content: '\0042';
 }
-.calamansi-skin--in-text .icon-stop:before {
+.calamansi-skin--in-text .clmns--icon-stop:before {
     content: '\0043';
 }

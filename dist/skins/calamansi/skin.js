@@ -10,18 +10,18 @@
                 document.querySelector('head').appendChild(script);
             }
 
-            var info = player.querySelector('.calamansi-skin--calamansi .info');
+            var info = player.querySelector('.calamansi-skin--calamansi .clmns--info');
 
-            player.querySelectorAll('.calamansi-skin--calamansi .toggle-playlist').forEach(function (el) {
+            player.querySelectorAll('.calamansi-skin--calamansi .clmns--toggle-playlist').forEach(function (el) {
                 el.addEventListener('change', function (e) {
-                    info.classList.toggle('show-playlist');
+                    info.classList.toggle('clmns--show-playlist');
                 });
             });
 
-            var controls = player.querySelector('.controls');
+            var controls = player.querySelector('.clmns--controls');
 
             if (controls.offsetWidth < 300) {
-                controls.classList.add('compact');
+                controls.classList.add('clmns--compact');
             }
         }
     });

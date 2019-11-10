@@ -10,9 +10,9 @@
                 document.querySelector('head').appendChild(script);
             }
 
-            player.querySelectorAll('.control-toggle-playlist').forEach(function (el) {
+            player.querySelectorAll('.clmns--control-toggle-playlist').forEach(function (el) {
                 el.addEventListener('change', function (e) {
-                    player.classList.toggle('show-playlist');
+                    player.classList.toggle('clmns--show-playlist');
                 });
             });
         }

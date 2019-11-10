@@ -3,15 +3,15 @@
         var player = instance.el;
 
         if (player.matches('.calamansi-skin--ayon')) {
-            var info = player.querySelector('.info');
-            var controlPanel = player.querySelector('.control-panel');
+            var info = player.querySelector('.clmns--info');
+            var controlPanel = player.querySelector('.clmns--control-panel');
 
             if (info) {
-                info.classList.add('active');
+                info.classList.add('clmns--active');
             }
 
             if (controlPanel) {
-                controlPanel.classList.add('active');
+                controlPanel.classList.add('clmns--active');
             }
         }
     });
@@ -20,15 +20,15 @@
         var player = instance.el;
 
         if (player.matches('.calamansi-skin--ayon')) {
-            var info = player.querySelector('.info');
-            var controlPanel = player.querySelector('.control-panel');
+            var info = player.querySelector('.clmns--info');
+            var controlPanel = player.querySelector('.clmns--control-panel');
 
             if (info) {
-                info.classList.remove('active');
+                info.classList.remove('clmns--active');
             }
 
             if (controlPanel) {
-                controlPanel.classList.remove('active');
+                controlPanel.classList.remove('clmns--active');
             }
         }
     });

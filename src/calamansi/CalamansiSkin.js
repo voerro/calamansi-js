@@ -140,7 +140,7 @@ class CalamansiSkin
 
     setUiElements() {
         // Insert the element's content inside the skin's content slot
-        const contentSlots = document.querySelectorAll(`#${this.el.id} .slot--content`);
+        const contentSlots = document.querySelectorAll(`#${this.el.id} .clmns--slot--content`);
 
         if (contentSlots && contentSlots.length > 0) {
             contentSlots.forEach(slot => {
@@ -178,42 +178,42 @@ class CalamansiSkin
         });
 
         this.el.addEventListener('click', (event) => {
-            if (event.target.type !== 'checkbox' && !event.target.classList.contains('link')) {
+            if (event.target.type !== 'checkbox' && !event.target.classList.contains('clmns--link')) {
                 event.preventDefault();
             }
 
             // Audio (playback) controls
             if (this.calamansi.audio) {
-                if (this.containsClass(event.target, 'control-play')) {
+                if (this.containsClass(event.target, 'clmns--control-play')) {
                     // "Play" button - start playback from 00:00
                     this.calamansi.audio.playFromStart();
-                } else if (this.containsClass(event.target, 'control-resume')) {
+                } else if (this.containsClass(event.target, 'clmns--control-resume')) {
                     // "Play" button - start or resume playback
                     this.calamansi.audio.play();
-                } else if (this.containsClass(event.target, 'control-pause')) {
+                } else if (this.containsClass(event.target, 'clmns--control-pause')) {
                     // "Pause" button
                     this.calamansi.audio.pause();
-                } else if (this.containsClass(event.target, 'control-stop')) {
+                } else if (this.containsClass(event.target, 'clmns--control-stop')) {
                     // "Stop" button
                     this.calamansi.audio.stop();
-                } else if (this.containsClass(event.target, 'control-next-track')) {
+                } else if (this.containsClass(event.target, 'clmns--control-next-track')) {
                     // "Next Track" button
                     this.calamansi.nextTrack();
-                } else if (this.containsClass(event.target, 'control-prev-track')) {
+                } else if (this.containsClass(event.target, 'clmns--control-prev-track')) {
                     // "Previoud Track" button
                     this.calamansi.prevTrack();
-                } else if (this.containsClass(event.target, 'control-toggle-loop')) {
+                } else if (this.containsClass(event.target, 'clmns--control-toggle-loop')) {
                     // "Loop" button (checkbox)
                     this.calamansi.toggleLoop();
-                } else if (this.containsClass(event.target, 'control-toggle-shuffle')) {
+                } else if (this.containsClass(event.target, 'clmns--control-toggle-shuffle')) {
                     // "Shuffle" button (checkbox)
                     this.calamansi.toggleShuffle();
-                } else if (this.containsClass(event.target, 'slider')) {
-                    const parent = this.findElParent(event.target, 'slider');
+                } else if (this.containsClass(event.target, 'clmns--slider')) {
+                    const parent = this.findElParent(event.target, 'clmns--slider');
 
                     let position;
 
-                    if (parent.classList.contains('slider-vertical')) {
+                    if (parent.classList.contains('clmns--slider-vertical')) {
                         position = 1 - ((event.clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
                     } else {
                         position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
@@ -227,13 +227,13 @@ class CalamansiSkin
         document.addEventListener('mousemove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'slider')) {
+                if (this.containsClass(this.mouseDownTarget, 'clmns--slider')) {
                     // Smooth seeking
-                    const parent = this.findElParent(this.mouseDownTarget, 'slider');
+                    const parent = this.findElParent(this.mouseDownTarget, 'clmns--slider');
 
                     let position;
 
-                    if (parent.classList.contains('slider-vertical')) {
+                    if (parent.classList.contains('clmns--slider-vertical')) {
                         position = 1 - ((event.clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
                     } else {
                         position = (event.clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
@@ -253,13 +253,13 @@ class CalamansiSkin
         document.addEventListener('touchmove', (event) => {
             // Audio (playback) controls
             if (this.calamansi.audio && this.mouseDownTarget) {
-                if (this.containsClass(this.mouseDownTarget, 'slider')) {
+                if (this.containsClass(this.mouseDownTarget, 'clmns--slider')) {
                     // Smooth seeking
-                    const parent = this.findElParent(this.mouseDownTarget, 'slider');
+                    const parent = this.findElParent(this.mouseDownTarget, 'clmns--slider');
 
                     let position;
 
-                    if (parent.classList.contains('slider-vertical')) {
+                    if (parent.classList.contains('clmns--slider-vertical')) {
                         position = 1 - ((event.touches[0].clientY - parent.getBoundingClientRect().y) / parent.clientHeight);
                     } else {
                         position = (event.touches[0].clientX - parent.getBoundingClientRect().x) / parent.clientWidth;
@@ -276,7 +276,7 @@ class CalamansiSkin
             }
         });
 
-        this.getEls('.playback-rate').forEach((el) => {
+        this.getEls('.clmns--playback-rate').forEach((el) => {
             el.addEventListener('change', (event) => {
                 if (this.calamansi.audio) {
                     this.calamansi.audio.changePlaybackRate(parseFloat(el.value));
@@ -374,27 +374,27 @@ class CalamansiSkin
     }
 
     onSliderPositionChanged(el, position) {
-        if (el.classList.contains('playback-bar')) {
+        if (el.classList.contains('clmns--playback-bar')) {
             this.calamansi.audio.seekTo(position * this.calamansi.audio.duration);
-        } else if (el.classList.contains('volume-bar')) {
+        } else if (el.classList.contains('clmns--volume-bar')) {
             this.calamansi.audio.changeVolume(position);
         }
     }
 
     updatePlaybackDuration(duration) {
-        this.getEls('.playback-duration').forEach((el) => {
+        this.getEls('.clmns--playback-duration').forEach((el) => {
             el.innerText = this.formatTime(duration);
         });
     }
 
     updatePlaybackTime(currentTime) {
-        this.getEls('.playback-time').forEach((el) => {
+        this.getEls('.clmns--playback-time').forEach((el) => {
             el.innerText = this.formatTime(currentTime);
         });
     }
 
     updatePlaybackTimeLeft(time, duration) {
-        this.getEls('.playback-time-left').forEach((el) => {
+        this.getEls('.clmns--playback-time-left').forEach((el) => {
             const timeLeft = duration - Math.floor(time);
 
             el.innerText = '-' + this.formatTime(timeLeft);
@@ -404,38 +404,38 @@ class CalamansiSkin
     updatePlaybackProgress(time, duration) {
         const progress = (time / duration) * 100;
  
-        this.getEls('.playback-progress').forEach((el) => {
-            let parent = this.findElParent(el, 'slider');
+        this.getEls('.clmns--playback-progress').forEach((el) => {
+            let parent = this.findElParent(el, 'clmns--slider');
 
             if (!parent) {
                 return;
             }
 
-            el.style[parent.classList.contains('slider-vertical') ? 'height' : 'width'] = progress + '%';
+            el.style[parent.classList.contains('clmns--slider-vertical') ? 'height' : 'width'] = progress + '%';
         });
 
-        this.getEls('.playback-bar').forEach((el) => {
+        this.getEls('.clmns--playback-bar').forEach((el) => {
             el.title = `${this.formatTime(this.calamansi.audio.currentTime)} / ${this.formatTime(this.calamansi.audio.duration)}`;
         });
     }
 
     updateLoadingProgress(progress) {
-        this.getEls('.playback-load').forEach((el) => {
+        this.getEls('.clmns--playback-load').forEach((el) => {
             el.style.width = progress + '%';
         });
     }
 
     updateVolume(volume) {
-        const els = this.getEls('.volume-value');
+        const els = this.getEls('.clmns--volume-value');
 
         els.forEach((el) => {
-            let parent = this.findElParent(el, 'slider');
+            let parent = this.findElParent(el, 'clmns--slider');
 
             if (!parent) {
                 return;
             } 
 
-            el.style[parent.classList.contains('slider-vertical') ? 'height' : 'width'] = (volume * 100) + '%';
+            el.style[parent.classList.contains('clmns--slider-vertical') ? 'height' : 'width'] = (volume * 100) + '%';
         });
     }
 
@@ -475,18 +475,18 @@ class CalamansiSkin
         let el;
 
         // "Loop"
-        this.getEls('.control-toggle-loop').forEach((el) => {
+        this.getEls('.clmns--control-toggle-loop').forEach((el) => {
             el.checked = this.calamansi._options.loop;
         });
 
         // "Shuffle"
-        this.getEls('.control-toggle-shuffle').forEach((el) => {
+        this.getEls('.clmns--control-toggle-shuffle').forEach((el) => {
             el.checked = this.calamansi._options.shuffle;
         });
     }
     
     updatePlaylistList() {
-        const el = this.getEl('.playlists');
+        const el = this.getEl('.clmns--playlists');
 
         if (!el) {
             return;
@@ -496,8 +496,8 @@ class CalamansiSkin
             el.removeChild(child);
         }
 
-        for (let index in this.calamansi.playlists) {
-            const playlist = this.calamansi.playlists[index];
+        for (let index in this.calamansi._playlists) {
+            const playlist = this.calamansi._playlists[index];
 
             const option = document.createElement('option');
             option.value = index;
@@ -516,7 +516,7 @@ class CalamansiSkin
             return;
         }
         
-        this.getEls('.playlist').forEach((el) => {
+        this.getEls('.clmns--playlist').forEach((el) => {
             if (el.nodeName.toLowerCase() === 'table') {
                 this.updatePlaylistTable(el);
             } else {
@@ -533,11 +533,11 @@ class CalamansiSkin
 
         const ul = document.createElement('ul');
 
-        let template = this.findEl(container, '.playlist-item.template');
+        let template = this.findEl(container, '.clmns--playlist-item.clmns--template');
         
         if (template) {
             template = template.cloneNode(true);
-            template.classList.remove('template');
+            template.classList.remove('clmns--template');
         }
 
         let index = 0;
@@ -549,10 +549,10 @@ class CalamansiSkin
             if (template) {
                 const item = template.cloneNode(true);
 
-                this.updateFields(item, 'playlist-track-info', info);
+                this.updateFields(item, 'clmns--playlist-track-info', info);
 
                 if (track === this.calamansi.currentTrack()) {
-                    item.classList.add('active');
+                    item.classList.add('clmns--active');
                 }
                 
                 li.appendChild(item);
@@ -561,11 +561,11 @@ class CalamansiSkin
                 li.title = track.info.name;
             }
 
-            li.classList.add('playlist-item-li');
+            li.classList.add('clmns--playlist-item-li');
             li.dataset.index = index;
 
             li.addEventListener('dblclick', (event) => {
-                const el = this.findElParent(event.target, 'playlist-item-li');
+                const el = this.findElParent(event.target, 'clmns--playlist-item-li');
 
                 this.calamansi.switchTrack(parseInt(el.dataset.index), true);
             });
@@ -583,21 +583,21 @@ class CalamansiSkin
         const tbody = this.findEl(table, 'tbody');
 
         if (!tbody) {
-            console.error('.playlist element should contain <tbody> with a template row!');
+            console.error('.clmns--playlist element should contain <tbody> with a template row!');
 
             return;
         }
 
         for (let el of this.findEls(tbody, 'tr')) {
-            if (!el.classList.contains('template')) {
+            if (!el.classList.contains('clmns--template')) {
                 tbody.removeChild(el);
             }
         }
 
-        let template = this.findEl(tbody, '.playlist-item.template');
+        let template = this.findEl(tbody, '.clmns--playlist-item.clmns--template');
 
         if (!template) {
-            console.error('.playlist element should contain a row template!');
+            console.error('.clmns--playlist element should contain a row template!');
 
             return;
         }
@@ -608,18 +608,18 @@ class CalamansiSkin
             const info = track.info;
 
             let tr = template.cloneNode(true);
-            tr.classList.remove('template');
+            tr.classList.remove('clmns--template');
 
-            this.updateFields(tr, 'playlist-track-info', info);
+            this.updateFields(tr, 'clmns--playlist-track-info', info);
 
             if (track === this.calamansi.currentTrack()) {
-                tr.classList.add('active');
+                tr.classList.add('clmns--active');
             }
 
             tr.dataset.index = index;
 
             tr.addEventListener('dblclick', (event) => {
-                const el = this.findElParent(event.target, 'playlist-item');
+                const el = this.findElParent(event.target, 'clmns--playlist-item');
 
                 this.calamansi.switchTrack(parseInt(el.dataset.index), true);
             });
@@ -633,13 +633,13 @@ class CalamansiSkin
     }
 
     updatePlaylistActiveTrack() {
-        this.getEls('.playlist-item.active').forEach((active) => {
-            active.classList.remove('active');
+        this.getEls('.clmns--playlist-item.clmns--active').forEach((active) => {
+            active.classList.remove('clmns--active');
 
-            let newActive = this.getEls('.playlist-item:not(.template)')[this.calamansi._currentTrack];
+            let newActive = this.getEls('.clmns--playlist-item:not(.clmns--template)')[this.calamansi._currentTrack];
 
             if (newActive) {
-                newActive.classList.add('active');
+                newActive.classList.add('clmns--active');
             }
         });
     }
@@ -651,7 +651,7 @@ class CalamansiSkin
 
         const info = this.calamansi.currentTrack().info;
 
-        this.updateFields(this.el, 'track-info', info);
+        this.updateFields(this.el, 'clmns--track-info', info);
     }
 
     updateFields(parent, className, values) {
@@ -660,7 +660,7 @@ class CalamansiSkin
 
             for (let i = 0; i < el.classList.length; i++) {
                 if (new RegExp(`${className}--.*`).test(el.classList[i])) {
-                    key = el.classList[i].split('--')[1];
+                    key = el.classList[i].split('--')[2];
 
                     break;
                 }
@@ -670,7 +670,7 @@ class CalamansiSkin
                 return;
             }
 
-            if (el.classList.contains('link')) {
+            if (el.classList.contains('clmns--link')) {
                 el.setAttribute('href', values[key] ? values[key] : '#');
                 el.style.visibility = values[key] ? 'visible' : 'collapse';
 
