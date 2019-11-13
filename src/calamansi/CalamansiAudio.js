@@ -13,6 +13,7 @@ class CalamansiAudio
         this.loadedPercent = 0.0;
         this.currentTime = 0;
         this.volume = this.audio.volume;
+        this.playbackRate = 1.0;
         
         this._addEventListeners();
     }

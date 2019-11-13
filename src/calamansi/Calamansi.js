@@ -232,11 +232,11 @@ class Calamansi
     switchPlaylist(index) {
         this._currentPlaylist = index;
 
-        // Load the first track to play
-        this._loadPlaylist(this.currentPlaylist());
-
         this._emit('playlistSwitched', this);
         CalamansiEvents._emit('playlistSwitched', this);
+
+        // Load the first track to play
+        this._loadPlaylist(this.currentPlaylist());
     }
 
     _loadTrack(track) {
@@ -266,11 +266,11 @@ class Calamansi
     switchTrack(index, startPlaying = false) {
         this._currentTrack = index;
 
-        // Load the first track to play
-        this._loadTrack(this.currentTrack());
-
         this._emit('trackSwitched', this);
         CalamansiEvents._emit('trackSwitched', this);
+
+        // Load the first track to play
+        this._loadTrack(this.currentTrack());
 
         if (startPlaying) {
             this.audio.play();
