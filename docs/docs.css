@@ -67,6 +67,7 @@ nav .nav-item.active {
 
 .content .tab-content {
     display: none;
+    max-width: 700px;
 }
 .content .tab-content.show {
     display: block;
@@ -95,6 +96,7 @@ nav .nav-item.active {
     margin: 1rem 0;
     padding: 0 1rem;
     white-space: pre-wrap;
+    font-size: .75rem;
 }
 
 .content p {
