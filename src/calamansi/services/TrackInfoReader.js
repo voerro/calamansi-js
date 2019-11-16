@@ -16,7 +16,17 @@ class TrackInfoReader {
 
     readId3(track) {
         return new Promise((resolve, reject) => {
-            jsmediatags.read(window.location.origin + window.location.pathname + track.source, {
+            let url;
+
+            if (track.source.startsWith('http')) {
+                url = track.source;
+            } else if (track.source.startsWith('/')) {
+                url = window.location.origin + track.source;
+            } else {
+                url = window.location.origin + window.location.pathname + track.source;
+            }
+
+            jsmediatags.read(url, {
                 onSuccess: (tags) => {
                     let trackInfo = tags.tags;
 
