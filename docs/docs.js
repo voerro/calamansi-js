@@ -1,4 +1,4 @@
-async function openTab(tab) {
+function openTab(tab) {
     if (document.querySelector('.nav-item.active')) {
         document.querySelector('.nav-item.active').classList.remove('active');
     }
@@ -8,19 +8,15 @@ async function openTab(tab) {
     }
     
     var tabEl = document.querySelector('.nav-item[data-tab="' + tab + '"]');
-    var contentEl = document.querySelector('.tab-content[data-tab="' + tab + '"]');
+    var tabContentEl = document.querySelector('.tab-content[data-tab="' + tab + '"]');
+    var contentEl = document.querySelector('.content > .tab-content');
 
     if (tabEl) {
         tabEl.classList.add('active');
     }
 
-    if (contentEl) {
-        contentEl.classList.add('show');
-
-        var response = await fetch('parts/' + tab + '.html');
-        var html = await response.text();
-        
-        contentEl.innerHTML = html;
+    if (contentEl && tabContentEl) {
+        contentEl.innerHTML = tabContentEl.innerHTML;
     }
 
     document.body.scrollTop = 0;
