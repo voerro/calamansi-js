@@ -564,7 +564,11 @@ class CalamansiSkin
             li.classList.add('clmns--playlist-item-li');
             li.dataset.index = index;
 
-            li.addEventListener('dblclick', (event) => {
+            li.addEventListener('click', (event) => {
+                if (event.target.classList.contains('clmns--link')) {
+                    return;
+                }
+
                 const el = this.findElParent(event.target, 'clmns--playlist-item-li');
 
                 this.calamansi.switchTrack(parseInt(el.dataset.index), true);
@@ -618,7 +622,11 @@ class CalamansiSkin
 
             tr.dataset.index = index;
 
-            tr.addEventListener('dblclick', (event) => {
+            tr.addEventListener('click', (event) => {
+                if (event.target.classList.contains('clmns--link')) {
+                    return;
+                }
+
                 const el = this.findElParent(event.target, 'clmns--playlist-item');
 
                 this.calamansi.switchTrack(parseInt(el.dataset.index), true);
