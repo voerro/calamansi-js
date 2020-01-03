@@ -1,7 +1,7 @@
 {
-  "name": "calamansi",
-  "version": "1.0.0",
-  "description": "An HTML5 and JavaScript audio player.",
+  "name": "@voerro/calamansi-js",
+  "version": "0.1.0",
+  "description": "Flexible feature-rich HTML5 & Vanilla JS audio player.",
   "main": "src/app.js",
   "scripts": {
     "dev": "npm run development",
@@ -11,7 +11,13 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
-  "keywords": [],
+  "keywords": [
+    "audio",
+    "player",
+    "mp3",
+    "wav",
+    "id3"
+  ],
   "author": "Alexander Zavyalov",
   "devDependencies": {
     "cross-env": "^5.2.1",
@@ -20,5 +26,6 @@
     "sass": "^1.22.0",
     "sass-loader": "^7.3.1",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "license": "MIT"
 }
