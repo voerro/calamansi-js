@@ -1,6 +1,6 @@
 {
   "name": "@voerro/calamansi-js",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Flexible feature-rich HTML5 & Vanilla JS audio player.",
   "main": "src/app.js",
   "scripts": {
@@ -27,5 +27,6 @@
     "sass-loader": "^7.3.1",
     "vue-template-compiler": "^2.6.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/voerro/calamansi-js"
 }
