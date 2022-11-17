@@ -31,7 +31,7 @@ or
 npm i @voerro/calamansi-js --save
 ```
 
-Then, require Clamansi.js in your JS file:
+Then, require Calamansi.js in your JS file:
 
 ```javascript
 require('@voerro/calamansi-js/src/calamansi');
